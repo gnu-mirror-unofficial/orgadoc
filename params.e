@@ -31,6 +31,7 @@ feature {ANY}
 	 enable_private := false
 	 insensitive := false
 	 template_path := DEFAULT_TPL_PATH
+	 pre_process_arguments
 	 if conffile = void then
 	    conffile := DEFAULT_CONF_FILE
 	 end
@@ -118,7 +119,24 @@ feature {PARAMS}
                                   %and exit%N")
 	    die_with_code(0)
       end
-
+   
+   pre_process_arguments is
+      local
+	 parser_switch	: STRING
+	 i		: INTEGER
+      do
+	 from i := 1 until i > argument_count loop 
+	    parser_switch := command_arguments.item(i)
+	    if ((parser_switch.is_equal("--conf-file") or
+		 parser_switch.is_equal("-c")) and 
+		(i /= argument_count)) then
+	       conffile := command_arguments.item(i + 1)
+	       i := i + 1
+	    end
+	    i := i + 1
+	 end
+      end
+						   
    process_arguments is
       local
 	 parser_switch	: STRING
