@@ -1,3 +1,21 @@
+===== DESCRIPTION =====
+
+Orgadoc is a tool to organize you documents. Is goal is not to provide a 
+full web access with database but to give possibility to everyone to have a 
+copy of the database on this computers without having to install a web server 
+or database.
+
+Orgadoc includes a research tools (with regexp support), and multiple 
+output backend with templates support : static html, latex, bibtex. An output 
+of the html output is available at : http://docs.happycoders.org/html/
+
+===== USE =====
+
+ Use is very easy : a xml file per directory describing all documents 
+of this directory.
+
+===== EXAMPLE =====
+
 Here is a example of readme.xml file :
 <?xml version="1.0"?>
 <readme>
@@ -8,6 +26,7 @@ Here is a example of readme.xml file :
     <author>First Author</author>
     <author>Second Author</author>
     <date>16 January 2002</date>
+    <nbpages>150</nbpages>
     <language>English</language>
     <summary>A little sample</summary>
     <part>Introduction</part>
@@ -26,12 +45,8 @@ Here is a example of readme.xml file :
 here is a example of command :
   orgadoc -r -p /var/www/docs -w -e /tmp
 
-FRENCH NOTES :
+===== FRENCH NOTES =====
 You can add "accents" in your xml file, here is a summary :
-
-
-
-
 
 Â : &Acirc;
 â :&acirc;
