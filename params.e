@@ -50,8 +50,12 @@ feature {ANY}
 	 if (input_path = void) then
 	    input_path := "./"
 	 end
-	 if (html_file = void) then
-	    html_file := DEFAULT_HTML_FILE
+	 if (output_file = void) then
+	    if bibtex_mode then
+	       output_file := DEFAULT_BIBTEX_FILE
+	    else
+	       output_file := DEFAULT_HTML_FILE
+	    end
 	 end
       end
    
@@ -67,10 +71,10 @@ feature {PARAMS}
 				  %configuration file %N")
 	    std_output.put_string("  -f, --file <file>%T%Tgive xml file %N")
 	    std_output.put_string("  -o, --output-file <file>%Tfile to %
-				   %store HTML%N")
+				   %store Output%N")
 	    std_output.put_string("  -p, --path <path>%T%Tpath to convert%N")
 	    std_output.put_string("  -e, --prefix <path>%T%Tpath to %
-				  %store HTML file%N")	    
+				  %store files%N")	    
 	    std_output.put_string("  -s, --search <regexp>%T%T%
 				  %print AST matching a pattern%N")
 	    std_output.put_string("  -i, --case-insensitive%T%
@@ -79,6 +83,7 @@ feature {PARAMS}
 	    std_output.put_string("  -r, --recursive%T%TRecursively %
 				  %convert directories.%N")
 	    std_output.put_string("  -t, --html%T%T%Toutput in html%N")
+	    std_output.put_string("  -b, --bibtex%T%T%Toutput in bibTex%N")
 	    std_output.put_string("  -d, --display-ast%T%Tdisplay AST%N")
 	    std_output.put_string("  -v, --version%T%T%Toutput version %
 				  %information and exit%N")
@@ -97,6 +102,9 @@ feature {PARAMS}
 	    if (parser_switch.is_equal("--html") or
 		parser_switch.is_equal("-t")) then
 	       html_mode := true
+	    elseif (parser_switch.is_equal("--bibtex") or
+		parser_switch.is_equal("-b")) then
+	       bibtex_mode := true
 	    elseif (parser_switch.is_equal("--display-ast") or
 		    parser_switch.is_equal("-d")) then
 	       display_mode := true
@@ -128,7 +136,7 @@ feature {PARAMS}
 	    elseif ((parser_switch.is_equal("--output-file") or
 		     parser_switch.is_equal("-o")) and 
 		    (i /= argument_count)) then
-	       html_file := command_arguments.item(i + 1)
+	       output_file := command_arguments.item(i + 1)
 	       i := i + 1
 	    elseif ((parser_switch.is_equal("--search") or
 		     parser_switch.is_equal("-s")) and 
@@ -165,9 +173,6 @@ feature {PARAMS}
    use_conffile(data : PARSER_DATA) is
       do
 	 if (data /= void) then
-	    if data.html_file /= void then
-	       html_file := data.html_file
-	    end
 	    if data.xml_file /= void then
 	       xml_file := data.xml_file
 	    end
@@ -185,9 +190,18 @@ feature {PARAMS}
 	    end
 	    if data.is_html_mode /= void then
 	       html_mode := data.is_html_mode 
+	       if data.html_file /= void then
+		  output_file := data.html_file
+	       end
 	    end
 	    if data.is_display_mode /= void then
 	       display_mode := data.is_display_mode
+	    end
+	    if data.is_bibtex_mode /= void then
+	       bibtex_mode := data.is_bibtex_mode
+	       if data.bibtex_file /= void then
+		  output_file := data.bibtex_file
+	       end	    
 	    end
 	    if data.template_path /= void then
 	       template_path := data.template_path
@@ -198,10 +212,11 @@ feature {PARAMS}
 feature {ANY}
    html_mode		: BOOLEAN
    display_mode		: BOOLEAN
+   bibtex_mode		: BOOLEAN
    xml_file		: STRING
    input_path		: STRING
    recursive		: BOOLEAN
-   html_file 		: STRING
+   output_file 		: STRING
    output_path		: STRING
    enable_private	: BOOLEAN
    regexp		: STRING
@@ -214,6 +229,7 @@ feature {PARAMS}
    DEFAULT_TPL_PATH	: STRING is "/etc/orgadoc/templates/html/"
    DEFAULT_XML_FILE	: STRING is "readme.xml"
    DEFAULT_HTML_FILE	: STRING is "index.html"
+   DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "0.4"
+   VERSION		: STRING is "0.5.0-alpha"
 end

@@ -7,3 +7,4 @@
 
  - produce latex output (latex_visitor)
  - produce bibtex output (bibtex_visitor)
+ - Try to made a interface for http://citeseer.nj.nec.com/cs

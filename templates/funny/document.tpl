@@ -9,11 +9,12 @@ width="100%">
  - <font size=-1><b>(%%DATE%%)</b></font></td>
 </tr> </table> </td> </tr><tr bgcolor=#ffffff> <td valign=top> <font size=-1>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tr><td>Authors</td><td>%%AUTHORS%%</a></td></tr>
-<tr><td>Language</td><td>%%LANGUAGE%%</a></td></tr>
-<tr><td>Type</td><td>%%TYPE%%</a></td></tr>
-<tr><td>Summary</td><td>%%SUMMARY%%</a></td></tr>
-<tr><td>Parts</td><td>%%PARTS%%</a></td></tr>
+<tr><td>Authors</td><td>%%AUTHORS%%</td></tr>
+<tr><td>Language</td><td>%%LANGUAGE%%</td></tr>
+<tr><td>Type</td><td>%%TYPE%%</td></tr>
+<tr><td>Url</td><td>%%URL%%</td></tr>
+<tr><td>Summary</td><td>%%SUMMARY%%</td></tr>
+<tr><td>Parts</td><td>%%PARTS%%</td></tr>
 </table>
 </font> </td> </tr> </table> </tr> </table>
 

@@ -40,7 +40,7 @@ creation
    
 %}
 
-%token T_XML T_HTML T_INPUT T_OUTPUT T_PRIVATE T_MODE T_REC 
+%token T_XML T_HTML T_BIBTEX T_INPUT T_OUTPUT T_PRIVATE T_MODE T_REC 
 %token T_TRUE T_FALSE T_EQUAL T_TEMPLATE
 %token <STRING> T_STRING 
 %token <INTEGER> T_INTEGER
@@ -60,6 +60,7 @@ Entrys: -- Empty
 	
 Entry : T_XML T_EQUAL T_STRING { data.set_xml($3) }
 	| T_HTML T_EQUAL T_STRING { data.set_html($3) }
+	| T_BIBTEX T_EQUAL T_STRING { data.set_bibtex($3) }
 	| T_INPUT T_EQUAL T_STRING { data.set_input($3) }
 	| T_OUTPUT T_EQUAL T_STRING { data.set_output($3) }
 	| T_MODE T_EQUAL T_STRING { data.set_mode($3) }

@@ -122,13 +122,13 @@ feature {ORGADOC}
 	 if (params.html_mode) then
 	    !!html.make(ast, params.enable_private, 
 			correct(params.output_path), 
-			params.html_file, params.input_path,
+			params.output_file, params.input_path,
 			sub_paths, sub_nb_docs,
 			correct(params.template_path))
 	    html.visit
 	    nb_docs := html.get_nb_docs
 	    !!ofile.connect_to(correct(params.output_path) + 
-			       new_path + params.html_file)
+			       new_path + params.output_file)
 	       if (ofile /= void and ofile.is_connected) then
 		  ofile.put_string(html.get_result)
 		  ofile.disconnect

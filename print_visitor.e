@@ -69,6 +69,8 @@ feature {PRINT_VISITOR} -- visitor function
 	    visit_string(doc.type);
 	    pre_section("File     : ")
 	    visit_string(doc.file);
+	    pre_section("Url      : ")
+	    visit_string(doc.url);	    
 	    pre_section("Summary  : ")
 	    visit_string(doc.summary);
 	    pre_section("Parts    : ")

@@ -34,6 +34,13 @@ feature {ANY}
 	 html_file := val
       end
    
+   set_bibtex(val : STRING) is
+      require
+	 val /= void
+      do
+	 bibtex_file := val
+      end
+
    set_xml(val : STRING) is
       require
 	 val /= void
@@ -111,6 +118,14 @@ feature {ANY}
 	    Result := mode.same_as(DISPLAY_MODE)
 	 end
       end
+   
+   is_bibtex_mode : BOOLEAN is
+      do
+	 Result := false
+	 if (mode /= void) then
+	    Result := mode.same_as(BIBTEX_MODE)
+	 end
+      end
       
 feature {PARSER_DATA}
    print_val(desc : STRING; val : ANY) is
@@ -124,6 +139,7 @@ feature {PARSER_DATA}
 
 feature {ANY}
    html_file		: STRING
+   bibtex_file		: STRING
    xml_file		: STRING
    input_path		: STRING
    output_path		: STRING
@@ -135,6 +151,7 @@ feature {ANY}
 feature {PARSER_DATA}
    DISPLAY_MODE		: STRING is "DISPLAY"
    HTML_MODE		: STRING is "HTML"
+   BIBTEX_MODE		: STRING is "BIBTEX"
    TEMP_DEFAULT_PATH	: STRING is "./"
 end
 

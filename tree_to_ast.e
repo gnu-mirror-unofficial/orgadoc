@@ -101,6 +101,7 @@ feature {TREE_TO_AST}
 	    document.set_summary(summary)
 	    document.set_date(date)
 	    document.set_type(type)
+	    document.set_url(url)
 	    document.set_file(file)
 	    document.set_title(title)
 	    document.set_language(language)
@@ -122,6 +123,8 @@ feature {TREE_TO_AST}
 	    date := node_content
 	 elseif (name.same_as(TYPE)) then
 	    type := node_content
+	 elseif (name.same_as(URL)) then
+	    url := node_content	 
 	 elseif (name.same_as(FILE)) then
 	    file := node_content
 	 elseif (name.same_as(TITLE)) then
@@ -174,7 +177,8 @@ feature {TREE_TO_AST}
    file		: STRING
    title	: STRING
    language	: STRING
-	 
+   url		: STRING
+   
    -- To Construct Root Node
    documents	: LINKED_LIST[DOCUMENT]
 	 
@@ -194,6 +198,7 @@ feature {TREE_TO_AST}
    SUMMARY	: STRING is "summary"
    DATE		: STRING is "date"
    TYPE		: STRING is "type"
+   URL		: STRING is "url"
    FILE		: STRING is "file"
    TITLE	: STRING is "title"
    LANGUAGE	: STRING is "language"

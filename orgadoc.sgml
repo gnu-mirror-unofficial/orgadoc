@@ -112,7 +112,7 @@
           <option>--output-file</option>
         </term>
         <listitem>
-          <para>File to store HTML Files.</para>
+          <para>File to store output Files.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -128,7 +128,7 @@
           <option>--prefix</option>
         </term>
         <listitem>
-          <para>Path to store HTML files.</para>
+          <para>Path to store output files.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -152,7 +152,7 @@
           <option>--with-private</option>
         </term>
         <listitem>
-          <para>Activate the generation of HTML document for private documents.</para>
+          <para>Activate the generation for private documents.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -169,6 +169,14 @@
         </term>
         <listitem>
           <para>Activate production of HTML files.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-b</option>
+          <option>--bibtex</option>
+        </term>
+        <listitem>
+          <para>Activate production of BibTex file.</para>
         </listitem>
       </varlistentry>
       <varlistentry>

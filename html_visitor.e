@@ -121,6 +121,7 @@ feature {HTML_VISITOR}
 	       tdocument.replace(DATE, doc.date)
 	       tdocument.replace(LANGUAGE, doc.language)
 	       tdocument.replace(TYPE, doc.type)
+	       tdocument.replace(URL, doc.url)
 	       tdocument.replace(SUMMARY, doc.summary)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
 	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
@@ -205,6 +206,7 @@ feature {HTML_VISITOR} -- Constants
    DATE			: STRING is "%%%%DATE%%"
    LANGUAGE		: STRING is "%%%%LANGUAGE%%"
    TYPE			: STRING is "%%%%TYPE%%"
+   URL			: STRING is "%%%%URL%%"
    SUMMARY		: STRING is "%%%%SUMMARY%%"
    PARTS		: STRING is "%%%%PARTS%%"
    COMMENTS		: STRING is "%%%%COMMENTS%%"

@@ -100,7 +100,14 @@ feature {ANY}
       do
 	 file := p_file
       end
-
+   
+   set_url (p_url : STRING) is
+      require
+	 p_url /= void
+      do
+	 url := p_url
+      end
+   
    set_title (p_title : STRING) is
       require
 	 p_title /= void
@@ -128,6 +135,7 @@ feature {ANY}
    date		: STRING
    type		: STRING
    file		: STRING
+   url		: STRING
    title	: STRING
    language	: STRING
    mark		: BOOLEAN
