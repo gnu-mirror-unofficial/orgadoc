@@ -5,7 +5,7 @@
 ## Login   <speedblue@debian.org>
 ##
 ## Started on  Sun Apr 14 05:40:53 2002 Julien LEMOINE
-## Last update Thu Jul 25 03:19:09 2002 Julien LEMOINE
+## Last update Sat Jul 27 02:06:48 2002 Julien LEMOINE
 ## 
 
 SmallEiffel	= /usr/lib/smalleiffel
@@ -99,7 +99,11 @@ install:
 		mkdir $(ETC)/orgadoc/templates;				\
 		mkdir $(ETC)/orgadoc/templates/html;			\
 		mkdir $(ETC)/orgadoc/templates/latex;			\
+		mkdir $(ETC)/orgadoc/templates/ast;			\
+		mkdir $(ETC)/orgadoc/templates/bibtex;			\
 		cp templates/html/*.tpl $(ETC)/orgadoc/templates/html;	\
+		cp templates/bibtex/*.tpl $(ETC)/orgadoc/templates/bibtex;\
+		cp templates/ast/*.tpl $(ETC)/orgadoc/templates/ast;	\
 		cp templates/latex/*.tpl $(ETC)/orgadoc/templates/latex;\
 		cp orgadoc $(PREFIX)/bin/;				\
 	fi

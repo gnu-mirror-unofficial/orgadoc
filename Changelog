@@ -1,3 +1,9 @@
+2002-07-27  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.6.1 was released
+
+	* added templates for search result and bibtex
+	* changed latex template (and replace _ by \_)
+
 2002-07-23  Julien LEMOINE <speedblue@debian.org>
 
 	Orgadoc 0.6 was released

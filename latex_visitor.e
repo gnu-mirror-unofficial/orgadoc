@@ -52,14 +52,14 @@ feature {LATEX_VISITOR}
 	 if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
-	       tdocument.replace(TITRE, doc.title)
-	       tdocument.replace(TITREL, path + doc.file)
-	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
-	       tdocument.replace(DATE, doc.date)
-	       tdocument.replace(LANGUAGE, doc.language)
-	       tdocument.replace(TYPE, doc.type)
-	       tdocument.replace(URL, doc.url)
-	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(TITRE, correct(doc.title))
+	       tdocument.replace(TITREL, correct(path + doc.file))
+	       tdocument.replace(AUTHORS, correct(visit_strs(doc.authors)))
+	       tdocument.replace(DATE, correct(doc.date))
+	       tdocument.replace(LANGUAGE, correct(doc.language))
+	       tdocument.replace(TYPE, correct(doc.type))
+	       tdocument.replace(URL, correct(doc.url))
+	       tdocument.replace(SUMMARY, correct(doc.summary))
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
 	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
@@ -67,10 +67,29 @@ feature {LATEX_VISITOR}
 	 end
       end
    
+   correct(n : STRING) : STRING is
+      local
+	 val : INTEGER
+	 name : STRING
+      do
+	 val := -2
+	 name := n
+	 if (name /= void) then
+	    from val :=  name.substring_index("_", val + 2) until val <= 0 loop
+	       name := name.substring(1, val - 1) + "\_" +
+		  name.substring(val + 1, name.count);
+	       val :=  name.substring_index("_", val + 3)
+	    end
+	    Result := name
+	 else
+	    Result := ""
+	 end
+      end
+   
    visit_str (name : STRING) : STRING is
       do
 	 if (name /= void) then
-	    Result := name
+	    Result := correct(name)
 	 else
 	    Result := ""
 	 end
@@ -85,7 +104,7 @@ feature {LATEX_VISITOR}
 	    Result.append(visit_str(strs.item(i)))
 	    i := i + 1
 	    if (i <= strs.count) then
-	       Result.append (" \\")
+	       Result.append (", ")
 	    end
 	 end
       end

@@ -129,16 +129,16 @@ feature {ORGADOC}
 	 end
       end
    
-   convert_display_file(ast : AST) is
+   convert_display_file(ast : AST; path : STRING) is
       local
 	 display	: PRINT_VISITOR
       do
-	 !!display.make(ast)
+	 !!display.make(ast, params.template_path, path)
 	 display.visit
 	 print(display.get_result)
       end
    
-   convert_regexp_file(ast : AST) is
+   convert_regexp_file(ast : AST; path : STRING) is
       local
 	 grep		: GREP_VISITOR	 
       	 display	: PRINT_VISITOR	 
@@ -147,7 +147,7 @@ feature {ORGADOC}
 		     params.regexp, params.insensitive)
 	 grep.visit
 	 if (grep.get_result) then
-	    !!display.make(ast)
+	    !!display.make(ast, params.template_path, path)
 	    display.visit
 	    print(display.get_result)	       
 	 end
@@ -159,7 +159,7 @@ feature {ORGADOC}
 	 bibtex		: BIBTEX_VISITOR
       do
 	 !!bibtex.make(ast, params.enable_private, 
-		       path, bibtex_index);
+		       path, bibtex_index, params.template_path);
 	 bibtex.visit
 	 bibtex_index := bibtex.get_pos
 	 tex_str.append(bibtex.get_result)
@@ -198,9 +198,9 @@ feature {ORGADOC}
 	    ast := convert.convert;
 	    -- Select type of conversion
 	    if params.regexp /= void then
-	       convert_regexp_file(ast)
+	       convert_regexp_file(ast, sub_paths.item(1))
 	    elseif params.display_mode then
-	       convert_display_file(ast)
+	       convert_display_file(ast, sub_paths.item(1))
 	    elseif params.bibtex_mode then
 	       convert_bibtex_file(ast, path)
 	    elseif params.latex_mode then

@@ -29,12 +29,14 @@ creation
    make
 	 
 feature {ANY}
-   make (a : AST; private : BOOLEAN; ppath : STRING; nb : INTEGER) is
+   make (a : AST; private : BOOLEAN; ppath : STRING; nb : INTEGER;
+	 template_path : STRING) is
       do
 	 make_default(a)
 	 enable_private := private
 	 pos := nb
 	 path := ppath
+	 !!tdocument.make(template_path + TDOCUMENT)
 	 !!str.make_empty
       end
    
@@ -55,34 +57,44 @@ feature {BIBTEX_VISITOR}
       do
 	 if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
-	    str.append("@article{orgadoc." + pos.to_string + ",%N")
-	    pos := pos + 1
-	    item_visitor("title=%"",doc.title)
-	    items_visitor("author=%"", doc.authors)
-	    item_visitor("url=%"", path + doc.file)
-	    item_visitor("url=%"", doc.url)
-	    item_visitor("year=%"", doc.date)
-	    item_visitor("abstract=%"", doc.summary)
-	    str.append("}%N")
+	    if (tdocument.start) then
+	       tdocument.replace(ID, "orgadoc." + pos.to_string)
+	       pos := pos + 1
+	       tdocument.replace(TITRE, doc.title)
+	       tdocument.replace(TITREL, path + doc.file)
+	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
+	       tdocument.replace(DATE, doc.date)
+	       tdocument.replace(LANGUAGE, doc.language)
+	       tdocument.replace(TYPE, doc.type)
+	       tdocument.replace(URL, doc.url)
+	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(PARTS, visit_strs(doc.parts))
+	       str.append(tdocument.stop)
+	    end
+	    
 	 end
       end
    
-   items_visitor(desc : STRING; strs : LINKED_LIST[STRING]) is
+   visit_str (name : STRING) : STRING is
+      do
+	 if (name /= void) then
+	    Result := name
+	 else
+	    Result := ""
+	 end
+      end
+   
+   visit_strs (strs : LINKED_LIST[STRING]) : STRING is
       local
 	 i : INTEGER
       do
-	 if strs /= void then
-	    from i := 1 until i > strs.count loop
-	       item_visitor(desc, strs.item(i))
-	       i := i + 1
+	 Result := ""
+	 from i := 1 until i > strs.count loop
+	    Result.append(visit_str(strs.item(i)))
+	    i := i + 1
+	    if (i <= strs.count) then
+	       Result.append (", ")
 	    end
-	 end	 
-      end
-   
-   item_visitor(desc : STRING; pstr : STRING) is
-      do
-	 if pstr /= void then
-	    str.append(desc + pstr + "%",%N")
 	 end
       end
    
@@ -96,6 +108,30 @@ feature {BIBTEX_VISITOR}
    pos			: INTEGER
    path			: STRING
    str			: STRING
+   tdocument		: TEMPLATE
+   
+   -- Strings to Replace 
+   AUTHOR		: STRING is "%%%%AUTHOR%%"
+   CONTENT		: STRING is "%%%%CONTENT%%"
+   TITREL		: STRING is "%%%%TITLEL%%"
+   TITRE		: STRING is "%%%%TITLE%%"
+   AUTHORS		: STRING is "%%%%AUTHORS%%"
+   DATE			: STRING is "%%%%DATE%%"
+   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
+   TYPE			: STRING is "%%%%TYPE%%"
+   URL			: STRING is "%%%%URL%%"
+   SUMMARY		: STRING is "%%%%SUMMARY%%"
+   PARTS		: STRING is "%%%%PARTS%%"
+   COMMENTS		: STRING is "%%%%COMMENTS%%"
+   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
+   LINKS		: STRING is "%%%%LINKS%%"
+   LINK			: STRING is "%%%%LINK%%"
+   NUMBER		: STRING is "%%%%NUMBER%%"
+   VERSION		: STRING is "%%%%VERSION%%"
+   ID			: STRING is "%%%%ID%%"
+   
+   -- Template files
+   TDOCUMENT		: STRING is "/bibtex/document.tpl"
    
 end -- bibtex_vivitor
 

@@ -201,8 +201,8 @@ feature {HTML_VISITOR} -- Constants
    -- Strings to Replace 
    AUTHOR		: STRING is "%%%%AUTHOR%%"
    CONTENT		: STRING is "%%%%CONTENT%%"
-   TITREL		: STRING is "%%%%TITREL%%"
-   TITRE		: STRING is "%%%%TITRE%%"
+   TITREL		: STRING is "%%%%TITLEL%%"
+   TITRE		: STRING is "%%%%TITLE%%"
    AUTHORS		: STRING is "%%%%AUTHORS%%"
    DATE			: STRING is "%%%%DATE%%"
    LANGUAGE		: STRING is "%%%%LANGUAGE%%"

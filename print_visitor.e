@@ -22,21 +22,18 @@ inherit DEFAULT_VISITOR
       rename
 	 make as make_default
       redefine
-	 sub_visit,
-	 visit_string,
-	 visit_strings,
-	 visit_comment
+	 sub_visit
 creation
    make
    
 feature {ANY}
-   make(a : AST) is
+   make(a : AST, template_path, ppath : STRING) is
       do
+	 !!tdocument.make(template_path + TDOCUMENT)
+	 !!tcomment.make(template_path + TCOMMENT)
 	 make_default(a)
+	 path := ppath
 	 !!str.make_empty
-	 str.append("***********************************%N")
-	 str.append("*           DOCUMENT              *%N")
-	 str.append("***********************************%N")
       end
    
    get_result : STRING is
@@ -57,64 +54,97 @@ feature {PRINT_VISITOR} -- visitor function
 	 doc /= void
       do
 	 if (doc.mark) then
-	    pre_section("Title    : ")
-	    visit_string(doc.title)
-	    pre_section("Authors  : ")
-	    visit_strings(doc.authors)
-	    pre_section("Date     : ")
-	    visit_string(doc.date);
-	    pre_section("Language : ")
-	    visit_string(doc.language);
-	    pre_section("Type     : ")
-	    visit_string(doc.type);
-	    pre_section("File     : ")
-	    visit_string(doc.file);
-	    pre_section("Url      : ")
-	    visit_string(doc.url);	    
-	    pre_section("Summary  : ")
-	    visit_string(doc.summary);
-	    pre_section("Parts    : ")
-	    visit_strings(doc.parts);
-	    visit_comments(doc.comments);
+	    if (tdocument.start) then
+	       tdocument.replace(TITRE, doc.title)
+	       tdocument.replace(TITREL, path + doc.file)
+	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
+	       tdocument.replace(DATE, doc.date)
+	       tdocument.replace(LANGUAGE, doc.language)
+	       tdocument.replace(TYPE, doc.type)
+	       tdocument.replace(URL, doc.url)
+	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(PARTS, visit_strs(doc.parts))
+	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
+	       str.append(tdocument.stop)
+	    end
+
 	 end
       end
    
-   visit_comment (comment : COMMENT) is
-      do   
-	 if (comment /= void) then
-	    str.append("***********************************%N")
-	    str.append("*            COMMENT              *%N")
-	    str.append("***********************************%N")
-	    pre_section("Author   : ")
-	    visit_string(comment.author_name)
-	    pre_section("Content  : ")
-	    visit_string(comment.content)
+   visit_str (name : STRING) : STRING is
+      do
+	 if (name /= void) then
+	    Result := name
+	 else
+	    Result := ""
 	 end
       end
    
-   visit_strings (strs : LINKED_LIST[STRING]) is
+   visit_strs (strs : LINKED_LIST[STRING]) : STRING is
       local
 	 i : INTEGER
       do
-	 if (strs /= void) then
-	    from i := 1 until i > strs.count loop
-	       if (i > 1) then
-		  str.append("           ");
-	       end
-	       visit_string(strs.item(i))
+	 Result := ""
+	 from i := 1 until i > strs.count loop
+	    Result.append(visit_str(strs.item(i)))
+	    i := i + 1
+	    if (i <= strs.count) then
+	       Result.append (", ")
+	    end
+	 end
+      end
+   
+   visit_cmts (comments : LINKED_LIST[COMMENT]) : STRING is
+      local
+	 i : INTEGER
+      do
+	 Result := ""
+	 if (comments /= void) then
+	    from i := 1 until i > comments.count loop
+	       Result.append(visit_cmt(comments.item(i)))
 	       i := i + 1
 	    end
 	 end
       end
 
-   visit_string (name : STRING) is
-      do
-	 if (name /= void) then
-	    str.append(name + "%N")
+   visit_cmt (comment : COMMENT) : STRING is
+      do   
+	 Result := ""
+	 if (comment /= void) then
+	    if (tcomment.start) then
+	       tcomment.replace(AUTHOR, comment.author_name)
+	       tcomment.replace(CONTENT, comment.content)
+	       Result.append(tcomment.stop)
+	    end
 	 end
       end
    
 feature {PRINT_VISITOR}   
+   path		: STRING
    str		: STRING
+   tdocument	: TEMPLATE
+   tcomment	: TEMPLATE
+   
+   -- consts
+   TDOCUMENT	: STRING is "/ast/document.tpl"
+   TCOMMENT	: STRING is "/ast/comment.tpl"
+	 
+   -- Strings to Replace 
+   AUTHOR	: STRING is "%%%%AUTHOR%%"
+   CONTENT	: STRING is "%%%%CONTENT%%"
+   TITREL	: STRING is "%%%%TITLEL%%"
+   TITRE	: STRING is "%%%%TITLE%%"
+   AUTHORS	: STRING is "%%%%AUTHORS%%"
+   DATE		: STRING is "%%%%DATE%%"
+   LANGUAGE	: STRING is "%%%%LANGUAGE%%"
+   TYPE		: STRING is "%%%%TYPE%%"
+   URL		: STRING is "%%%%URL%%"
+   SUMMARY	: STRING is "%%%%SUMMARY%%"
+   PARTS	: STRING is "%%%%PARTS%%"
+   COMMENTS	: STRING is "%%%%COMMENTS%%"
+   DOCUMENTS	: STRING is "%%%%DOCUMENTS%%"
+   LINKS	: STRING is "%%%%LINKS%%"
+   LINK		: STRING is "%%%%LINK%%"
+   NUMBER	: STRING is "%%%%NUMBER%%"
+   VERSION	: STRING is "%%%%VERSION%%"
 end
-

@@ -1,4 +1,3 @@
-Comment : \\
 \begin{center}
 \begin{tabular}[c]{|c|c|}
 \hline

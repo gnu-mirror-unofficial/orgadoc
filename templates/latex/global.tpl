@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage[french]{babel}
 \usepackage{fancyhdr}
+\usepackage{tabularx}
 \setlength\abovecaptionskip{0pt}
 \setlength\belowcaptionskip{10pt}
 \pagestyle{fancy}
@@ -34,7 +35,6 @@
 
 
 \begin{document}
-\tableofcontents
 
 %%DOCUMENTS%%
 
