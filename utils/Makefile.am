@@ -1,2 +1,2 @@
-bin_PROGRAMS 	= add_docs init_readmes
+bin_SCRIPTS 	= orgadoc_add_docs orgadoc_init_readmes
 CLEANFILES 	= *~
