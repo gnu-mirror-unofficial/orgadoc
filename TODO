@@ -11,7 +11,8 @@
 fichier/rep)
 
 
-DONE :
+##### DONE (not yet released) #####
+
  - Better error message : give the exact reason of error 
    (exemple : no type in xxx document...)
  - ADD CGI for research on web interface
