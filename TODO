@@ -4,15 +4,14 @@
 
 #### NEW FEATURE ####
 
- - Better error message : give the exact reason of error (exemple : no type in xxx 
-document...)
  - read file HEADER and FOOTER like apache with moddir
  - Try to made a interface for http://citeseer.nj.nec.com/cs
  - Add IA (text-mining) to generate readme.xml files
- - Multiple Section Support (ex : robotics and ia)
  - add a script for add a document automaticaly (ex : orgadoc_add_doc 
 fichier/rep)
 
 
 DONE :
+ - Better error message : give the exact reason of error 
+   (exemple : no type in xxx document...)
  - ADD CGI for research on web interface
