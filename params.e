@@ -230,8 +230,8 @@ feature {PARAMS}
       do
 	 std_output.put_string(NAME + " version " + VERSION + "%N%N")
 	 std_output.put_string("Copyright 2002-2003")
-	 std_output.put_string(" Julien LEMOINE <julien@oopla.org>%N")
-	 std_output.put_string("%NReport bugs to <julien@oopla.org>.%N")
+	 std_output.put_string(" Julien LEMOINE <julien@happycoders.org>%N")
+	 std_output.put_string("%NReport bugs to <julien@happycoders.org>.%N")
 	 die_with_code(0)
       end
    
