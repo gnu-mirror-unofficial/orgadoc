@@ -1,3 +1,10 @@
+2002-06-24  Julien LEMOINE <speedblue@debian.org>
+	* added <url></url> tag in readme.xml
+	  add display in visitors
+	* added BibTex support in configuration file, man page
+	  and command line
+	* added BibTex Visitors (not used for the moment)
+
 2002-06-22  Julien LEMOINE <speedblue@debian.org>
 
 	OrgaDoc 0.4.1 was released
