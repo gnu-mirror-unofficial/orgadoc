@@ -54,9 +54,9 @@ feature {TREE_TO_AST}
       do
 	 -- empty node is a <node/> with no data
 	 if not el.is_empty then
-	    process_start_element(el.name.to_utf8)
+	    process_start_element(el.name.out) --to_utf8)
 	    process_composite(el)
-	    process_end_element(el.name.to_utf8)
+	    process_end_element(el.name.out) --to_utf8)
 	 end
       end
    

@@ -40,7 +40,7 @@ feature {ANY}                   -- creation
 	 str	: UCSTRING
 	 tools	: FILE_TOOLS
       do
-	 -- choose expat if available
+	 --choose expat if available
 	 if fact.is_expat_event_available then
 	    tree := parse_expat
 	 else
@@ -53,6 +53,9 @@ feature {ANY}                   -- creation
 	       Result := tree.is_correct
 	       if Result /= true then
 		  print("Tree not correct%N");
+		  debug
+		     print(tree.last_error_extended_description + "%N")
+		  end
 	       end
 	    else
 	       Result := false

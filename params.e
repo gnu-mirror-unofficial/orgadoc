@@ -235,5 +235,5 @@ feature {PARAMS}
    DEFAULT_HTML_FILE	: STRING is "index.html"
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "pre-0.5.0"
+   VERSION		: STRING is "0.5.0"
 end

@@ -12,7 +12,7 @@
 		<cluster name="orgadoc" location="${CURRENT_DIR}/"/>
 
 		<mount location="${EXML}/exml.xace" >
-			<exclude cluster="exml.impl.expat"/>
+			<exclude cluster="exml.impl.no_expat"/>
 			<exclude cluster="exml.impl.no_eiffel"/>
 			<exclude cluster="exml.impl.no_tree_on_event"/>
 		</mount>

@@ -1,10 +1,8 @@
 ################ TODO LIST FOR ORGADOC ################
 
 #### OPTIMISATION ####
- - allow display of french caracters (accents) in generated document
 
 #### NEW FEATURE ####
 
  - produce latex output (latex_visitor)
- - produce bibtex output (bibtex_visitor)
  - Try to made a interface for http://citeseer.nj.nec.com/cs

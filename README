@@ -25,3 +25,41 @@ Here is a example of readme.xml file :
 
 here is a example of command :
   orgadoc -r -p /var/www/docs -w -e /tmp
+
+FRENCH NOTES :
+You can add "accents" in your xml file, here is a summary :
+
+
+
+
+
+Â : &Acirc;
+â :&acirc;
+Æ : &AElig;
+æ : &aelig;
+À : &Agrave;
+à : &agrave;
+Ç : &Ccedil;
+ç : &ccedil;
+É : &Eacute;
+é : &eacute;
+Ê : &Ecirc;
+ê : &ecirc;
+È : &Egrave;
+è : &egrave;
+Ë : &Euml;
+ë : &euml;
+Î : &Icirc;
+î : &icirc;
+Ï : &Iuml;
+ï : &iuml;
+Ô : &Ocirc;
+ô : &ocirc;
+Ö : &Ouml;
+ö : &ouml;
+Ù : &Ugrave;
+ù : &ugrave;
+Û : &Ucirc;
+û : &ucirc;
+Ü : &Uuml;
+ü : &uuml;

@@ -1,3 +1,10 @@
+2002-06-30  Julien LEMOINE <speedblue@debian.org>
+	
+	OrgaDoc 0.5 was released
+	
+	* added expat support (resolve problem with french characters)
+	* first release with BibTex support
+
 2002-06-26  Julien LEMOINE <speedblue@debian.org>
 	* Integrated Bibtex
 	* Fixed some bug (with conffile)
