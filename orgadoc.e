@@ -178,7 +178,8 @@ feature {ORGADOC}
    convert_regexp_file(ast : AST; path : STRING) is
       local
 			grep		: GREP_VISITOR	 
-			display	: PRINT_VISITOR	 
+			display	: PRINT_VISITOR
+			index	   : INTEGER
       do
 			!!grep.make(ast, params.enable_private, 
 							params.regexp, params.insensitive)
@@ -187,6 +188,11 @@ feature {ORGADOC}
 				if (is_prog) then
 					!!display.make(ast, params.template_path + REP_PROG, path)
 				else
+					index := path.first_substring_index(params.input_path)
+					if (index > 0) then
+						path.replace_substring(params.httpd_path, index,
+													  index + params.input_path.count - 1)
+					end
 					!!display.make(ast, params.template_path + REP_CGI, path)
 				end
 				display.visit
