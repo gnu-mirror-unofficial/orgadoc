@@ -247,7 +247,7 @@ feature {ORGADOC}
 					print ("Try convert " + correct(path) + file + "%N")
 				end
 				if (parser.parse) then
-					!!convert.make(parser.get_tree, params);
+					!!convert.make(parser.get_tree, params, correct(path) + file);
 					ast := convert.convert;
 					if (ast /= void) then
 						-- Select type of conversion
@@ -269,20 +269,22 @@ feature {ORGADOC}
 					end
 				end
 			end
-			if params.html_mode and ast /= void then
+			if params.html_mode then
 				convert_html_file(ast, path, sub_paths, sub_nb_docs)
 			end
-			if ast = void then
+			if ast = void and parser.file_exist then
 				cerr.put_string("Error [" + correct(path) + file +
 									 "] : Empty AST%N")
-			elseif params.verbose then
+			elseif params.verbose and parser.file_exist then
 				print ("Successfully convert " + correct(path) + file + "%N")
+			elseif not parser.file_exist and params.verbose then
+				print ("No file " + correct(path) + file + "%N")
 			end
-      rescue
-			cerr.put_string ("%N" + correct(path) + file + " is not correct%N")
-			cerr.put_string ("verify the xml header, it must contain : %
-								  % encoding=%"ISO-8859-1%"%N")
-			die_with_code(0)
+         rescue
+   			cerr.put_string ("%N" + correct(path) + file + " is not correct%N")
+   			cerr.put_string ("verify the xml header, it must contain : %
+   								  % encoding=%"ISO-8859-1%"%N")
+   			die_with_code(0)
       end
    
    -- add a final '/' if there is not one
@@ -321,12 +323,18 @@ feature {ORGADOC}
 					dir.compute_subdirectory_with(some_path, dir.last_entry.twin)
 					another_path := dir.last_entry.twin
 					if another_path.count > 0 then
+						if tmp_dir.is_connected then
+							tmp_dir.disconnect
+						end
 						tmp_dir.connect_to(another_path)
 						if tmp_dir.is_connected and recursive_convert(another_path) then
 							Result := true
 							sub_paths.add_last(another_path)
 							sub_nb_doc.add_last(nb_docs)
 							tnb_docs := tnb_docs + nb_docs
+							if tmp_dir.is_connected then
+								tmp_dir.disconnect
+							end
 						end
 					end
 					dir.read_entry -- next sub directory

@@ -1,3 +1,11 @@
+2003-11-02   Julien LEMOINE <speedblue@debian.org>
+	* Fixed a bug when reading template : last line was ignored when there were no
+	  \n a then end
+	* Added a new feature : "%%FILENAME:file_name.ext%%" in the html template
+	  replace this string by the content of file_name.ext for each directory
+	* Fixed exploration bug (introduced in previous commit)
+	* Display a warning when there is no <language> tag
+
 2003-10-17  Julien LEMOINE <speedblue@debian.org>
 	* Improved a lot orgadoc errors message.
 	  now it give the missing xml markup for a file, ex :

@@ -27,15 +27,12 @@ feature {ANY}
 			lpath /= void
       do
 			path := lpath
-
 			!!file.connect_to(path)
 			model := ""
 			if (file /= void and file.is_connected) then
-				from file.read_line until file.end_of_input loop
+				from model := "" until file.end_of_input loop
+					file.read_line
 					model := model + file.last_string + "%N"
-					if not file.end_of_input then
-						file.read_line
-					end
 				end
 				file.disconnect
 			end

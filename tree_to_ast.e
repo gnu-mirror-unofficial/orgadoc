@@ -28,12 +28,13 @@ creation
    make
 
 feature {ANY}
-   make (tree : XM_DOCUMENT; p : PARAMS) is
+   make (tree : XM_DOCUMENT; p : PARAMS; xmlfile : STRING) is
       require
 			tree /= void
       do
 			doc := tree
 			params := p
+			xml_filename := xmlfile
       end
    
    convert : AST is
@@ -108,24 +109,32 @@ feature {TREE_TO_AST}
 				document.set_summary(summary)
 				document.set_nbpages(nbpages)
 				document.set_date(date)
+				if (file /= void)
+					document.set_file(file)
+				else
+					cerr.put_string ("Failed to convert [" + xml_filename +
+										  "] : no <file></file> section%N")
+				end
 				if (type /= void) then
 					document.set_type(type)
 				else
 					cerr.put_string ("Failed to convert [" + 
-										  file + "] : no <type></type> section%N")
+										  file + " in " + xml_filename +
+										  "] : no <type></type> section%N")
 				end
 				document.set_url(url)
-				document.set_file(file)
 				if (title /= void) then
 					document.set_title(title)
 				else
 					cerr.put_string ("Failed to convert [" + 
-										  file + "] : no <title></title> section%N")
+										  file + " in " + xml_filename +
+										  "] : no <title></title> section%N")
 				end
 				if (language /= void) then
 					document.set_language(language)
-				else
-					cerr.put_string ("Failed to convert [" + file +
+				elseif params.verbose then 
+					cerr.put_string ("Warning: [" + file +
+										  " in " + xml_filename +
 										  "] : no <language></language> section%N")
 				end
 				documents.add_last(document)
@@ -213,6 +222,9 @@ feature {ANY}
 			-- Node Content
    node_content : STRING
 
+	      -- Xml file name
+	xml_filename : STRING
+	
 			-- Constants
    CREADME		 : STRING is "readme"
    CDOCUMENT	 : STRING is "document"
