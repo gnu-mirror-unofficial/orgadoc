@@ -58,6 +58,9 @@ AC_PROG_GOBO
 AC_CHECK_RQRD_CLUSTER(GOBO)
 AC_CHECK_RQRD_XACE(ORGADOC, src, orgadoc)
 AC_CHECK_RQRD_XACE(ORGADOC, src, cgi)
+if test x$GOBO_EIFFEL = xse; then
+  AC_CHECK_RQRD_CLUSTER2(SmartEiffel)
+fi
 
 # enable/disable debug
 AC_ARG_ENABLE(debug,

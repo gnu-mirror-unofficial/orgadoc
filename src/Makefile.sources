@@ -1,4 +1,5 @@
 ESRC = ./ast.e ./default_visitor.e ./latex_visitor.e ./print_visitor.e	\
        ./bibtex_visitor.e ./document.e ./orgadoc.e ./read_xml.e		\
        ./cgi.e ./grep_visitor.e ./params.e ./template.e ./comment.e	\
-       ./html_visitor.e ./parser_data.e ./tree_to_ast.e parser.e scanner.e
+       ./html_visitor.e ./parser_data.e ./tree_to_ast.e ./parser.e 	\
+       ./scanner.e ./parser.y ./scanner.l ./tokens.e

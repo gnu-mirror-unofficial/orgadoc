@@ -215,6 +215,31 @@ fi
 AC_MSG_RESULT([yes])
 ])# AC_CHECK_CLUSTER
 
+# AC_CHECK_RQRD_CLUSTER
+# ---------------------
+# Check if a certain cluster (or set of clusters) is available.
+# This is equal to checking if the environment variable of this name is set
+# and if that directory or file exists.
+# The cluster is considered required, so an error message is given if
+# cluster not found.
+# Use AC_CHECK_XACE_CLUSTER to check for a .xace file in addition.
+AC_DEFUN([AC_CHECK_RQRD_CLUSTER2],
+[AC_ARG_VAR([$1], [Location of $1 cluster])dnl
+
+AC_MSG_CHECKING([for Eiffel cluster $1])
+
+if test x$$1 = x; then
+  AC_MSG_ERROR(The environment variable for cluster $1 is undefined)
+fi
+
+if test ! -f $$1; then
+  if test ! -d $$1; then
+    AC_MSG_ERROR(The file/directory for cluster $1 given as $$1 does not exist)
+  fi
+fi
+
+AC_MSG_RESULT([yes])
+])# AC_CHECK_CLUSTER2
 
 # AC_CHECK_RQRD_XACE(CLUSTER, PATH-RELATIVE-TO-CLUSTER)
 # -----------------------------------------------------

@@ -8,7 +8,7 @@ root
 
 default
 
-	assertion (all)
+	assertion (boost)
 	case_insensitive (yes)
 	debug (no)
 	collect (no)
