@@ -92,7 +92,7 @@ perform queries.
 
 OrgaDoc is easy to use : only the creation of some xml files
 describing your documents is needed. These files can be generated. Read the
-section (@pxref{howto}) for details.
+section (@pxref{How to use it}) for details.
 
 @node Installation
 @chapter Installation
@@ -134,7 +134,7 @@ cd orgadoc-0.8.0
 make
 @end verbatim
 and to install OrgaDoc, run in super user mode:
-@begin verbatim
+@verbatim
 make install
 @end verbatim
 
@@ -160,7 +160,7 @@ documents pool and a CGI mode to enable queries via html.
 @cindex howto
 A directory hierarchy of documentation is needed, for example:
 
-@begin verbatim
+@verbatim
 artificial_intelligence
 artificial_intelligence/neural_networks
 artificial_intelligence/pattern_recognition
@@ -196,7 +196,7 @@ A document node contains a number of subnodes:
 @end itemize
 
 Here is an example of an xml file describing a directory:
-@begin verbatim
+@verbatim
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <readme>
   <document>
@@ -245,7 +245,7 @@ containing extractable informations. XML section that can not be
 extracted are filled with a FIXME.
 
 Exemple of orgadoc_init_readmes usage:
-@begin verbatim
+@verbatim
 $ orgadoc_init_readmes docs
 Entering directory [docs]
 Leaving directory [docs]
@@ -266,7 +266,7 @@ readme.xml files are now created, please edit the FIXME lines
 $
 @end verbatim
 Exemple of generated readme.xml file:
-@begin verbatim
+@verbatim
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <readme>
 <document>
@@ -347,7 +347,7 @@ Here is a list of configuration variable and there utility:
 @end itemize
 
 Example of orgadoc.conf file:
-@begin verbatim
+@verbatim
 XmlFile                 = readme.xml
 HtmlFile                = index.html
 BibTexFile              = orgadoc.bib
@@ -377,7 +377,7 @@ server with scp. A readme.xml file and a section have to be supplied and
 the script do  the remaining part of the work.
 
 For example:
-@begin verbatim
+@verbatim
 ./orgadoc_add_docs /tmp/readme.xml artificial_intelligence/neural_networks
 @end verbatim
 will commit changes into readme.xml file of
@@ -390,7 +390,7 @@ You can use the orgadoc cgi binary to perform regexp search on your
 document pool, you simply need to send the query variable to cgi.
 
 Here is a example of HTML form to use with this cgi :
-@begin verbatim
+@verbatim
 <FORM ACTION="cgi-bin/orgadoc_cgi" xmethod="PRE">
 <P>Regexp search :
 <INPUT NAME="query" SIZE="10">

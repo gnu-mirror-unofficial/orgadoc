@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.56)
-AC_INIT(orgadoc, 0.8-cvs)
+AC_INIT(orgadoc, 0.8)
 AC_CONFIG_SRCDIR([src/orgadoc.e])
 
 # Auxiliary files.
