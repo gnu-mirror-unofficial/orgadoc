@@ -19,7 +19,7 @@ indexing
 class LATEX_VISITOR     
 
 
-inherit LATEX_VISITOR
+inherit DEFAULT_VISITOR
       rename
 	 make as make_default
       redefine

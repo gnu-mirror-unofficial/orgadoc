@@ -191,6 +191,8 @@ feature {ORGADOC}
 	       convert_display_file(ast)
 	    elseif params.bibtex_mode then
 	       convert_bibtex_file(ast, path)
+	    elseif params.latex_mode then
+	       convert_latex_file(ast, path)	    
 	    end -- end select
 	    print ("Successfully convert " + path + file + "%N")
 	 else

@@ -25,8 +25,7 @@ feature {ANY}
       local
 	 parser	: PARSER
       do
-	 html_mode := false
-	 display_mode := false
+	 reinit
 	 recursive := false
 	 output_path := "./"
 	 enable_private := false
@@ -44,7 +43,11 @@ feature {ANY}
 	 if (xml_file = void) then -- default value
 	    xml_file := DEFAULT_XML_FILE
 	 end
-	 if (regexp = void and not html_mode and not display_mode) then
+	 if (regexp = void 
+	     and not html_mode 
+	     and not display_mode
+	     and not bibtex_mode
+	     and not latex_mode) then
 	    html_mode := true
 	 end
 	 if (input_path = void) then
@@ -70,6 +73,14 @@ feature {ANY}
       end
    
 feature {PARAMS}
+   reinit is
+      do
+	 html_mode := false
+	 display_mode := false
+	 latex_mode := false
+	 bibtex_mode := false
+      end
+   
    display_help is
       do
 	 std_output.put_string(NAME + " %
@@ -112,15 +123,19 @@ feature {PARAMS}
 	    parser_switch := command_arguments.item(i)
 	    if (parser_switch.is_equal("--html") or
 		parser_switch.is_equal("-t")) then
+	       reinit
 	       html_mode := true
 	    elseif (parser_switch.is_equal("--bibtex") or
 		parser_switch.is_equal("-b")) then
+	       reinit
 	       bibtex_mode := true
 	    elseif (parser_switch.is_equal("--latex") or
 		parser_switch.is_equal("-l")) then
+	       reinit
 	       latex_mode := true	    
 	    elseif (parser_switch.is_equal("--display-ast") or
 		    parser_switch.is_equal("-d")) then
+	       reinit
 	       display_mode := true
 	    elseif (parser_switch.is_equal("--case-insensitive") or
 		    parser_switch.is_equal("-i")) then
@@ -202,27 +217,6 @@ feature {PARAMS}
 	    if data.enable_private /= void then
 	       enable_private := data.enable_private
 	    end
-	    if data.is_html_mode /= void then
-	       html_mode := data.is_html_mode 
-	       if data.html_file /= void and html_mode then
-		  output_file := data.html_file
-	       end
-	    end
-	    if data.is_display_mode /= void then
-	       display_mode := data.is_display_mode
-	    end
-	    if data.is_bibtex_mode /= void then
-	       bibtex_mode := data.is_bibtex_mode
-	       if data.bibtex_file /= void and bibtex_mode then
-		  output_file := data.bibtex_file
-	       end	    
-	    end
-	    if data.is_latex_mode /= void then
-	       latex_mode := data.is_latex_mode
-	       if data.latex_file /= void and latex_mode then
-		  output_file := data.latex_file
-	       end	    
-	    end	    
 	    if data.template_path /= void then
 	       template_path := data.template_path
 	    end
