@@ -17,7 +17,7 @@ indexing
    --| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 
 class HTML_VISITOR     
-
+   
 inherit DEFAULT_VISITOR
       rename
 	 make as make_default
@@ -26,7 +26,7 @@ inherit DEFAULT_VISITOR
 
 creation
    make
-
+   
 feature {ANY}
    make (a : AST; private : BOOLEAN; 
 	 output_path, file, ppath : STRING;

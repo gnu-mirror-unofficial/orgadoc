@@ -37,7 +37,7 @@ feature {ANY}
 	    if (ast.documents /= void) then
 	       from i := 1 until i > ast.documents.count loop
 		  sub_visit(ast.documents.item(i))
-		  i := i + 11
+		  i := i + 1
 	       end
 	    end
 	 end
