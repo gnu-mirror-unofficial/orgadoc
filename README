@@ -11,8 +11,18 @@ of the html output is available at : http://docs.happycoders.org/html/
 
 ===== USE =====
 
- Use is very easy : a xml file per directory describing all documents 
+Use is very easy : a xml file per directory describing all documents 
 of this directory.
+
+===== USE of CGI =====
+the cgi read a variable 'query'.
+Here is a example of HTML form to use with this cgi :
+
+<FORM ACTION="cgi-bin/orgadoc_cgi" xmethod="PRE">
+<P>Regexp search :
+<INPUT NAME="query" SIZE="10">
+<INPUT TYPE="SUBMIT" VALUE="Search">
+</FORM>
 
 ===== EXAMPLE =====
 
