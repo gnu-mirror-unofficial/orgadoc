@@ -24,7 +24,7 @@ inherit DEFAULT_VISITOR
       redefine
 			sub_visit
 creation
-   make
+   make, make_all
    
 feature {ANY}
    make(a : AST, template_path, ppath : STRING) is
@@ -34,8 +34,19 @@ feature {ANY}
 			make_default(a)
 			path := ppath
 			!!str.make_empty
+			grep := true
       end
    
+   make_all(a : AST, template_path, ppath : STRING) is
+      do
+			!!tdocument.make(template_path + CTDOCUMENT)
+			!!tcomment.make(template_path + CTCOMMENT)
+			make_default(a)
+			path := ppath
+			!!str.make_empty
+			grep := false
+      end
+
    get_result : STRING is
       do
 			Result := "%N" + str + "%N"
@@ -51,9 +62,9 @@ feature {PRINT_VISITOR} -- visitor function
    
    sub_visit (doc : DOCUMENT) is
       require
-		doc /= void
+			doc /= void
       do
-			if (doc.mark) then
+			if doc.mark or not grep then
 				if (tdocument.start) then
 					tdocument.replace(TITRE, doc.title)
 					tdocument.replace(TITREL, path + doc.file)
@@ -67,12 +78,12 @@ feature {PRINT_VISITOR} -- visitor function
 					tdocument.replace(PARTS, visit_strs(doc.parts))
 					tdocument.replace(COMMENTS, visit_cmts(doc.comments))
 					str.append(tdocument.stop)
-					end
-
 				end
+
 			end
+		end
    
-			visit_str (name : STRING) : STRING is
+	visit_str (name : STRING) : STRING is
       do
 			if (name /= void) then
 				Result := name
@@ -125,7 +136,8 @@ feature {PRINT_VISITOR}
    str			 : STRING
    tdocument	 : TEMPLATE
    tcomment		 : TEMPLATE
-   
+   grep			 : BOOLEAN
+	
 			-- consts
    CTDOCUMENT	: STRING is "/document.tpl"
    CTCOMMENT	: STRING is "/comment.tpl"

@@ -167,9 +167,9 @@ feature {ORGADOC}
 			display	: PRINT_VISITOR
       do
 			if (is_prog) then
-				!!display.make(ast, params.template_path + REP_PROG, path)
+				!!display.make_all(ast, params.template_path + REP_PROG, path)
 			else
-				!!display.make(ast, params.template_path + REP_CGI, path)
+				!!display.make_all(ast, params.template_path + REP_CGI, path)
 			end
 			display.visit
 			print(display.get_result)
