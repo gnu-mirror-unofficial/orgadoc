@@ -241,7 +241,7 @@ feature {ORGADOC}
 			cerr		: STD_ERROR
       do
 			!!cerr.make
-			!!parser.make(path + "/" + file)
+			!!parser.make(correct(path) + file)
 			if (parser.file_exist)
 				if params.verbose then
 					print ("Try convert " + correct(path) + file + "%N")
@@ -276,10 +276,10 @@ feature {ORGADOC}
 				cerr.put_string("Error [" + correct(path) + file +
 									 "] : Empty AST%N")
 			elseif params.verbose then
-				print ("Successfully convert " + path + "/" + file + "%N")
+				print ("Successfully convert " + correct(path) + file + "%N")
 			end
       rescue
-			cerr.put_string ("%N" + path + "/" + file + " is not correct%N")
+			cerr.put_string ("%N" + correct(path) + file + " is not correct%N")
 			cerr.put_string ("verify the xml header, it must contain : %
 								  % encoding=%"ISO-8859-1%"%N")
 			die_with_code(0)
