@@ -9,4 +9,5 @@ document...)
  - read file HEADER and FOOTER like apache with moddir
  - Try to made a interface for http://citeseer.nj.nec.com/cs
  - Add IA (text-mining) to generate readme.xml files
-
+ - Multiple Section Support (ex : robotics and ia)
+ - ADD CGI for research on web interface
