@@ -1,3 +1,9 @@
+2003-10-17  Julien LEMOINE <speedblue@debian.org>
+	* Improved a lot orgadoc errors message.
+	  now it give the missing xml markup for a file, ex :
+	  "Failed to convert [compil.pdf] : no <type></type> section"
+	* Fixed compilation problem when compiling with require
+
 2003-10-16  Julien LEMOINE <speedblue@debian.org>
 	* Added a cgi for web reserch
 

@@ -241,26 +241,25 @@ feature {ORGADOC}
 			cerr		: STD_ERROR
       do
 			!!cerr.make
-			!!parser.make(path + file)
+			!!parser.make(path + "/" + file)
 			if (parser.file_exist)
 				if params.verbose then
 					print ("Try convert " + correct(path) + file + "%N")
 				end
 				if (parser.parse) then
-					!!convert.make(parser.get_tree);
+					!!convert.make(parser.get_tree, params);
 					ast := convert.convert;
-					-- Select type of conversion
-					if params.regexp /= void then
-						convert_regexp_file(ast, sub_paths.item(1))
-					elseif params.display_mode then
-						convert_display_file(ast, sub_paths.item(1))
-					elseif params.bibtex_mode then
-						convert_bibtex_file(ast, path)
-					elseif params.latex_mode then
-						convert_latex_file(ast, path)	    
-					end -- end select
-					if params.verbose then
-						print ("Successfully convert " + path + file + "%N")
+					if (ast /= void) then
+						-- Select type of conversion
+						if params.regexp /= void then
+							convert_regexp_file(ast, sub_paths.item(1))
+						elseif params.display_mode then
+							convert_display_file(ast, sub_paths.item(1))
+						elseif params.bibtex_mode then
+							convert_bibtex_file(ast, path)
+						elseif params.latex_mode then
+							convert_latex_file(ast, path)	    
+						end -- end select
 					end
 				else
 					ast := void
@@ -270,11 +269,17 @@ feature {ORGADOC}
 					end
 				end
 			end
-			if (params.html_mode) then
+			if params.html_mode and ast /= void then
 				convert_html_file(ast, path, sub_paths, sub_nb_docs)
 			end
+			if ast = void then
+				cerr.put_string("Error [" + correct(path) + file +
+									 "] : Empty AST%N")
+			elseif params.verbose then
+				print ("Successfully convert " + path + "/" + file + "%N")
+			end
       rescue
-			cerr.put_string ("%N" + path + file + " is not correct%N")
+			cerr.put_string ("%N" + path + "/" + file + " is not correct%N")
 			cerr.put_string ("verify the xml header, it must contain : %
 								  % encoding=%"ISO-8859-1%"%N")
 			die_with_code(0)
@@ -315,12 +320,14 @@ feature {ORGADOC}
 				from dir.read_entry until dir.end_of_input loop -- loop on sub directory
 					dir.compute_subdirectory_with(some_path, dir.last_entry.twin)
 					another_path := dir.last_entry.twin
-					tmp_dir.connect_to(another_path)
-					if tmp_dir.is_connected and recursive_convert(another_path) then
-						Result := true
-						sub_paths.add_last(another_path)
-						sub_nb_doc.add_last(nb_docs)
-						tnb_docs := tnb_docs + nb_docs
+					if another_path.count > 0 then
+						tmp_dir.connect_to(another_path)
+						if tmp_dir.is_connected and recursive_convert(another_path) then
+							Result := true
+							sub_paths.add_last(another_path)
+							sub_nb_doc.add_last(nb_docs)
+							tnb_docs := tnb_docs + nb_docs
+						end
 					end
 					dir.read_entry -- next sub directory
 				end

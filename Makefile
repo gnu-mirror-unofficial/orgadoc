@@ -56,7 +56,7 @@ binary: scanner parser
 	  GOBO=$(GOBO) 			\
 	  CURRENT_DIR=$(CURRENT_DIR)	\
           EXPAT=/usr                   	\
-	  $(SE) ./$$file.ace;	exit;	\
+	  $(SE) ./$$file.ace;		\
 	done
 
 ################ GENERATE DOCUMENTATIONS ################
