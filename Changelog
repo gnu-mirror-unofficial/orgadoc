@@ -1,3 +1,8 @@
+2003-03-10  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.6.7 was released
+	
+	* Fixed problem of encoding with iso-8859-1 documents.
+
 2003-03-06  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.6.7 pre-release (Need to ask a question to gobo team)
 

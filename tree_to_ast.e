@@ -18,8 +18,7 @@ indexing
 
 class TREE_TO_AST     
    
-inherit KL_IMPORTED_STRING_ROUTINES; XM_NODE_PROCESSOR; 
-        UC_IMPORTED_UTF8_ROUTINES
+inherit KL_IMPORTED_STRING_ROUTINES; XM_NODE_PROCESSOR
       redefine
 	 process_document, process_element, 
 	 process_character_data
@@ -57,9 +56,9 @@ feature {TREE_TO_AST}
       do
 	 -- empty node is a <node/> with no data
 	 if not el.is_empty then
-	    process_start_element(utf8.to_utf8 (el.name.out))
+	    process_start_element(el.name.out)
 	    process_composite(el)
-	    process_end_element(utf8.to_utf8 (el.name.out))
+	    process_end_element(el.name.out)
 	 end
       end
    
@@ -95,8 +94,6 @@ feature {TREE_TO_AST}
 	 comment : COMMENT
 	 document : DOCUMENT
       do
-	 print(utf8.valid_utf8(node_content));
-	 print("%N")
 	 if (name.same_as(CREADME)) then
 	    ast.set_documents(documents)
 	 elseif (name.same_as(CDOCUMENT)) then
@@ -149,8 +146,7 @@ feature {TREE_TO_AST}
    
    process_character_data(c : XM_CHARACTER_DATA) is
       do
-	 node_content := STRING_.concat (node_content,  
-					 utf8.to_utf8(c.content.out))
+	 node_content := node_content + STRING_.string (c.content)
       end
    
    process_composite (c: XM_COMPOSITE) is
