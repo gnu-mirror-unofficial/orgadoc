@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<system name="orgadoc">
+	<root class="ORGADOC" creation="make"/>
+	<cluster>
+		<options>
+			<require enable="False"/>
+			<ensure enable="False"/>
+			<check enable="False"/>
+			<debug enable="False" name="boost"/>
+		</options>
+
+		<cluster name="orgadoc" location="${CURRENT_DIR}/"/>
+
+		<mount location="${EXML}/exml.xace" >
+			<exclude cluster="exml.impl.expat"/>
+			<exclude cluster="exml.impl.no_eiffel"/>
+			<exclude cluster="exml.impl.no_tree_on_event"/>
+		</mount>
+
+		<mount location="${EXML}/gobo.xace"/>
+		<mount location="${EXML}/ucstring.xace"/>
+		<mount location="${EXML}/kernel.xace" />
+	</cluster>
+</system>

@@ -1,0 +1,27 @@
+Here is a example of readme.xml file :
+<?xml version="1.0"?>
+<readme>
+  <document>
+    <title>Sample</title>
+    <file>sample.ps</file>
+    <type>public</type>
+    <author>First Author</author>
+    <author>Second Author</author>
+    <date>16 January 2002</date>
+    <language>English</language>
+    <summary>A little sample</summary>
+    <part>Introduction</part>
+    <part>Index</part>
+    <comment>	
+      <author_name>Julien LEMOINE</author_name>
+      <content>This is a comment</content>
+    </comment>
+    <comment>	
+      <author_name>Julien LEMOINE</author_name>
+      <content>Second comment</content>
+    </comment>
+  </document>
+</readme>
+
+here is a example of command :
+  orgadoc -r -p /var/www/docs -w -e /tmp

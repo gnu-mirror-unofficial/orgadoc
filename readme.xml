@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<readme>
+  <document>
+    <title>Compilation</title>
+    <file>compil.pdf</file>
+    <type>private</type>
+    <author>Akim Demaille</author>
+    <date>16 January 2002</date>
+    <language>English</language>
+    <summary>This document does not constitute by itself sufficient
+    lecture notes for students to learn compilation. Nonetheless,
+    there should be enough information for EPITA students to complete
+    their project provided they assist to the lectures</summary>
+    <part>Introduction</part>
+    <part>Grammars</part>
+    <part>Lexical analysis</part>
+    <part>Syntactic Analysis</part>
+    <part>Abstract Syntax</part>
+    <part>Escapes</part>
+    <part>Type Checking</part>
+    <part>Frames</part>
+    <part>Intermediate Representation</part>
+    <part>Instruction Selection</part>
+  </document>
+</readme>

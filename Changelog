@@ -1,0 +1,34 @@
+2002-06-17  Julien LEMOINE <speedblue@debian.org>
+	
+	Doc Server 0.4 was released
+
+	* Used configueration File Support
+	* Cleaned up code
+	* Removed case sensitive in Xml
+
+2002-06-16  Julien LEMOINE <speedblue@debian.org>
+	* Added Configuration File Support
+	  (Not used for the moment)
+
+2002-06-15  Julien LEMOINE <speedblue@debian.org>
+	
+	Doc Server 0.3 was released
+
+	* Added Template Support
+
+2002-06-12  Julien LEMOINE <speedblue@debian.org>
+	
+	* Added Manpage
+
+2002-06-10  Julien LEMOINE <speedblue@debian.org>
+
+	Doc Server 0.2 was released
+
+	* Fix some bugs on html_visitor
+	* Add grep_visitor and search functions
+
+2002-06-10  Julien LEMOINE <speedblue@debian.org>
+
+	Doc Server 0.1 was released
+	
+	* first public release
