@@ -1,3 +1,10 @@
+2002-07-23  Julien LEMOINE <speedblue@debian.org>
+
+	Orgadoc 0.6 was released
+
+	* added LaTex export with templates
+	* Fixed some bugs
+
 2002-06-30  Julien LEMOINE <speedblue@debian.org>
 	
 	OrgaDoc 0.5 was released
