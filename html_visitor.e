@@ -28,7 +28,7 @@ creation
    make
    
 feature {ANY}
-   make (a : AST;
+   make (a : AST; httpd : STRING;
 	 output_path, file, ppath : STRING;
 	 paths : LINKED_LIST[STRING];
 	 nbs : LINKED_LIST[INTEGER];
@@ -45,6 +45,7 @@ feature {ANY}
 	 !!tglobal.make(template_path + CTGLOBAL)
 	 !!tdocument.make(template_path + CTDOCUMENT)
 	 !!tcomment.make(template_path + CTCOMMENT)
+	 httpd_path := httpd
 	 is_writable := tglobal.start
 	 value := 0
 	 if (is_writable) then
@@ -118,11 +119,11 @@ feature {HTML_VISITOR}
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
 	       value := value + 1
-	       if (path.substring(1, 2).same_as("./"))
-		  tdocument.replace(TITREL, path.substring(2, path.count) 
+	       if (httpd_path.substring(1, 2).same_as("./"))
+		  tdocument.replace(TITREL, httpd_path.substring(2, httpd_path.count) 
 				    + doc.file)
 	       else
-		  tdocument.replace(TITREL, path + doc.file)
+		  tdocument.replace(TITREL, httpd_path + doc.file)
 	       end
 	       tdocument.replace(TITRE, doc.title)
 	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
@@ -195,6 +196,7 @@ feature {HTML_VISITOR}
    tcomment		: TEMPLATE
    tdocument		: TEMPLATE
    tglobal		: TEMPLATE
+   httpd_path		: STRING
    
 feature {HTML_VISITOR} -- Constants
    -- Global Template boolean

@@ -106,6 +106,7 @@ feature {ORGADOC}
 		     sub_nb_docs : LINKED_LIST[INTEGER]) is
       local
 	 new_path	: STRING
+	 httpd		: STRING
 	 ofile		: STD_FILE_WRITE
 	 html		: HTML_VISITOR
       do
@@ -114,8 +115,13 @@ feature {ORGADOC}
 	 if new_path.is_equal(".") then
 	    new_path := "./" 
 	 end
+	 if params.httpd_path.count > 0 then
+	    httpd := params.httpd_path + new_path
+	 else
+	    httpd := correct(params.output_path) + new_path
+	 end
 	 create_dirs(correct(params.output_path) + new_path)
-	 !!html.make(ast, correct(params.output_path), 
+	 !!html.make(ast, httpd, correct(params.output_path), 
 		     params.output_file, params.input_path,
 		     sub_paths, sub_nb_docs,
 		     correct(params.template_path), params)

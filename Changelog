@@ -1,3 +1,10 @@
+2003-06-01  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.7.0 was released
+
+	* This version include a new feature : html generated files are
+          now completely independant of the document, they can be on another
+          server (another vhost...)
+
 2003-03-10  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.6.7 was released
 	

@@ -58,6 +58,7 @@ creation
 "Mode"			last_token := T_MODE
 "Recursive"		last_token := T_REC
 "TemplatePath"		last_token := T_TEMPLATE
+"HttpdDocPath"		last_token := T_HTTPDPATH
 [tT][rR][uU][eE]	last_token := T_TRUE
 [fF][aA][lL][sS][eE]	last_token := T_FALSE
 "="			last_token := T_EQUAL

@@ -29,6 +29,7 @@ feature {ANY}
 	 verbose := false
 	 recursive := false
 	 output_path := "./"
+	 httpd_path := ""
 	 enable_private := false
 	 insensitive := false
 	 template_path := DEFAULT_TPL_PATH
@@ -103,6 +104,8 @@ feature {PARAMS}
 	    std_output.put_string("  -p, --path <path>%T%Tpath to convert%N")
 	    std_output.put_string("  -e, --prefix <path>%T%Tpath to %
 				  %store files%N")	    
+	    std_output.put_string("  -a, --httpd-path <path>%
+                                  %%Tdocument prefix path on http server%N")
 	    std_output.put_string("  -s, --search <regexp>%T%T%
 				  %print AST matching a pattern%N")
 	    std_output.put_string("  -i, --case-insensitive%T%
@@ -200,6 +203,11 @@ feature {PARAMS}
 		    (i /= argument_count)) then
 	       regexp := command_arguments.item(i + 1)
 	       i := i + 1	    	    
+	    elseif ((parser_switch.is_equal("--httpd-path") or
+		     parser_switch.is_equal("-a")) and 
+		    (i /= argument_count)) then
+	       httpd_path := command_arguments.item(i + 1)
+	       i := i + 1	    
 	    elseif ((parser_switch.is_equal("--prefix") or
 		     parser_switch.is_equal("-e")) and 
 		    (i /= argument_count)) then
@@ -248,6 +256,9 @@ feature {PARAMS}
 	    if data.template_path /= void then
 	       template_path := data.template_path
 	    end
+	    if data.httpd_path /= void then
+	       httpd_path := data.httpd_path
+	    end
 	 end
       end
    
@@ -262,6 +273,7 @@ feature {ANY}
    recursive		: BOOLEAN
    output_file 		: STRING
    output_path		: STRING
+   httpd_path		: STRING
    enable_private	: BOOLEAN
    regexp		: STRING
    insensitive		: BOOLEAN
@@ -276,5 +288,5 @@ feature {PARAMS}
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "0.6.7"
+   VERSION		: STRING is "0.7.0"
 end

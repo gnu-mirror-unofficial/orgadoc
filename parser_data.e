@@ -90,6 +90,13 @@ feature {ANY}
 	 enable_private := val
       end
    
+   set_httpdpath(val : STRING) is
+      require
+	 val /= void
+      do
+	 httpd_path := val
+      end
+   
    set_template(val : STRING) is
       require
 	 val /= void
@@ -163,6 +170,7 @@ feature {ANY}
    recursive		: BOOLEAN
    enable_private	: BOOLEAN
    template_path	: STRING
+   httpd_path		: STRING
    
 feature {PARSER_DATA}
    DISPLAY_MODE		: STRING is "DISPLAY"

@@ -41,7 +41,7 @@ creation
 %}
 
 %token T_XML T_HTML T_BIBTEX T_INPUT T_OUTPUT T_PRIVATE T_MODE T_REC T_LATEX
-%token T_TRUE T_FALSE T_EQUAL T_TEMPLATE
+%token T_TRUE T_FALSE T_EQUAL T_TEMPLATE T_HTTPDPATH
 %token <STRING> T_STRING 
 %token <INTEGER> T_INTEGER
 
@@ -68,6 +68,7 @@ Entry : T_XML T_EQUAL T_STRING { data.set_xml($3) }
 	| T_PRIVATE T_EQUAL Boolean { data.set_private($3) }
 	| T_REC T_EQUAL Boolean { data.set_rec($3) }
 	| T_TEMPLATE T_EQUAL T_STRING { data.set_template($3) }
+	| T_HTTPDPATH T_EQUAL T_STRING { data.set_httpdpath($3) }
 	;
 	
 Boolean: T_FALSE { $$ := false }
