@@ -21,10 +21,14 @@ orgadoc_cgi: $(ESRC)
 	  --system=@GOBO_EIFFEL@ cgi.xace
 	$(VARS) $(EC) ./@GOBO_EIFFEL@.ace
 
+SUFFIXES=.e .l .y .ge
+
 .l.e:
 	gelex $<
 
 .y.e:
 	geyacc -t TOKENS -o $@ $<
+.ge.e:
+	gepp -D@GOBO_EIFFEL@ $< $@
 
-CLEANFILES      	= *~ *.c *.h *.id scanner.e parser.e
+CLEANFILES      	= *~ *.c *.h *.id scanner.e parser.e params.e

@@ -36,7 +36,7 @@ AUTHORS COPYING ChangeLog INSTALL README TODO NEWS		\
 ./templates/cgi/document.tpl ./templates/cgi/link.tpl		\
 ./templates/cgi/global.tpl
 
-CLEANFILES      = *~ orgadoc.1
+CLEANFILES      = *~ orgadoc.1 config.e
 
 orgadoc.1: docs/orgadoc.sgml
 	@if [ -f /usr/bin/docbook2man ]; then                          	\

@@ -4,7 +4,6 @@
 AC_PREREQ(2.56)
 AC_INIT(orgadoc, 0.8-cvs)
 AC_CONFIG_SRCDIR([src/orgadoc.e])
-#AM_CONFIG_HEADER([config.e])
 
 # Auxiliary files.
 AC_CONFIG_AUX_DIR(config)
@@ -82,6 +81,9 @@ AC_SUBST(GOBO)
 AC_SUBST(GOBO_EIFFEL)
 AC_SUBST(CURRENT_DIR)
 AC_SUBST(DEBUG)
+
+# update version informations in config.e
+echo "   VERSION : STRING is \"$VERSION\"" > config.e
 
 AC_CONFIG_FILES([Makefile src/Makefile])
 

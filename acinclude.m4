@@ -183,6 +183,7 @@ AC_CHECK_PROG(GOBO_GEXACE,gexace,yes,no)
 AC_CHECK_PROG(GOBO_TEST,getest,yes,no)
 AC_CHECK_PROG(GOBO_YACC,geyacc,yes,no)
 AC_CHECK_PROG(GOBO_LEX,gelex,yes,no)
+AC_CHECK_PROG(GOBO_GEPP,gepp,yes,no)
 
 if test x$GOBO_GEANT = xno; then
   AC_MSG_ERROR(Gobo "geant" not in your path or not installed)
