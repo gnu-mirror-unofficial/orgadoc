@@ -1,1 +1,1 @@
-<tr><td><a href="%%LINK%%">%%CONTENT%%</a></td></tr>
+<tr><td><a href="%%LINK%%">%%CONTENT%% (%%NUMBER%%)</a></td></tr>

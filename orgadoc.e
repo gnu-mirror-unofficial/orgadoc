@@ -21,25 +21,57 @@ creation
    make
 
 feature {ANY}
+   -- Constructor
    make is
       local
 	 paths	: LINKED_LIST[STRING]
 	 i	: INTEGER
+	 b	: BOOLEAN
       do
+	 nb_docs := 0
 	 !!params.make
-	 if (params.recursive) then
-	    paths := recursive_list_of(true, params.input_path)
-	    from i := 1 until i > paths.count loop
-	       convert_file(correct(paths.item(i)), params.xml_file)
-	       i := i + 1
-	    end
-	 else
-	    convert_file(correct(params.input_path), params.xml_file)
+	 if (params.recursive) then -- explore all files in sub directories
+	    b := recursive_convert(params.input_path)
+	 else -- convert only one file
+	    convert_file_nosubpaths(correct(params.input_path), params.xml_file)
 	 end
       end
    
 feature {ORGADOC}
-   convert_file(path, file : STRING) is
+   
+   --convert a file with no sub path
+   convert_file_nosubpaths(path, file : STRING) is
+      local
+	 sl : LINKED_LIST[STRING]
+	 il : LINKED_LIST[INTEGER]
+      do
+	 !!sl.make
+	 sl.add_last(path)
+	 !!il.make
+	 convert_file(path, file, sl, il)
+      end
+   
+   -- create directories
+   create_dirs(path : STRING) is 
+      local
+	 dir		: BASIC_DIRECTORY
+	 start_index	: INTEGER
+	 b		: BOOLEAN
+      do
+	 from start_index := 1 until start_index <= 0 loop
+	    start_index := path.substring_index("/", start_index + 1)
+	    if start_index > 0 then
+	       b := dir.create_new_directory(path.substring(1, start_index))
+	    else
+	       b := dir.create_new_directory(path)
+	    end
+	 end
+      end
+   
+   --convert a file
+   convert_file(path, file : STRING; 
+		sub_paths : LINKED_LIST[STRING];
+		sub_nb_docs : LINKED_LIST[INTEGER]) is
       require
 	 path /= void
 	 name /= void
@@ -49,7 +81,6 @@ feature {ORGADOC}
 	 html		: HTML_VISITOR
       	 ast		: AST
 	 convert	: TREE_TO_AST
-	 dir		: BASIC_DIRECTORY
 	 bool		: BOOLEAN
 	 ofile		: STD_FILE_WRITE
 	 new_path	: STRING
@@ -64,10 +95,7 @@ feature {ORGADOC}
 	 end
 	 print ("Try convert " + path + file + "%N")
 	 !!parser.make(path + file)
-	 if (params.html_mode) then
-	    bool := dir.create_new_directory(correct(params.output_path) + 
-					     new_path)
-	 end
+	 create_dirs(correct(params.output_path) + new_path)
 	 if (parser.parse) then
 	    !!convert.make(parser.get_tree);
 	    ast := convert.convert;
@@ -95,9 +123,10 @@ feature {ORGADOC}
 	    !!html.make(ast, params.enable_private, 
 			correct(params.output_path), 
 			params.html_file, params.input_path,
-			recursive_list_of(false, path),
+			sub_paths, sub_nb_docs,
 			correct(params.template_path))
 	    html.visit
+	    nb_docs := html.get_nb_docs
 	    !!ofile.connect_to(correct(params.output_path) + 
 			       new_path + params.html_file)
 	       if (ofile /= void and ofile.is_connected) then
@@ -108,6 +137,7 @@ feature {ORGADOC}
       
       end
    
+   -- add a final '/' if there is not one
    correct (path : STRING) : STRING is
       require
 	 path /= void
@@ -119,55 +149,53 @@ feature {ORGADOC}
 	 end
       end
    
-   already_visited_places: ARRAY[STRING] is
-      once
-         !!Result.with_capacity(1,32);
-      end;
-   
-   recursive_list_of(rec : BOOLEAN;
-		     some_path : STRING) : LINKED_LIST[STRING] is
-      do
-	 !!rpaths.make
-	 sub_recursive_list_of(rec, some_path, 0)
-	 Result := rpaths
-      end
-   
-   sub_recursive_list_of(rec : BOOLEAN; 
-			 some_path: STRING; level : INTEGER) is
+   -- explore all sub directory and create file
+   recursive_convert(some_path : STRING) : BOOLEAN is
       require
 	 some_path /= void
       local
-         basic_directory		: BASIC_DIRECTORY;
-	 tmp				: BASIC_DIRECTORY;
-         some_entry, another_path	: STRING;
+	 sub_paths	: LINKED_LIST[STRING]
+	 sub_nb_doc	: LINKED_LIST[INTEGER]
+	 dir		: BASIC_DIRECTORY;
+	 tmp_dir	: BASIC_DIRECTORY
+	 another_path	: STRING
+	 file		: STD_FILE_READ
+	 tnb_docs	: INTEGER
       do
-	 basic_directory.connect_to(some_path);
-	 if basic_directory.is_connected then
-	    rpaths.add_last(correct(some_path));
-	    from
-	       basic_directory.read_entry;
-	    until
-	       basic_directory.end_of_input
-	    loop
-	       
-	       some_entry := basic_directory.last_entry.twin;
-	       basic_directory.compute_subdirectory_with(some_path,
-							 some_entry);
-	       if (rec or level < 1) and 
-		  not basic_directory.last_entry.is_empty then
-		  another_path := basic_directory.last_entry.twin;
-		  tmp.connect_to(another_path)
-		  if tmp.is_connected then
-		     sub_recursive_list_of(rec, another_path, level + 1);
-		  end;
-	       end;
-	       basic_directory.read_entry;
-	    end;
-	    basic_directory.disconnect;
-	 end;
-      end;
+	 tnb_docs := 0
+	 !!sub_paths.make
+	 sub_paths.add_last(correct(some_path))
+	 !!sub_nb_doc.make
+	 Result := false
+	 dir.connect_to(some_path);
+	 if dir.is_connected then -- directory exist
+	    from dir.read_entry until dir.end_of_input loop -- loop on sub directory
+	       dir.compute_subdirectory_with(some_path, dir.last_entry.twin)
+	       another_path := dir.last_entry.twin
+	       tmp_dir.connect_to(another_path)
+	       if tmp_dir.is_connected and recursive_convert(another_path) then
+		  Result := true
+		  sub_paths.add_last(another_path)
+		  sub_nb_doc.add_last(nb_docs)
+		  tnb_docs := tnb_docs + nb_docs
+	       end
+	       dir.read_entry -- next sub directory
+	    end
+	    dir.disconnect
+	    !!file.connect_to(correct(some_path) + params.xml_file)
+	    if Result or file.is_connected then
+	       if file.is_connected then
+		  file.disconnect
+	       end
+	       Result := true
+	       convert_file(some_path, params.xml_file, sub_paths, sub_nb_doc)
+	       tnb_docs := tnb_docs + nb_docs
+	    end
+	    nb_docs := tnb_docs
+	 end
+      end
    
 feature {ORGADOC}
    params	: PARAMS
-   rpaths	: LINKED_LIST[STRING]
+   nb_docs	: INTEGER
 end

@@ -54,11 +54,17 @@ feature {ANY}
    
    replace (src, dst : STRING) is
       local
-	 index : INTEGER
+	 index		: INTEGER
+	 new_dst	: STRING
       do
+	 if (dst = void) then
+	    new_dst := ""
+	 else
+	    new_dst := dst;
+	 end
 	 index := buff.first_substring_index(src)
 	 if (index > 0) then
-	    buff.replace_substring(dst, 
+	    buff.replace_substring(new_dst, 
 				   index,
 				   index + src.count)
 	 end

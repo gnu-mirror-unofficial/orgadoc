@@ -1,8 +1,6 @@
 ################ TODO LIST FOR ORGADOC ################
 
 #### OPTIMISATION ####
- - allow display of french caracters (accents) in generated document
- - Does not produce directory with no readme.xml
 
 #### NEW FEATURE ####
 

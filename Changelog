@@ -1,6 +1,15 @@
+2002-06-22  Julien LEMOINE <speedblue@debian.org>
+
+	OrgaDoc 0.4.1 was released
+
+	* some bug fixed on empty xml entries
+	* rewrited orgadoc.e
+	  - improved directories exploration
+	  - added number of document in each directory
+
 2002-06-17  Julien LEMOINE <speedblue@debian.org>
 	
-	Doc Server 0.4 was released
+	OrgaDoc 0.4 was released
 
 	* Used configueration File Support
 	* Cleaned up code
@@ -12,7 +21,7 @@
 
 2002-06-15  Julien LEMOINE <speedblue@debian.org>
 	
-	Doc Server 0.3 was released
+	OrgaDoc 0.3 was released
 
 	* Added Template Support
 
@@ -22,13 +31,13 @@
 
 2002-06-10  Julien LEMOINE <speedblue@debian.org>
 
-	Doc Server 0.2 was released
+	OrgaDoc 0.2 was released
 
 	* Fix some bugs on html_visitor
 	* Add grep_visitor and search functions
 
 2002-06-10  Julien LEMOINE <speedblue@debian.org>
 
-	Doc Server 0.1 was released
+	OrgaDoc 0.1 was released
 	
 	* first public release

@@ -31,6 +31,7 @@ feature {ANY}
    make (a : AST; private : BOOLEAN; 
 	 output_path, file, ppath : STRING;
 	 paths : LINKED_LIST[STRING];
+	 nbs : LINKED_LIST[INTEGER];
 	 template_path : STRING) is
       local
 	 i	: INTEGER
@@ -45,15 +46,16 @@ feature {ANY}
 	 !!tdocument.make(template_path + TDOCUMENT)
 	 !!tcomment.make(template_path + TCOMMENT)
 	 is_writable := tglobal.start
+	 value := 0
 	 if (is_writable) then
 	    path := paths.item(1)
 	    from i := 2 until i > paths.count loop
-	       if (link.start) then
+	       if link.start and (i - 1) <= nbs.count and nbs.item(i - 1) > 0 then
 		  link.replace(LINK,concat(output_path,
 					   paths.item(i), 
 					   ppath) + file);
 		  link.replace(CONTENT, paths.item(i));
-		  
+		  link.replace(NUMBER, nbs.item(i - 1).to_string);
 		  str.append(link.stop)
 	       end
 	       i := i + 1
@@ -74,6 +76,11 @@ feature {ANY}
 	 else
 	    Result := ""
 	 end
+      end
+   
+   get_nb_docs : INTEGER is
+      do
+	 Result := value
       end
    
 feature {HTML_VISITOR}
@@ -107,6 +114,7 @@ feature {HTML_VISITOR}
 	 if (allow_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
+	       value := value + 1
 	       tdocument.replace(TITREL, path + doc.file)
 	       tdocument.replace(TITRE, doc.title)
 	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
@@ -168,7 +176,7 @@ feature {HTML_VISITOR}
 	    end
 	 end
       end
-
+      
 feature {HTML_VISITOR}
    str			: STRING
    header		: STRING
@@ -181,7 +189,8 @@ feature {HTML_VISITOR}
 feature {HTML_VISITOR} -- Constants
    -- Global Template boolean
    is_writable		: BOOLEAN
-   cerr			: STD_ERROR   
+   value		: INTEGER
+   cerr			: STD_ERROR
    
    -- Public
    PUBLIC		: STRING is "public"
@@ -202,6 +211,7 @@ feature {HTML_VISITOR} -- Constants
    DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
    LINKS		: STRING is "%%%%LINKS%%"
    LINK			: STRING is "%%%%LINK%%"
+   NUMBER		: STRING is "%%%%NUMBER%%"
    
    -- Template files
    TLINK		: STRING is "link.tpl"
