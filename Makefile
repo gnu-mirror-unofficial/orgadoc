@@ -97,7 +97,7 @@ install:
 		mkdir $(ETC)/orgadoc/templates/latex;			\
 		mkdir $(ETC)/orgadoc/templates/ast;			\
 		mkdir $(ETC)/orgadoc/templates/bibtex;			\
-		cp templates/funny/*.tpl $(ETC)/orgadoc/templates/html;	\
+		cp templates/html/*.tpl $(ETC)/orgadoc/templates/html;	\
 		cp templates/bibtex/*.tpl $(ETC)/orgadoc/templates/bibtex;\
 		cp templates/ast/*.tpl $(ETC)/orgadoc/templates/ast;	\
 		cp templates/latex/*.tpl $(ETC)/orgadoc/templates/latex;\
