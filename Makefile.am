@@ -1,24 +1,24 @@
 # Process this file with automake to produce Makefile.in
 
 orgadocdir 	= $(sysconfdir)/orgadoc
-orgadoc_DATA	= docs/orgadoc.conf
+dist_orgadoc_DATA= docs/orgadoc.conf
 templatesdir 	= $(sysconfdir)/orgadoc/templates
 asttpldir	= $(sysconfdir)/orgadoc/templates/ast
-asttpl_DATA	= templates/ast/comment.tpl templates/ast/document.tpl
+dist_asttpl_DATA= templates/ast/comment.tpl templates/ast/document.tpl
 htmltpldir	= $(sysconfdir)/orgadoc/templates/html
-htmltpl_DATA	= ./templates/html/document.tpl ./templates/html/global.tpl \
-		  ./templates/html/comment.tpl ./templates/html/link.tpl
+dist_htmltpl_DATA= ./templates/html/document.tpl ./templates/html/global.tpl \
+		   ./templates/html/comment.tpl ./templates/html/link.tpl
 cgitpldir	= $(sysconfdir)/orgadoc/templates/cgi
-cgitpl_DATA	= ./templates/cgi/document.tpl ./templates/cgi/global.tpl   \
+dist_cgitpl_DATA= ./templates/cgi/document.tpl ./templates/cgi/global.tpl   \
 		  ./templates/cgi/comment.tpl ./templates/cgi/link.tpl
 latextpldir	= $(sysconfdir)/orgadoc/templates/latex
-latextpl_DATA	= ./templates/latex/document.tpl 			    \
+dist_latextpl_DATA= ./templates/latex/document.tpl 			    \
 	 	  ./templates/latex/global.tpl ./templates/latex/comment.tpl
 bibtextpldir	= $(sysconfdir)/orgadoc/templates/bibtex
-bibtextpl_DATA	= ./templates/bibtex/document.tpl
+dist_bibtextpl_DATA= ./templates/bibtex/document.tpl
 
 exampledir	= $(datadir)/doc/orgadoc/examples
-example_DATA  	= docs/readme.xml
+dist_example_DATA= docs/readme.xml
 
 info_TEXINFOS	= docs/orgadoc.texinfo
 man_MANS  	= docs/orgadoc.1 docs/orgadoc_cgi.1 		\
