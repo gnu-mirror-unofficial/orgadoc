@@ -1,7 +1,7 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-	--| $Id: cgi.e,v 1.4 2003/10/16 22:45:48 speedblue Exp $
+	--| $Id: cgi.e,v 1.5 2003/10/17 10:39:40 speedblue Exp $
 	--| 
 	--| Copyright (C) 2003 Julien Lemoine
 	--| This program is free software; you can redistribute it and/or modify
@@ -95,10 +95,10 @@ feature{CGI}
 		local
 			index : INTEGER
 		do
-			index := str.first_substring_index(src)
-			if (index > 0) then
+			from index := str.first_substring_index(src) until index <= 0 loop
 				str.replace_substring(dst, index,
 											 index + src.count - 1)
+				index := str.first_substring_index(src)
 			end
 			Result := str
 		end
