@@ -109,7 +109,7 @@ feature {TREE_TO_AST}
 				document.set_summary(summary)
 				document.set_nbpages(nbpages)
 				document.set_date(date)
-				if (file /= void)
+				if (file /= void) then
 					document.set_file(file)
 				else
 					cerr.put_string ("Failed to convert [" + xml_filename +

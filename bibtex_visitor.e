@@ -21,10 +21,11 @@ class BIBTEX_VISITOR
 
 inherit DEFAULT_VISITOR
       rename
-	 make as make_default
+			make as make_default
       redefine
-	 sub_visit
-
+			sub_visit
+		end
+	
 creation
    make
 	 
@@ -52,10 +53,8 @@ feature {ANY}
    
 feature {BIBTEX_VISITOR}
    sub_visit(doc : DOCUMENT) is
-      local
-	 i : INTEGER
       do
-	 if (enable_private or doc.type.same_as(PUBLIQUE) or
+		if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
 	       tdocument.replace(ID, "orgadoc." + pos.to_string)

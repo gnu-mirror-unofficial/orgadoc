@@ -23,7 +23,8 @@ inherit DEFAULT_VISITOR
 			make as make_default
       redefine
 			sub_visit
-
+		end
+			
 creation
    make
    
@@ -153,7 +154,7 @@ feature {HTML_VISITOR}
 				 doc.type.same_as(PUBLIC)) then
 				if (tdocument.start) then
 					value := value + 1
-					if (httpd_path.substring(1, 2).same_as("./"))
+					if (httpd_path.substring(1, 2).same_as("./")) then
 						tdocument.replace(TITREL,
 												httpd_path.substring(2, httpd_path.count) 
 												+ doc.file)

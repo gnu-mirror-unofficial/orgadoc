@@ -44,10 +44,8 @@ feature {ANY}
    -- default Constructor
    make is
       local
-			paths				: LINKED_LIST[STRING]
-			i					: INTEGER
 			b					: BOOLEAN
-			ofile				: STD_FILE_WRITE
+			ofile				: TEXT_FILE_WRITE
 			latex				: TEMPLATE
 			can_write		: BOOLEAN
       do
@@ -134,7 +132,7 @@ feature {ORGADOC}
       local
 			new_path	: STRING
 			httpd		: STRING
-			ofile		: STD_FILE_WRITE
+			ofile		: TEXT_FILE_WRITE
 			html		: HTML_VISITOR
       do
 			new_path := correct(path).substring(params.input_path.count + 
@@ -237,12 +235,11 @@ feature {ORGADOC}
 			parser	: READ_XML
 			ast		: AST
 			convert	: TREE_TO_AST
-			bool		: BOOLEAN
 			cerr		: STD_ERROR
       do
 			!!cerr.make
 			!!parser.make(correct(path) + file)
-			if (parser.file_exist)
+			if (parser.file_exist) then
 				if params.verbose then
 					print ("Try convert " + correct(path) + file + "%N")
 				end
@@ -309,7 +306,7 @@ feature {ORGADOC}
 			dir		    : BASIC_DIRECTORY;
 			tmp_dir	    : BASIC_DIRECTORY
 			another_path : STRING
-			file		    : STD_FILE_READ
+			file		    : TEXT_FILE_READ
 			tnb_docs	    : INTEGER
       do
 			tnb_docs := 0

@@ -23,11 +23,13 @@ inherit DEFAULT_VISITOR
 			make as make_default
       redefine
 			sub_visit
+		end
+	
 creation
    make, make_all
    
 feature {ANY}
-   make(a : AST, template_path, ppath : STRING) is
+   make(a : AST; template_path, ppath : STRING) is
       do
 			!!tdocument.make(template_path + CTDOCUMENT)
 			!!tcomment.make(template_path + CTCOMMENT)
@@ -37,7 +39,7 @@ feature {ANY}
 			grep := true
       end
    
-   make_all(a : AST, template_path, ppath : STRING) is
+   make_all(a : AST; template_path, ppath : STRING) is
       do
 			!!tdocument.make(template_path + CTDOCUMENT)
 			!!tcomment.make(template_path + CTCOMMENT)

@@ -23,7 +23,8 @@ inherit DEFAULT_VISITOR
 			make as make_default
       redefine
 			visit_string, sub_visit
-
+		end
+	
 creation
    make
    
@@ -66,7 +67,7 @@ feature {GREP_VISITOR}
    visit_string(str : STRING) is
       do
 			if (str /= void) then
-				if (regexp.compiled and regexp.matches(str)) then
+				if (regexp.is_compiled and regexp.matches(str)) then
 					res := true
 					if (document /= void) then
 						document.set_mark(true)
