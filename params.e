@@ -1,7 +1,7 @@
 indexing
    description: "Parse command options"
    author: "Julien LEMOINE <speedblue@debian.org>"
-   --| Copyright (C) 2002 Julien LEMOINE
+   --| Copyright (C) 2002-2003 Julien LEMOINE
    --| This program is free software; you can redistribute it and/or modify
    --| it under the terms of the GNU General Public License as published by
    --| the Free Software Foundation; either version 2 of the License, or
@@ -288,5 +288,5 @@ feature {PARAMS}
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "0.7.0"
+   VERSION		: STRING is "0.7.1"
 end

@@ -1,3 +1,11 @@
+2003-07-30  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.7.1 was releaded
+
+	* Bug fix release.
+	 - fixed url problem (variable was not reinit)
+	 - fixed directory display problem (display doc directory instead of 
+	   full unix directory)
+
 2003-06-01  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.7.0 was released
 
