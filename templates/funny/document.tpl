@@ -4,8 +4,7 @@
 <table border=0 cellpadding=5 cellspacing=1 bgcolor=#cacaf7
 width="100%">
 <tr><td valign=top><table border=0 cellpadding=0 cellspacing=0>
-<tr><td> <img src=/images/icons/document.txt.gif width=16 height=16
-border=0>&nbsp;</td>
+<tr><td> </td>
 <td><B><a href="%%TITREL%%">%%TITRE%%</a></B>
  - <font size=-1><b>(%%DATE%%)</b></font></td>
 </tr> </table> </td> </tr><tr bgcolor=#ffffff> <td valign=top> <font size=-1>

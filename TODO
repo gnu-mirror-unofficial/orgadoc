@@ -1,10 +1,9 @@
 ################ TODO LIST FOR ORGADOC ################
 
 #### OPTIMISATION ####
+ - allow display of french caracters (accents) in generated document
 
 #### NEW FEATURE ####
 
- - display number of document in a directory
-   exemple : /cours/logique(5)
  - produce latex output (latex_visitor)
  - produce bibtex output (bibtex_visitor)
