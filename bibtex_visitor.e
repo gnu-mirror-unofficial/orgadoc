@@ -17,21 +17,24 @@ indexing
    --| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 
 class BIBTEX_VISITOR     
-creation
-   make
+
 
 inherit DEFAULT_VISITOR
       rename
 	 make as make_default
       redefine
 	 sub_visit
+
+creation
+   make
 	 
 feature {ANY}
-   make (a : AST; private : BOOLEAN; path : STRING; nb : INTEGER) is
+   make (a : AST; private : BOOLEAN; ppath : STRING; nb : INTEGER) is
       do
 	 make_default(a)
 	 enable_private := private
 	 pos := nb
+	 path := ppath
 	 !!str.make_empty
       end
    
@@ -40,30 +43,59 @@ feature {ANY}
 	 Result := str
       end
    
+   get_pos : INTEGER is
+      do
+	 Result := pos
+      end
+   
 feature {BIBTEX_VISITOR}
    sub_visit(doc : DOCUMENT) is
+      local
+	 i : INTEGER
       do
-	 if (allow_private or doc.type.same_as(PUBLIQUE) or
+	 if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
-	    
 	    str.append("@article{orgadoc." + pos.to_string + ",%N")
 	    pos := pos + 1
-	    str.append("title=%"" + doc.title + "%",%N")
-	    str.append("author=%"" + doc.author + "%",%N")
-	    str.append("url=%"" + path + doc.file + "%",%N")
-	    if doc.url /= void and doc.url.count > 0 then
-	       str.append("url=%"" + doc.url + "%",%N")
-	    end	 
-	    str.append("year=%"" + doc.date + "%",%N")
-	    str.append("abstract=%"" + doc.summary + "%"%N")
+	    item_visitor("title=%"",doc.title)
+	    items_visitor("author=%"", doc.authors)
+	    item_visitor("url=%"", path + doc.file)
+	    item_visitor("url=%"", doc.url)
+	    item_visitor("year=%"", doc.date)
+	    item_visitor("abstract=%"", doc.summary)
 	    str.append("}%N")
 	 end
       end
    
+   items_visitor(desc : STRING; strs : LINKED_LIST[STRING]) is
+      local
+	 i : INTEGER
+      do
+	 if strs /= void then
+	    from i := 1 until i > strs.count loop
+	       item_visitor(desc, strs.item(i))
+	       i := i + 1
+	    end
+	 end	 
+      end
+   
+   item_visitor(desc : STRING; pstr : STRING) is
+      do
+	 if pstr /= void then
+	    str.append(desc + pstr + "%",%N")
+	 end
+      end
+   
 feature {BIBTEX_VISITOR}
+   -- Public
+   PUBLIC		: STRING is "public"
+   PUBLIQUE		: STRING is "publique"
+   
+   -- Vars
    enable_private	: BOOLEAN
+   pos			: INTEGER
    path			: STRING
    str			: STRING
    
-end
+end -- bibtex_vivitor
 

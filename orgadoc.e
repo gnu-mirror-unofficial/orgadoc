@@ -27,13 +27,25 @@ feature {ANY}
 	 paths	: LINKED_LIST[STRING]
 	 i	: INTEGER
 	 b	: BOOLEAN
+      	 ofile	: STD_FILE_WRITE
       do
+	 bibtex_index := 1
+	 !!bibtex_str.make_empty
 	 nb_docs := 0
 	 !!params.make
 	 if (params.recursive) then -- explore all files in sub directories
 	    b := recursive_convert(params.input_path)
 	 else -- convert only one file
-	    convert_file_nosubpaths(correct(params.input_path), params.xml_file)
+	    convert_file_nosubpaths(correct(params.input_path), 
+				    params.xml_file)
+	 end
+	 if params.bibtex_mode then	 
+	    !!ofile.connect_to(correct(params.output_path) + 
+			       params.output_file)
+	    if (ofile /= void and ofile.is_connected) then
+	       ofile.put_string(bibtex_str)
+	       ofile.disconnect
+	    end
 	 end
       end
    
@@ -68,6 +80,70 @@ feature {ORGADOC}
 	 end
       end
    
+   convert_html_file(ast : AST; path : STRING;
+		     sub_paths : LINKED_LIST[STRING];
+		     sub_nb_docs : LINKED_LIST[INTEGER]) is
+      local
+	 new_path	: STRING
+	 ofile		: STD_FILE_WRITE
+	 html		: HTML_VISITOR
+      do
+	 new_path := correct(path).substring(params.input_path.count + 
+					     1,correct(path).count)
+	 if new_path.is_equal(".") then
+	    new_path := "./" 
+	 end
+	 create_dirs(correct(params.output_path) + new_path)
+	 !!html.make(ast, params.enable_private, 
+		     correct(params.output_path), 
+		     params.output_file, params.input_path,
+		     sub_paths, sub_nb_docs,
+		     correct(params.template_path))
+	 html.visit
+	 nb_docs := html.get_nb_docs
+	 !!ofile.connect_to(correct(params.output_path) + 
+			    new_path + params.output_file)
+	 if (ofile /= void and ofile.is_connected) then
+	    ofile.put_string(html.get_result)
+	    ofile.disconnect
+	 end
+      end
+   
+   convert_display_file(ast : AST) is
+      local
+	 display	: PRINT_VISITOR
+      do
+	 !!display.make(ast)
+	 display.visit
+	 print(display.get_result)
+      end
+   
+   convert_regexp_file(ast : AST) is
+      local
+	 grep		: GREP_VISITOR	 
+      	 display	: PRINT_VISITOR	 
+      do
+	 !!grep.make(ast, params.enable_private, 
+		     params.regexp, params.insensitive)
+	 grep.visit
+	 if (grep.get_result) then
+	    !!display.make(ast)
+	    display.visit
+	    print(display.get_result)	       
+	 end
+      end
+   
+   convert_bibtex_file(ast : AST; path : STRING) is
+      local
+	 bibtex		: BIBTEX_VISITOR
+      do
+	 !!bibtex.make(ast, params.enable_private, 
+		       path, bibtex_index);
+	 bibtex.visit
+	 bibtex_index := bibtex.get_pos
+	 bibtex_str.append(bibtex.get_result)
+      end
+		       
    --convert a file
    convert_file(path, file : STRING; 
 		sub_paths : LINKED_LIST[STRING];
@@ -77,64 +153,33 @@ feature {ORGADOC}
 	 name /= void
       local
 	 parser		: READ_XML
-      	 display	: PRINT_VISITOR
-	 html		: HTML_VISITOR
       	 ast		: AST
 	 convert	: TREE_TO_AST
 	 bool		: BOOLEAN
-	 ofile		: STD_FILE_WRITE
-	 new_path	: STRING
-	 grep		: GREP_VISITOR
 	 cerr		: STD_ERROR
       do
 	 !!cerr.make
-	 new_path := correct(path).substring(params.input_path.count + 
-					     1,correct(path).count)
-	 if new_path.is_equal(".") then
-	    new_path := "./" 
-	 end
-	 print ("Try convert " + path + file + "%N")
+	 print ("Try convert " + correct(path) + file + "%N")
 	 !!parser.make(path + file)
-	 create_dirs(correct(params.output_path) + new_path)
 	 if (parser.parse) then
 	    !!convert.make(parser.get_tree);
 	    ast := convert.convert;
-	    if (params.regexp /= void) then
-	       !!grep.make(ast, params.regexp, params.insensitive)
-	       grep.visit
-	       if (grep.get_result) then
-		  !!display.make(ast)
-		  display.visit
-		  print(display.get_result)	       
-	       end
-	    else
-	       if (params.display_mode) then
-		  !!display.make(ast)
-		  display.visit
-		  print(display.get_result)
-	       end
-	    end
+	    -- Select type of conversion
+	    if params.regexp /= void then
+	       convert_regexp_file(ast)
+	    elseif params.display_mode then
+	       convert_display_file(ast)
+	    elseif params.bibtex_mode then
+	       convert_bibtex_file(ast, path)
+	    end -- end select
 	    print ("Successfully convert " + path + file + "%N")
 	 else
 	    ast := void
-	    cerr.put_string ("Failed to convert " + path + file + "%N")
+	    cerr.put_string ("Failed to convert " + correct(path) + file + "%N")
 	 end
 	 if (params.html_mode) then
-	    !!html.make(ast, params.enable_private, 
-			correct(params.output_path), 
-			params.output_file, params.input_path,
-			sub_paths, sub_nb_docs,
-			correct(params.template_path))
-	    html.visit
-	    nb_docs := html.get_nb_docs
-	    !!ofile.connect_to(correct(params.output_path) + 
-			       new_path + params.output_file)
-	       if (ofile /= void and ofile.is_connected) then
-		  ofile.put_string(html.get_result)
-		  ofile.disconnect
-	       end
+	    convert_html_file(ast, path, sub_paths, sub_nb_docs)
 	 end
-      
       end
    
    -- add a final '/' if there is not one
@@ -198,4 +243,6 @@ feature {ORGADOC}
 feature {ORGADOC}
    params	: PARAMS
    nb_docs	: INTEGER
+   bibtex_index : INTEGER
+   bibtex_str	: STRING
 end

@@ -32,7 +32,6 @@ feature {ANY}
 	 enable_private := false
 	 insensitive := false
 	 template_path := DEFAULT_TPL_PATH
-	 process_arguments
 	 if conffile = void then
 	    conffile := DEFAULT_CONF_FILE
 	 end
@@ -41,6 +40,7 @@ feature {ANY}
 	    parser.get_data.display
 	 end
 	 use_conffile(parser.get_data)
+	 process_arguments
 	 if (xml_file = void) then -- default value
 	    xml_file := DEFAULT_XML_FILE
 	 end
@@ -52,7 +52,11 @@ feature {ANY}
 	 end
 	 if (output_file = void) then
 	    if bibtex_mode then
-	       output_file := DEFAULT_BIBTEX_FILE
+	       if parser.get_data.bibtex_file /= void then
+		  output_file := parser.get_data.bibtex_file
+	       else
+		  output_file := DEFAULT_BIBTEX_FILE
+	       end
 	    else
 	       output_file := DEFAULT_HTML_FILE
 	    end

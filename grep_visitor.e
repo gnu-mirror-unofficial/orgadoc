@@ -28,11 +28,13 @@ creation
    make
    
 feature {ANY}   
-   make(a : AST; rexp : STRING; case_sensitive : BOOLEAN) is
+   make(a : AST; private : BOOLEAN; 
+	rexp : STRING; case_sensitive : BOOLEAN) is
       do
 	 make_default(a)
 	 !!regexp.compile(rexp, case_sensitive)
 	 res := false
+	 allow_private := private
       end
    
    get_result : BOOLEAN is
@@ -46,15 +48,18 @@ feature {GREP_VISITOR}
 	 doc /= void
       do
 	 document := doc
-	 visit_strings(doc.authors)
-	 visit_strings(doc.parts)
-	 visit_comments(doc.comments)
-	 visit_string(doc.summary)
-	 visit_string(doc.date)
-	 visit_string(doc.type)
-	 visit_string(doc.file)
-	 visit_string(doc.title)
-	 visit_string(doc.language)
+	 if (allow_private or doc.type.same_as(PUBLIQUE) or
+	     doc.type.same_as(PUBLIC)) then
+	    visit_strings(doc.authors)
+	    visit_strings(doc.parts)
+	    visit_comments(doc.comments)
+	    visit_string(doc.summary)
+	    visit_string(doc.date)
+	    visit_string(doc.type)
+	    visit_string(doc.file)
+	    visit_string(doc.title)
+	    visit_string(doc.language)
+	 end
       end
    
    visit_string(str : STRING) is
@@ -70,8 +75,14 @@ feature {GREP_VISITOR}
       end
    
 feature {GREP_VISITOR}
-   regexp	: LX_DFA_REGULAR_EXPRESSION
-   res		: BOOLEAN
-   document	: DOCUMENT
+   -- Public
+   PUBLIC		: STRING is "public"
+   PUBLIQUE		: STRING is "publique"
+   
+   -- Vars
+   regexp		: LX_DFA_REGULAR_EXPRESSION
+   res			: BOOLEAN
+   document		: DOCUMENT
+   allow_private	: BOOLEAN
 end
 
