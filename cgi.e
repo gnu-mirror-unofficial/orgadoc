@@ -1,7 +1,7 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-	--| $Id: cgi.e,v 1.3 2003/10/16 22:30:40 speedblue Exp $
+	--| $Id: cgi.e,v 1.4 2003/10/16 22:45:48 speedblue Exp $
 	--| 
 	--| Copyright (C) 2003 Julien Lemoine
 	--| This program is free software; you can redistribute it and/or modify
@@ -61,7 +61,7 @@ feature{CGI}
 				query := replace(query, "%%29", ")")
 				query := replace(query, "%%3D", "=")
 				query := replace(query, "%%7C", "|")
-				query := replace(query, "%%5D", "\")
+				query := replace(query, "%%5C", "\")
 				query := replace(query, "%%2F", "/")
 				!!prog.make_cgi(query);
 				res := prog.get_res
