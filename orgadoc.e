@@ -192,7 +192,9 @@ feature {ORGADOC}
 	 !!cerr.make
 	 !!parser.make(path + file)
 	 if (parser.file_exist)
-	    print ("Try convert " + correct(path) + file + "%N")
+	    if params.verbose then
+	       print ("Try convert " + correct(path) + file + "%N")
+	    end
 	    if (parser.parse) then
 	       !!convert.make(parser.get_tree);
 	       ast := convert.convert;
@@ -206,11 +208,15 @@ feature {ORGADOC}
 	       elseif params.latex_mode then
 		  convert_latex_file(ast, path)	    
 	       end -- end select
-	       print ("Successfully convert " + path + file + "%N")
+	       if params.verbose then
+		  print ("Successfully convert " + path + file + "%N")
+	       end
 	    else
 	       ast := void
-	       cerr.put_string ("Failed to convert " + 
-				correct(path) + file + "%N")
+	       if params.verbose then
+		  cerr.put_string ("Failed to convert " + 
+				   correct(path) + file + "%N")
+	       end
 	    end
 	 end
 	 if (params.html_mode) then

@@ -1,3 +1,9 @@
+2003-03-06  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.6.7 pre-release (Need to ask a question to gobo team)
+
+	* Added --verbose (-V) option
+	* Fixed problem of document encoding (but this eat a character)
+
 2003-02-25  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.6.6 was released
 	

@@ -1,7 +1,7 @@
 indexing
    description: "Tree to AST"
    author: "Julien LEMOINE <speedblue@debian.org>"
-   --| Copyright (C) 2002 Julien LEMOINE
+   --| Copyright (C) 2002-2003 Julien LEMOINE
    --| This program is free software; you can redistribute it and/or modify
    --| it under the terms of the GNU General Public License as published by
    --| the Free Software Foundation; either version 2 of the License, or
@@ -54,9 +54,9 @@ feature {TREE_TO_AST}
       do
 	 -- empty node is a <node/> with no data
 	 if not el.is_empty then
-	    process_start_element(el.name.out) --to_utf8)
+	    process_start_element(el.name) --to_utf8)
 	    process_composite(el)
-	    process_end_element(el.name.out) --to_utf8)
+	    process_end_element(el.name) --to_utf8)
 	 end
       end
    
@@ -144,22 +144,19 @@ feature {TREE_TO_AST}
    
    process_character_data(c : XM_CHARACTER_DATA) is
       do
-	 node_content := node_content + c.content.out --to_utf8
+	 node_content := node_content + c.content --to_utf8
       end
    
-   process_composite(c : XM_COMPOSITE) is
+   process_composite (c: XM_COMPOSITE) is
+	 -- Process composite `c'.
       require
-	 c /= void
+	 c_not_void: c /= Void
       local
-	 cs : DS_BILINEAR_CURSOR [XM_NODE]
+	 cs: DS_BILINEAR_CURSOR [XM_NODE]
       do
-	 from 
-	    cs := c.new_cursor
-	    cs.start
-	 until
-	    cs.off
-	 loop
-	    cs.item.process(Current)
+	 cs := c.new_cursor
+	 from cs.start until cs.after loop
+	    cs.item.process (Current)
 	    cs.forth
 	 end
       end

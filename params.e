@@ -26,6 +26,7 @@ feature {ANY}
 	 parser	: PARSER
       do
 	 reinit
+	 verbose := false
 	 recursive := false
 	 output_path := "./"
 	 enable_private := false
@@ -113,6 +114,7 @@ feature {PARAMS}
 	    std_output.put_string("  -b, --bibtex%T%T%Toutput in BibTex%N")
 	    std_output.put_string("  -l, --latex%T%T%Toutput in LaTex%N")
 	    std_output.put_string("  -d, --display-ast%T%Tdisplay AST%N")
+	    std_output.put_string("  -V, --verbose%T%T%Tenable verbose mode%N")
 	    std_output.put_string("  -v, --version%T%T%Toutput version %
 				  %information and exit%N")
 	    std_output.put_string("  -h, --help%T%T%Tdisplay this help %
@@ -163,6 +165,9 @@ feature {PARAMS}
 	    elseif (parser_switch.is_equal("--case-insensitive") or
 		    parser_switch.is_equal("-i")) then
 	       insensitive := true	    
+	    elseif (parser_switch.is_equal("--verbose") or
+		    parser_switch.is_equal("-V")) then
+	       verbose := true	    
 	    elseif (parser_switch.is_equal("--with-private") or
 		    parser_switch.is_equal("-w")) then
 	       enable_private := true	    
@@ -247,6 +252,7 @@ feature {PARAMS}
       end
    
 feature {ANY}
+   verbose		: BOOLEAN
    html_mode		: BOOLEAN
    display_mode		: BOOLEAN
    bibtex_mode		: BOOLEAN
