@@ -209,11 +209,17 @@ feature {ORGADOC}
 	    print ("Successfully convert " + path + file + "%N")
 	 else
 	    ast := void
-	    cerr.put_string ("Failed to convert " + correct(path) + file + "%N")
+	    cerr.put_string ("Failed to convert " + 
+			     correct(path) + file + "%N")
 	 end
 	 if (params.html_mode) then
 	    convert_html_file(ast, path, sub_paths, sub_nb_docs)
 	 end
+      rescue
+	 cerr.put_string ("%N" + path + file + " is not correct%N")
+	 cerr.put_string ("verify the xml header, it must contain : %
+			  % encoding=%"ISO-8859-1%"%N")
+	 die_with_code(0)
       end
    
    -- add a final '/' if there is not one
