@@ -52,14 +52,15 @@ feature {ANY}
 	    path := paths.item(1)
 	    from i := 2 until i > paths.count loop
 	       if tlink.start and (i - 1) <= nbs.count and 
-		  nbs.item(i - 1) > 0 then
+				 nbs.item(i - 1) > 0 then
 		  
-		  tlink.replace(LINK, concat(output_path,
-					     paths.item(i), 
-					     ppath) + file);
-		  tlink.replace(CONTENT, paths.item(i));
-		  tlink.replace(NUMBER, nbs.item(i - 1).to_string);
-		  str.append(tlink.stop)
+				 tlink.replace(LINK, concat(output_path,
+													 paths.item(i), 
+													 ppath) + file);
+				 tlink.replace(CONTENT, paths.item(i).substring(ppath.count + 1,
+																		paths.item(i).count));
+				 tlink.replace(NUMBER, nbs.item(i - 1).to_string);
+				 str.append(tlink.stop)
 	       end
 	       i := i + 1
 	    end
