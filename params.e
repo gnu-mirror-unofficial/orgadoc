@@ -253,5 +253,5 @@ feature {PARAMS}
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "0.5.0"
+   VERSION		: STRING is "0.6.0"
 end

@@ -180,6 +180,14 @@
         </listitem>
       </varlistentry>
       <varlistentry>
+        <term><option>-l</option>
+          <option>--latex</option>
+        </term>
+        <listitem>
+          <para>Activate production of LaTex file.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
         <term><option>-d</option>
           <option>--display-ast</option>
         </term>
