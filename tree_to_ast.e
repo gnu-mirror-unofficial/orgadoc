@@ -18,10 +18,11 @@ indexing
 
 class TREE_TO_AST     
    
-inherit XM_NODE_PROCESSOR
+inherit KL_IMPORTED_STRING_ROUTINES; XM_NODE_PROCESSOR
       redefine
 	 process_document, process_element, 
 	 process_character_data
+   
 creation
    make
 
@@ -54,9 +55,9 @@ feature {TREE_TO_AST}
       do
 	 -- empty node is a <node/> with no data
 	 if not el.is_empty then
-	    process_start_element(el.name) --to_utf8)
+	    process_start_element(el.name.out) --to_utf8)
 	    process_composite(el)
-	    process_end_element(el.name) --to_utf8)
+	    process_end_element(el.name.out) --to_utf8)
 	 end
       end
    
@@ -144,7 +145,7 @@ feature {TREE_TO_AST}
    
    process_character_data(c : XM_CHARACTER_DATA) is
       do
-	 node_content := node_content + c.content --to_utf8
+	 node_content := STRING_.concat (node_content, c.content.out)
       end
    
    process_composite (c: XM_COMPOSITE) is
