@@ -1,7 +1,7 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-	--| $Id: cgi.e,v 1.1 2003/10/16 20:20:22 speedblue Exp $
+	--| $Id: cgi.e,v 1.2 2003/10/16 21:36:16 speedblue Exp $
 	--| 
 	--| Copyright (C) 2003 Julien Lemoine
 	--| This program is free software; you can redistribute it and/or modify
@@ -37,21 +37,35 @@ feature {ANY}
       end
 
 feature{CGI}
-	process(query : STRING) is
+	process(q : STRING) is
 		local
 			tglobal : TEMPLATE
 			index	  : INTEGER
 			prog	  : ORGADOC
 			res     : STRING
+			query   : STRING
 		do
-			index := query.first_substring_index(CQUERY)
+			index := q.first_substring_index(CQUERY)
 			if (index > 0) then
+				query := q.substring(1 + CQUERY.count, q.count - index + 1)
+				query := replace(query, "+", " ")
+				query := replace(query, "%%3F", "?")
+				query := replace(query, "%%5B", "[")
+				query := replace(query, "%%5D", "]")
+				query := replace(query, "%%2B", "+")
+				query := replace(query, "%%5B", "{")
+				query := replace(query, "%%2D", "}")
+				query := replace(query, "%%5E", "^")
+				query := replace(query, "%%24", "$")
+				query := replace(query, "%%28", "(")
+				query := replace(query, "%%29", ")")
+				query := replace(query, "%%3D", "=")
+				query := replace(query, "%%7C", "|")
+				!!prog.make_cgi(query);
+				res := prog.get_res
 				!!tglobal.make(TEMPL_PATH + CTGLOBAL);
 				is_writeable := tglobal.start
-				!!prog.make_cgi(query.substring(1 + CQUERY.count,
-														  query.count - index));
-				res := prog.get_res
-				tglobal.replace(DOCUMENTS, "<pre>" + res + "</pre>")
+				tglobal.replace(DOCUMENTS, res)
 				tglobal.replace(VERSION, params.get_version)
 				print(tglobal.stop)
 			else
@@ -71,6 +85,22 @@ feature{CGI}
 			print(tglobal.stop)
 		end
 
+	replace(str, src, dst : STRING) : STRING is
+		require
+			str /= void
+			src /= void
+			dst /= void
+		local
+			index : INTEGER
+		do
+			index := str.first_substring_index(src)
+			if (index > 0) then
+				str.replace_substring(dst, index,
+											 index + src.count - 1)
+			end
+			Result := str
+		end
+	
 feature{CGI}
 	params		 :	PARAMS
 	is_writeable : BOOLEAN
