@@ -81,6 +81,7 @@ feature {TREE_TO_AST}
 	    file := void
 	    summary := void
 	    nbpages := void
+		 url := void
 	 elseif (name.same_as(CCOMMENT)) then
 	    content := void
 	    author_name := void
