@@ -1,7 +1,7 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-	--| $Id: cgi.e,v 1.5 2003/10/17 10:39:40 speedblue Exp $
+	--| $Id: cgi.e,v 1.1 2003/11/03 12:27:37 speedblue Exp $
 	--| 
 	--| Copyright (C) 2003 Julien Lemoine
 	--| This program is free software; you can redistribute it and/or modify

@@ -1,8 +1,13 @@
+2003-11-03   Julien LEMOINE <speedblue@debian.org>
+	* Fixed a lot of warnings
+	* upgraded to autoconf/automake
+
 2003-11-02   Julien LEMOINE <speedblue@debian.org>
-	* Fixed a bug when reading template : last line was ignored when there were no
-	  \n a then end
-	* Added a new feature : "%%FILENAME:file_name.ext%%" in the html template
-	  replace this string by the content of file_name.ext for each directory
+	* Fixed a bug when reading template : last line was ignored when 
+	  there were no \n a then end
+	* Added a new feature : "%%FILENAME:file_name.ext%%" in the html 
+	  template replace this string by the content of file_name.ext 
+	  for each directory
 	* Fixed exploration bug (introduced in previous commit)
 	* Display a warning when there is no <language> tag
 

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<system name="orgadoc">
+        <description>
+                system: "OrgaDoc"
+                copyright: "Copyright (c) 2002-2003, Julien LEMOINE"
+                license: "GPL, GNU General Public Licence"
+                date: "$Date: 2003/11/03 12:27:37 $"
+        </description>
+	<root class="ORGADOC" creation="make"/>
+
+        <option unless="${DEBUG}">
+                <option name="assertion" value="none"/>
+                <option name="garbage_collector" value="none"/>
+                <option name="finalize" value="true" 
+	                unless="${GOBO_EIFFEL}=ve"/>
+        </option>
+        <option if="${DEBUG}">
+                <option name="assertion" value="all"/>
+                <option name="garbage_collector" value="none"/>
+                <option name="finalize" value="false"/>
+        </option>
+	<cluster name="orgadoc" location="${CURRENT_DIR}"/>
+        <mount location="${GOBO}/library/library.xace"/>
+        <mount location="${GOBO}/library/kernel.xace"/>
+</system>
