@@ -17,6 +17,7 @@ GELEX		= $(shell which gelex || echo "/usr/bin/gelex")
 GEYACC		= $(shell which geyacc || echo "/usr/bin/geyacc")
 ETC		= $(DESTDIR)/etc
 PREFIX		= $(DESTDIR)/usr
+XACE_FILES	= cgi orgadoc
 
 ################ GENERAL RULES ################
 all: ace no_debug binary
@@ -25,17 +26,21 @@ re: clean all
 
 ################ DISABLE DEBUG ################
 no_debug:
-	sed s/assertion\ \(no\)/assertion\ \(boost\)\ debug\ \(no\)/ se.ace > tmp
-	cp tmp se.ace
-	rm tmp
+	for file in $(XACE_FILES); do 					\
+	  sed s/assertion\ \(no\)/assertion\ \(boost\)\ debug\ \(no\)/ 	\
+	  $$file.ace > tmp; cp tmp $$file.ace; rm tmp;			\
+	done
 
 ################ GENERATE se.ace ################
 ace: test_xace
-	SmartEiffel=$(SmartEiffel)	\
-	GOBO=$(GOBO) 			\
-	CURRENT_DIR=$(CURRENT_DIR)	\
-        EXPAT=/usr                      \
-	$(XACE) --define="GOBO_XML_EXPAT" --system=se orgadoc.xace
+	for file in $(XACE_FILES); do	\
+	  SmartEiffel=$(SmartEiffel)	\
+	  GOBO=$(GOBO) 			\
+	  CURRENT_DIR=$(CURRENT_DIR)	\
+          EXPAT=/usr			\
+	  $(XACE) --define="GOBO_XML_EXPAT" --system=se $$file.xace; \
+	  mv se.ace $$file.ace; 	\
+	done
 
 ################ FLEX/BISON ################
 scanner: test_gelex
@@ -46,11 +51,13 @@ parser: test_geyacc
 
 ################ BINARY ################
 binary: scanner parser
-	SmartEiffel=$(SmartEiffel)	\
-	GOBO=$(GOBO) 			\
-	CURRENT_DIR=$(CURRENT_DIR)	\
-        EXPAT=/usr                      \
-	$(SE) ./se.ace
+	for file in $(XACE_FILES); do	\
+	  SmartEiffel=$(SmartEiffel)	\
+	  GOBO=$(GOBO) 			\
+	  CURRENT_DIR=$(CURRENT_DIR)	\
+          EXPAT=/usr                   	\
+	  $(SE) ./$$file.ace;	exit;	\
+	done
 
 ################ GENERATE DOCUMENTATIONS ################
 doc:
@@ -84,8 +91,9 @@ test_geyacc:
 
 ################ CLEAN ################
 clean:
-	rm -rf *~ *.o *.c *.id *.h orgadoc				\
+	rm -rf *~ *.o *.c *.id *.h orgadoc orgadoc_cgi			\
 	cecil.se se.ace *.1 manpage.* scanner.e parser.e tokens.e
+	for file in $(XACE_FILES); do rm -f $$file.ace; done
 
 ################ INSTALL ################
 install: 
@@ -97,9 +105,11 @@ install:
 		mkdir $(ETC)/orgadoc/templates/latex;			\
 		mkdir $(ETC)/orgadoc/templates/ast;			\
 		mkdir $(ETC)/orgadoc/templates/bibtex;			\
+		mkdir $(ETC)/orgadoc/templates/cgi;			\
 		cp templates/html/*.tpl $(ETC)/orgadoc/templates/html;	\
 		cp templates/bibtex/*.tpl $(ETC)/orgadoc/templates/bibtex;\
 		cp templates/ast/*.tpl $(ETC)/orgadoc/templates/ast;	\
 		cp templates/latex/*.tpl $(ETC)/orgadoc/templates/latex;\
+		cp templates/cgi/*.tpl $(ETC)/orgadoc/templates/cgi;	\
 		cp orgadoc $(PREFIX)/bin/;				\
 	fi

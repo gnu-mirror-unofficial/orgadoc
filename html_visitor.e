@@ -29,13 +29,13 @@ creation
    
 feature {ANY}
    make (a : AST; httpd : STRING;
-	 output_path, file, ppath : STRING;
-	 paths : LINKED_LIST[STRING];
-	 nbs : LINKED_LIST[INTEGER];
-	 template_path : STRING; params : PARAMS) is
+			output_path, file, ppath : STRING;
+			paths : LINKED_LIST[STRING];
+			nbs : LINKED_LIST[INTEGER];
+			template_path : STRING; params : PARAMS) is
       local
-	 i	: INTEGER
-	 tlink	: TEMPLATE
+			i	: INTEGER
+			tlink	: TEMPLATE
       do
 	 !!cerr.make
 	 make_default(a)
