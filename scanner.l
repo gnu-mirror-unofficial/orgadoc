@@ -66,7 +66,7 @@ creation
 			  last_token := T_INTEGER
 			  last_value := text.to_integer
 			}
-[-a-zA-Z0-9_~/.]+		{
+[-a-zA-Z0-9_~/.:]+		{
 			  last_token := T_STRING			
 			  last_value := text
 			}
