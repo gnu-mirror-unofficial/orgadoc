@@ -33,7 +33,7 @@ feature {ANY}
    
    set_content (p_content : STRING) is
       require
-	 p_comment /= void
+	 p_content /= void
       do
 	 content := p_content
       end

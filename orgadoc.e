@@ -182,7 +182,6 @@ feature {ORGADOC}
 		sub_nb_docs : LINKED_LIST[INTEGER]) is
       require
 	 path /= void
-	 name /= void
       local
 	 parser		: READ_XML
       	 ast		: AST

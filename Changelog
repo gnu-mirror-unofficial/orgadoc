@@ -1,3 +1,11 @@
+2003-02-14  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.6.5 was released
+	
+	* Fixed compilation problem with SmartEiffel
+ 	* Does not need any more ucstring and exml, need only
+	  smarteiffel and gobo to compile
+	* No new features, only a smarteiffel/gobo  port
+
 2002-10-27  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.6.4 was released
 	

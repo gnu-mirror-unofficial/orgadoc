@@ -26,39 +26,42 @@ feature {ANY}                   -- creation
 	 path := ppath
       end
    
-   get_tree : XM_TREE_PARSER is
+   get_tree : XM_DOCUMENT is
       require
-	 tree /= void
+	 tree_pipe /= void
       do
-	 Result := tree
+	 Result := tree_pipe.document
       end
    
    parse : BOOLEAN is
       require
 	 path /= void
       local
-	 str	: UCSTRING
 	 tools	: FILE_TOOLS
+	 in	: KL_TEXT_INPUT_FILE
       do
 	 --choose expat if available
-	 if fact.is_expat_event_available then
-	    tree := parse_expat
+	 if fact.is_expat_parser_available then
+	    event_parser := fact.new_expat_parser
+	    -- tree := parse_expat
 	 else
-	    tree := parse_eiffel
+	    !XM_EIFFEL_PARSER! event_parser.make
+	    -- tree := parse_eiffel
 	 end
-	 !!str.make_from_string(path)
-	 if (tools.is_readable(path)) then
-	    tree.parse_from_file_name(str);
-	    if (tree /= void) then
-	       Result := tree.is_correct
-	       if Result /= true then
-		  print("Tree not correct%N");
-		  debug
-		     print(tree.last_error_extended_description + "%N")
-		  end
+	 !! tree_pipe.make
+	 event_parser.set_callbacks (tree_pipe.start)
+	 !! in.make (path)
+	 in.open_read
+	 if in.is_open_read then
+	    event_parser.parse_from_stream (in)
+	    in.close
+	    Result := not tree_pipe.error.has_error
+	    -- to fix
+	    if Result /= true then
+	       print("Tree not correct%N");
+	       debug
+		  print(tree_pipe.last_error + "%N")
 	       end
-	    else
-	       Result := false
 	    end
 	 else
 	    Result := false
@@ -73,24 +76,16 @@ feature {ANY}                   -- creation
 	 print (tree.document.out + "%N")                    
       end
    
-feature {READ_XML}
-      
-   parse_eiffel : XM_TREE_PARSER is
-      do
-      	 Result :=  fact.new_toe_eiffel_tree_parser
+feature -- Parser
+   fact		: XM_EXPAT_PARSER_FACTORY is
+      once
+	 !! Result
       ensure
-	 Result /= void
-      end
+	 factory_not_void: Result /= Void
+      end   
    
-   parse_expat : XM_TREE_PARSER is
-      do
-	 Result :=  fact.new_toe_expat_tree_parser
-      ensure
-	 Result /= void
-      end
-
 feature {NONE}
-   path : STRING;
-   tree : XM_TREE_PARSER
-   fact : expanded XM_PARSER_FACTORY
+   path		: STRING;
+   event_parser	: XM_PARSER
+   tree_pipe	: XM_TREE_CALLBACKS_PIPE
 end

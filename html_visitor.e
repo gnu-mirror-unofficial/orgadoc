@@ -41,17 +41,17 @@ feature {ANY}
 	 make_default(a)
 	 allow_private := params.enable_private
 	 !!str.make_empty
-	 !!link.make(template_path + TLINK)
-	 !!tglobal.make(template_path + TGLOBAL)
-	 !!tdocument.make(template_path + TDOCUMENT)
-	 !!tcomment.make(template_path + TCOMMENT)
+	 !!link.make(template_path + CTLINK)
+	 !!tglobal.make(template_path + CTGLOBAL)
+	 !!tdocument.make(template_path + CTDOCUMENT)
+	 !!tcomment.make(template_path + CTCOMMENT)
 	 is_writable := tglobal.start
 	 value := 0
 	 if (is_writable) then
 	    path := paths.item(1)
 	    from i := 2 until i > paths.count loop
 	       if link.start and (i - 1) <= nbs.count and nbs.item(i - 1) > 0 then
-		  link.replace(LINK,concat(output_path,
+		  link.replace(CLINK,concat(output_path,
 					   paths.item(i), 
 					   ppath) + file);
 		  link.replace(CONTENT, paths.item(i));
@@ -64,7 +64,7 @@ feature {ANY}
 	    tglobal.replace(VERSION, params.get_version)
 	 else
 	    cerr.put_string ("Error : Could not load " +
-			     template_path + TGLOBAL + "%N")
+			     template_path + CTGLOBAL + "%N")
 	 end
 	 !!str.make_empty
       end
@@ -125,7 +125,7 @@ feature {HTML_VISITOR}
 	       tdocument.replace(URL, doc.url)
 	       tdocument.replace(SUMMARY, doc.summary)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 	 end
@@ -210,17 +210,17 @@ feature {HTML_VISITOR} -- Constants
    URL			: STRING is "%%%%URL%%"
    SUMMARY		: STRING is "%%%%SUMMARY%%"
    PARTS		: STRING is "%%%%PARTS%%"
-   COMMENTS		: STRING is "%%%%COMMENTS%%"
+   CCOMMENTS		: STRING is "%%%%COMMENTS%%"
    DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
    LINKS		: STRING is "%%%%LINKS%%"
-   LINK			: STRING is "%%%%LINK%%"
+   CLINK		: STRING is "%%%%LINK%%"
    NUMBER		: STRING is "%%%%NUMBER%%"
    VERSION		: STRING is "%%%%VERSION%%"
    
    -- Template files
-   TLINK		: STRING is "/html/link.tpl"
-   TGLOBAL		: STRING is "/html/global.tpl"
-   TDOCUMENT		: STRING is "/html/document.tpl"
-   TCOMMENT		: STRING is "/html/comment.tpl"
+   CTLINK		: STRING is "/html/link.tpl"
+   CTGLOBAL		: STRING is "/html/global.tpl"
+   CTDOCUMENT		: STRING is "/html/document.tpl"
+   CTCOMMENT		: STRING is "/html/comment.tpl"
    
 end

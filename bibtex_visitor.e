@@ -36,7 +36,7 @@ feature {ANY}
 	 enable_private := private
 	 pos := nb
 	 path := ppath
-	 !!tdocument.make(template_path + TDOCUMENT)
+	 !!tdocument.make(template_path + CTDOCUMENT)
 	 !!str.make_empty
       end
    
@@ -131,7 +131,7 @@ feature {BIBTEX_VISITOR}
    ID			: STRING is "%%%%ID%%"
    
    -- Template files
-   TDOCUMENT		: STRING is "/bibtex/document.tpl"
+   CTDOCUMENT		: STRING is "/bibtex/document.tpl"
    
 end -- bibtex_vivitor
 

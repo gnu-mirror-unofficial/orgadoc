@@ -216,9 +216,9 @@ feature {PARAMS}
    display_version is
       do
 	 std_output.put_string(NAME + " version " + VERSION + "%N%N")
-	 std_output.put_string("Copyright 2002")
-	 std_output.put_string(" Julien LEMOINE<speedblue@debian.org>%N")
-	 std_output.put_string("%NReport bugs to <speedblue@debian.org>.%N")
+	 std_output.put_string("Copyright 2002-2003")
+	 std_output.put_string(" Julien LEMOINE <julien@oopla.org>%N")
+	 std_output.put_string("%NReport bugs to <julien@oopla.org>.%N")
 	 die_with_code(0)
       end
    
@@ -270,5 +270,5 @@ feature {PARAMS}
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
    NAME			: STRING is "OrgaDoc"
-   VERSION		: STRING is "0.6.3"
+   VERSION		: STRING is "0.6.4"
 end

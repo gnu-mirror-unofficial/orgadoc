@@ -8,12 +8,10 @@
 ## Last update Thu Aug  1 00:58:42 2002 Julien LEMOINE
 ## 
 
-SmallEiffel	= /usr/lib/smalleiffel
+SmartEiffel	= /usr/lib/smarteiffel/sys/system.se
 GOBO		= /usr/lib/gobo
-UCSTRING	= /usr/lib/ucstring
-EXML		= /usr/lib/exml
 SE		= se-compile -no_warning
-XACE		= $(shell which xace || echo "/usr/bin/xace")
+XACE		= $(shell which gexace || echo "/usr/bin/gexace")
 CURRENT_DIR	= $(shell pwd)
 GELEX		= $(shell which gelex || echo "/usr/bin/gelex")
 GEYACC		= $(shell which geyacc || echo "/usr/bin/geyacc")
@@ -33,12 +31,12 @@ no_debug:
 
 ################ GENERATE se.ace ################
 ace: test_xace
-	EXML=$(EXML)			\
-	SmallEiffel=$(SmallEiffel)	\
-	UCSTRING=$(UCSTRING)		\
+	SmartEiffel=$(SmartEiffel)	\
 	GOBO=$(GOBO) 			\
 	CURRENT_DIR=$(CURRENT_DIR)	\
-	$(XACE) --build --se orgadoc.xace
+        GOBO_XML_EXPAT="true"           \
+        EXPAT=/usr                      \
+	$(XACE) --system=se orgadoc.xace
 
 ################ FLEX/BISON ################
 scanner: test_gelex
@@ -49,11 +47,11 @@ parser: test_geyacc
 
 ################ BINARY ################
 binary: scanner parser
-	EXML=$(EXML)			\
-	SmallEiffel=$(SmallEiffel)	\
-	UCSTRING=$(UCSTRING)		\
+	SmartEiffel=$(SmartEiffel)	\
 	GOBO=$(GOBO) 			\
 	CURRENT_DIR=$(CURRENT_DIR)	\
+        GOBO_XML_EXPAT="true"           \
+        EXPAT=/usr                      \
 	$(SE) ./se.ace
 
 ################ GENERATE DOCUMENTATIONS ################
@@ -68,7 +66,7 @@ doc:
 test_xace:
 	@if ! [ -f $(XACE) ]; then					\
 		echo -n "Error : You Need to install xace (apt-get ";	\
-		echo "install exml-util on Debian Gnu/Linux)";		\
+		echo "install gobo on Debian Gnu/Linux)";		\
 		exit 1;							\
 	fi
 

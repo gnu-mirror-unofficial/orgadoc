@@ -1,24 +1,25 @@
 <?xml version="1.0"?>
 <system name="orgadoc">
+        <description>
+                system: "OrgaDoc"
+                copyright: "Copyright (c) 2002-2003, Julien LEMOINE"
+                license: "GPL, GNU General Public Licence"
+                date: "$Date: 2003/02/14 22:09:29 $"
+        </description>
 	<root class="ORGADOC" creation="make"/>
-	<cluster>
-		<options>
-			<require enable="False"/>
-			<ensure enable="False"/>
-			<check enable="False"/>
-			<debug enable="False" name="boost"/>
-		</options>
 
-		<cluster name="orgadoc" location="${CURRENT_DIR}/"/>
-
-		<mount location="${EXML}/exml.xace" >
-			<exclude cluster="exml.impl.no_expat"/>
-			<exclude cluster="exml.impl.no_eiffel"/>
-			<exclude cluster="exml.impl.no_tree_on_event"/>
-		</mount>
-
-		<mount location="${EXML}/gobo.xace"/>
-		<mount location="${EXML}/ucstring.xace"/>
-		<mount location="${EXML}/kernel.xace" />
-	</cluster>
+        <option unless="${DEBUG}">
+                <option name="assertion" value="none"/>
+                <option name="garbage_collector" value="none"/>
+                <option name="finalize" value="true" 
+	                unless="${GOBO_EIFFEL}=ve"/>
+        </option>
+        <option if="${DEBUG}">
+                <option name="assertion" value="all"/>
+                <option name="garbage_collector" value="none"/>
+                <option name="finalize" value="false"/>
+        </option>
+	<cluster name="orgadoc" location="${CURRENT_DIR}"/>
+        <mount location="${GOBO}/library/library.xace"/>
+        <mount location="${GOBO}/library/kernel.xace"/>
 </system>

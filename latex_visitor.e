@@ -1,3 +1,4 @@
+
 indexing
    description: "Convert AST to LaTex"
    author: "Julien LEMOINE <speedblue@debian.org>"
@@ -35,8 +36,8 @@ feature {ANY}
 	 enable_private := private
 	 path := ppath
 	 !!str.make_empty
-	 !!tdocument.make(template_path + TDOCUMENT)
-	 !!tcomment.make(template_path + TCOMMENT)
+	 !!tdocument.make(template_path + CTDOCUMENT)
+	 !!tcomment.make(template_path + CTCOMMENT)
       end
    
    get_result : STRING is
@@ -61,7 +62,7 @@ feature {LATEX_VISITOR}
 	       tdocument.replace(URL, correct(doc.url))
 	       tdocument.replace(SUMMARY, correct(doc.summary))
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 	 end
@@ -151,7 +152,7 @@ feature {LATEX_VISITOR}
    URL			: STRING is "%%%%URL%%"
    SUMMARY		: STRING is "%%%%SUMMARY%%"
    PARTS		: STRING is "%%%%PARTS%%"
-   COMMENTS		: STRING is "%%%%COMMENTS%%"
+   CCOMMENTS		: STRING is "%%%%COMMENTS%%"
    DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
    LINKS		: STRING is "%%%%LINKS%%"
    LINK			: STRING is "%%%%LINK%%"
@@ -167,8 +168,8 @@ feature {LATEX_VISITOR}
    
 feature {ANY}
    -- Templates Files
-   TGLOBAL		: STRING is "/latex/global.tpl"
-   TDOCUMENT		: STRING is "/latex/document.tpl"
-   TCOMMENT		: STRING is "/latex/comment.tpl"
+   CTGLOBAL		: STRING is "/latex/global.tpl"
+   CTDOCUMENT		: STRING is "/latex/document.tpl"
+   CTCOMMENT		: STRING is "/latex/comment.tpl"
 
 end -- latex_vivitor

@@ -86,15 +86,16 @@ feature {NONE} -- Initialization
    
    execute (filename : STRING) is
       local
-	 file: like INPUT_STREAM_TYPE
+	 file: KL_TEXT_INPUT_FILE
       do
 	 make
-	 file := INPUT_STREAM_.make_file_open_read(filename)
-	 if INPUT_STREAM_.is_open_read(file) then 
+         !!file.make (filename)
+         file.open_read
+         if file.is_open_read then
 	     reset
 	     set_input_buffer (new_file_buffer (file))
 	     parse
-	     INPUT_STREAM_.close(file)
+	     file.close
 	 else
 	     std.error.put_string ("parser: cannot read %'")
 	     std.error.put_string (filename)
@@ -108,7 +109,7 @@ feature {NONE} -- Initialization
       do
 	 f_buffer ?= input_buffer
 	 if f_buffer /= Void then
-	    std.error.put_string (INPUT_STREAM_.name (f_buffer.file))
+	    std.error.put_string (f_buffer.file.name)
 	    std.error.put_string (", line ")
 	 else
 	    std.error.put_string ("line ")

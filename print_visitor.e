@@ -29,8 +29,8 @@ creation
 feature {ANY}
    make(a : AST, template_path, ppath : STRING) is
       do
-	 !!tdocument.make(template_path + TDOCUMENT)
-	 !!tcomment.make(template_path + TCOMMENT)
+	 !!tdocument.make(template_path + CTDOCUMENT)
+	 !!tcomment.make(template_path + CTCOMMENT)
 	 make_default(a)
 	 path := ppath
 	 !!str.make_empty
@@ -64,7 +64,7 @@ feature {PRINT_VISITOR} -- visitor function
 	       tdocument.replace(URL, doc.url)
 	       tdocument.replace(SUMMARY, doc.summary)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 
@@ -126,8 +126,8 @@ feature {PRINT_VISITOR}
    tcomment	: TEMPLATE
    
    -- consts
-   TDOCUMENT	: STRING is "/ast/document.tpl"
-   TCOMMENT	: STRING is "/ast/comment.tpl"
+   CTDOCUMENT	: STRING is "/ast/document.tpl"
+   CTCOMMENT	: STRING is "/ast/comment.tpl"
 	 
    -- Strings to Replace 
    AUTHOR	: STRING is "%%%%AUTHOR%%"
@@ -141,7 +141,7 @@ feature {PRINT_VISITOR}
    URL		: STRING is "%%%%URL%%"
    SUMMARY	: STRING is "%%%%SUMMARY%%"
    PARTS	: STRING is "%%%%PARTS%%"
-   COMMENTS	: STRING is "%%%%COMMENTS%%"
+   CCOMMENTS	: STRING is "%%%%COMMENTS%%"
    DOCUMENTS	: STRING is "%%%%DOCUMENTS%%"
    LINKS	: STRING is "%%%%LINKS%%"
    LINK		: STRING is "%%%%LINK%%"
