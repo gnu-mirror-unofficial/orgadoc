@@ -3,11 +3,10 @@ Basic Installation
 
 You Need :
   - Gobo (www.gobosoft.com)
-  - Exml (exml.sourceforge.net)
   - Eiffel Compiler (SmallEiffel for example)
   - Expat library
 
-on debian you need to run "apt-get install exml-util libexpat1-dev"
+on debian you need to run "apt-get install gobo smarteiffel libexpat1-dev"
 
 run "make" command.
 You have now a orgadoc binary
