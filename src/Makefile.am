@@ -31,4 +31,4 @@ SUFFIXES=.e .l .y .ge
 .ge.e:
 	gepp -D@GOBO_EIFFEL@ $< $@
 
-CLEANFILES      	= *~ *.c *.h *.id scanner.e parser.e params.e
+CLEANFILES = *~ *.c *.h *.id scanner.e parser.e params.e tokens.e *.ace
