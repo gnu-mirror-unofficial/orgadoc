@@ -118,7 +118,12 @@ feature {HTML_VISITOR}
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
 	       value := value + 1
-	       tdocument.replace(TITREL, path + doc.file)
+	       if (path.substring(1, 2).same_as("./"))
+		  tdocument.replace(TITREL, path.substring(2, path.count) 
+				    + doc.file)
+	       else
+		  tdocument.replace(TITREL, path + doc.file)
+	       end
 	       tdocument.replace(TITRE, doc.title)
 	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
 	       tdocument.replace(DATE, doc.date)
@@ -203,4 +208,5 @@ feature {HTML_VISITOR} -- Constants
    CTDOCUMENT		: STRING is "/html/document.tpl"
    CTCOMMENT		: STRING is "/html/comment.tpl"
    
+   LOCALPATH		: STRING is "./"
 end

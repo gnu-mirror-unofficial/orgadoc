@@ -90,7 +90,7 @@ feature {PARAMS}
    display_help is
       do
 	 std_output.put_string(NAME + " %
-			       %(convert XML file to Document)%N%N")
+			       %(organizes documents from XML descriptions)%N%N")
 	 std_output.put_string("Usage: " + command_arguments.item(0) + 
 			       " [OPTION]%N%N")
 	    std_output.put_string("Options:%N")

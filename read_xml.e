@@ -33,6 +33,22 @@ feature {ANY}                   -- creation
 	 Result := tree_pipe.document
       end
    
+   file_exist : BOOLEAN is
+      require
+	 path /= void
+      local
+	 in	: KL_TEXT_INPUT_FILE
+      do
+      	 !! in.make (path)
+	 in.open_read
+	 if in.is_open_read then
+	    in.close
+	    Result := true
+	 else
+	    Result := false
+	 end
+      end
+   
    parse : BOOLEAN is
       require
 	 path /= void

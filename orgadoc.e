@@ -190,26 +190,28 @@ feature {ORGADOC}
 	 cerr		: STD_ERROR
       do
 	 !!cerr.make
-	 print ("Try convert " + correct(path) + file + "%N")
 	 !!parser.make(path + file)
-	 if (parser.parse) then
-	    !!convert.make(parser.get_tree);
-	    ast := convert.convert;
-	    -- Select type of conversion
-	    if params.regexp /= void then
-	       convert_regexp_file(ast, sub_paths.item(1))
-	    elseif params.display_mode then
-	       convert_display_file(ast, sub_paths.item(1))
-	    elseif params.bibtex_mode then
-	       convert_bibtex_file(ast, path)
-	    elseif params.latex_mode then
-	       convert_latex_file(ast, path)	    
-	    end -- end select
-	    print ("Successfully convert " + path + file + "%N")
-	 else
-	    ast := void
-	    cerr.put_string ("Failed to convert " + 
-			     correct(path) + file + "%N")
+	 if (parser.file_exist)
+	    print ("Try convert " + correct(path) + file + "%N")
+	    if (parser.parse) then
+	       !!convert.make(parser.get_tree);
+	       ast := convert.convert;
+	       -- Select type of conversion
+	       if params.regexp /= void then
+		  convert_regexp_file(ast, sub_paths.item(1))
+	       elseif params.display_mode then
+		  convert_display_file(ast, sub_paths.item(1))
+	       elseif params.bibtex_mode then
+		  convert_bibtex_file(ast, path)
+	       elseif params.latex_mode then
+		  convert_latex_file(ast, path)	    
+	       end -- end select
+	       print ("Successfully convert " + path + file + "%N")
+	    else
+	       ast := void
+	       cerr.put_string ("Failed to convert " + 
+				correct(path) + file + "%N")
+	    end
 	 end
 	 if (params.html_mode) then
 	    convert_html_file(ast, path, sub_paths, sub_nb_docs)
