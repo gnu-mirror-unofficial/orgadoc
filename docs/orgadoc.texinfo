@@ -1,0 +1,401 @@
+\input texinfo @c -*-texinfo-*-
+@comment %**start of header
+@setfilename orgadoc.info
+@include version.texi
+@settitle OrgaDoc @value{VERSION}
+@setchapternewpage off 
+
+@finalout
+
+@synindex fn cp
+@synindex vr cp
+@synindex tp cp
+
+@copying
+
+This manual is for @acronym{GNU} OrgaDoc (version @value{VERSION},
+@value{UPDATED})
+
+Copyright @copyright{} 2003, 2004 Free Software Foundation, Inc.
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the @acronym{GNU} Free Documentation License,
+Version 1.1 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with the Front-Cover texts
+being ``A @acronym{GNU} Manual,'' and with the Back-Cover Texts as in
+(a) below.  A copy of the license is included in the section entitled
+``@acronym{GNU} Free Documentation License.''
+
+(a) The @acronym{FSF}'s Back-Cover Text is: ``You have freedom to copy
+and modify this @acronym{GNU} Manual, like @acronym{GNU} software.
+Copies published by the Free Software Foundation raise funds for
+@acronym{GNU} development.''
+@end quotation
+@end copying
+
+@dircategory GNU programming tools
+@direntry
+* orgadoc: (orgadoc).       Organizes documents from XML descriptions
+@end direntry
+
+@ifset shorttitlepage-enabled
+@shorttitlepage OrgaDoc
+@end ifset
+@titlepage
+@title OrgaDoc User Manual
+@subtitle Organizes documents from XML descriptions
+@subtitle @value{UPDATED}, OrgaDoc Version @value{VERSION}
+
+@author by Julien Lemoine
+
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@sp 2
+Published by the Free Software Foundation @*
+59 Temple Place, Suite 330 @*
+Boston, MA  02111-1307  USA @*
+Printed copies are available from the Free Software Foundation.@*
+@acronym{ISBN} 1-882114-44-2
+@sp 2
+Cover art by Etienne Suvasa.
+@end titlepage
+
+@contents
+
+@node Top
+@top Copyright
+@insertcopying
+
+@menu
+* Goals of orgadoc:: 
+* Installation:: 
+* OrgaDoc features:: 
+* How to use it:: 
+* Templates:: 
+* Configuration file:: 
+* Usage of OrgaDoc with CVS:: 
+* CGI binary:: 
+@end menu
+
+@node Goals of orgadoc
+@chapter Goals of orgadoc
+@cindex goals
+
+OrgaDoc has been designed to easily copy and maitain a pool of
+documents between computers. You can synchronise your documents pool
+with rsync or unison. You don't need to install a database server
+(like MySql or PostgreSql), a HTTP server, a script language (like
+php, perl, ...). You only need orgadoc to generate html pages and to
+perform queries.
+
+OrgaDoc is easy to use : only the creation of some xml files
+describing your documents is needed. These files can be generated. Read the
+section (@pxref{howto}) for details.
+
+@node Installation
+@chapter Installation
+@cindex installation
+
+Needed software to compile orgadoc:
+@itemize @bullet
+@item An eiffel compiler : SmartEiffel for example;
+@item Gobo library (http://www.gobosoft.com).
+@end itemize
+
+Needed software to run orgadoc_init_readmes:
+@itemize @bullet
+@item pdfinfo which is a part of xpdf (pdfinfo is into the xpdf-utils
+package on Debian GNU/Linux).
+@end itemize
+
+OrgaDoc uses the autoconf/automake facilities, therefore the end user
+ should use the provided configure script (some options are available)
+ to generate architecture specific.      
+
+First of all, some environment variables have to be defined if your
+compiler and libraries are not located in the standard path. Here is a
+list of variables:
+@verbatim
+GOBO_EIFFEL: specify the eiffel vendor (se, ise or ve), default value
+is se (for Smart Eiffel)
+GOBO: specify the location of the gobo library, default path is
+/usr/lib/gobo
+SmartEiffel: give the location of SmartEiffel cluster, for exemple :
+/usr/lib/smarteiffel/sys/system.se
+@end verbatim
+
+To compile OrgaDoc, run these commands in user mode:
+@verbatim
+tar xzvf orgadoc-0.8.0.tar.gz
+cd orgadoc-0.8.0
+./configure
+make
+@end verbatim
+and to install OrgaDoc, run in super user mode:
+@begin verbatim
+make install
+@end verbatim
+
+@node OrgaDoc features
+@chapter OrgaDoc features
+
+Orgadoc uses XML files to describe your documents and convert them to
+another format using one of the available backend:
+@itemize @bullet
+@item HTML: generates a tree of HTML files, you can easily browse into your
+  documentation;
+@item Bibtex: convert your documents pool into a bibtex file for reference
+  into LaTex documents;
+@item Latex: generates a latex document with the details of your
+ documents base, you can compile this into a pdf or ps file.
+@item Ast : dump the documents pool into ascii
+@end itemize
+Orgadoc also includes a search tool to perform regexp queries on the
+documents pool and a CGI mode to enable queries via html.
+
+@node How to use it
+@chapter How to use it
+@cindex howto
+A directory hierarchy of documentation is needed, for example:
+
+@begin verbatim
+artificial_intelligence
+artificial_intelligence/neural_networks
+artificial_intelligence/pattern_recognition
+graphics
+graphics/rendering
+graphics/nurbs
+...
+@end verbatim
+
+To describes documents which are in these directories, you
+need to have an xml file per directory which describes them. This file
+contains a <document> node for each document of this directory.
+A document node contains a number of subnodes:
+
+@itemize @bullet
+@item title: the title of the document;
+@item file: the filename or the directory of the document
+@item nbpages: the number of pages;
+@item type: you can flag the document public or private, this option
+  is usefull if you want to create a public documentation server and
+  you do not have the correct permission to diffuse all documents;
+@item date: creation date of the document;
+@item language: language the document was written in;
+@item summary : short resume of the document (useful for search on
+  your documents pool);
+@item url : the url where you downloaded the document;
+@item part : you can give the principal chapter or section of your
+  document;
+@item author : authors of the document;
+@item comment : this node is designed to add some comments about your
+  documents. Comments are splitted in two  subnodes ``author\_name'' and
+  ``content'' (see the example below).
+@end itemize
+
+Here is an example of an xml file describing a directory:
+@begin verbatim
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<readme>
+  <document>
+    <title>An Introduction To Neural Networks</title>
+    <file>neuro-intro.ps</file>
+    <nbpages>135</nbpages>
+    <type>public</type>
+    <author>Ben Krose, Patrick van der Smagt</author>
+    <date>November 1996</date>
+    <language>English</language>
+    <summary>Neural networks, terminology, theory, topoloy,
+    applications, implementations</summary>
+    <part>Introduction and terminology</part>
+    <part>Perceptron and Adaline</part>
+    <part>Back-propagation</part>
+    <part>Recurrent Networks</part>
+    <part>Self-Organising Networks</part>
+    <part>Reinforcement learning</part>
+    <part>Applications (vision, robotics, etc...)</part>
+    <url>http://www.domain.com/document/file.ps</url>
+    <part>Implementations (software, hardware, etc...)</part>
+    <comment>   
+      <author_name>Julien Lemoine</author_name>
+      <content>This is a comment</content>
+    </comment>
+  </document>
+ <document>
+    <title>Neural Network and Its Application in IR</title>
+    <file>uiuclis--1999-5+irg.pdf</file>
+    <nbpages>31</nbpages>
+    <type>public</type>
+    <author>Qin He</author>
+    <date>1999</date>
+    <language>English</language>
+    <summary>neural networks and applications in information retrieval
+    systems.</summary>
+  </document>
+</readme>
+@end verbatim
+
+Some documentation can contain a piece of this information, for example pdf
+documents contains the author, the number of pages...
+This information can be extracted using the orgadoc\_init\_readmes script.
+This script takes a directory in argument, explores it recursively and generates a readme.xml file per directory
+containing extractable informations. XML section that can not be
+extracted are filled with a FIXME.
+
+Exemple of orgadoc_init_readmes usage:
+@begin verbatim
+$ orgadoc_init_readmes docs
+Entering directory [docs]
+Leaving directory [docs]
+Entering directory [docs/artifical_intelligence]
+Leaving directory [docs/artifical_intelligence]
+Entering directory [docs/artifical_intelligence/neural_networks]
+Leaving directory [docs/artifical_intelligence/neural_networks]
+Entering directory [docs/artifical_intelligence/pattern_recognition]
+Leaving directory [docs/artifical_intelligence/pattern_recognition]
+Entering directory [docs/graphics]
+Leaving directory [docs/graphics]
+Entering directory [docs/graphics/nurbs]
+Leaving directory [docs/graphics/nurbs]
+Entering directory [docs/graphics/rendering]
+Leaving directory [docs/graphics/rendering]
+
+readme.xml files are now created, please edit the FIXME lines
+$
+@end verbatim
+Exemple of generated readme.xml file:
+@begin verbatim
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<readme>
+<document>
+<title>Neural Nets Report.PDF</title>
+<file>uiuclis--1999-5+irg.pdf</file>
+<date>Tue Aug 17 17:19:35 1999</date>
+<type>public</public>
+<author>Qin He</author>
+<nbpages>31</nbpages>
+<language>FIXME: LANGUAGE</language>
+<summary>FIXME: SUMMARY</summary>
+<part>FIXME: PART</part>
+</document>
+</readme>
+@end verbatim
+
+@node Templates
+@chapter Templates
+
+Orgadoc supports many backends. For each backend it use a template to
+output data in a particular way. Templates are located into
+/etc/orgadoc/templates, you can edit them to personalize your backend
+output. A template is constitued of four files (orgadoc replaces
+specific tokens by data in these files, for example %%TITLE%% is
+remplaced by the title of the document)
+@itemize @bullet
+@item global.tpl: gives the global aspect of the output;
+@item document.tpl: gives the output aspect for a document;
+@item comment.tpl: gives the output aspect for a comment;
+@item link.tpl: gives the output aspect for link between documents
+  (for html documents).
+@end itemize
+
+There is currently five orgadoc backends:
+@itemize @bullet
+@item ast : this template is used when you perform a query using the orgadoc command
+  line binary;
+@item bibtex : this template is used to convert the orgadoc format
+  into a bibtex file to use your documents pool in a LaTex document;
+@item cgi: this template is used to generate a suitable output for cgi
+  binary, it generates an html output;
+@item html: used for html tree creation;
+@item latex: this template is used to generate a LaTex document with
+  a small description for each document.
+@end itemize
+
+
+Once all the xml files have been written, the orgadoc
+binary can be used to generate a html tree decribing these documents
+(or an other kind of backend) and perform queries on your documents
+pool using the orgadoc binary (orgadoc -s) or the cgi binary.
+For details on orgadoc binary, please consult the man page.
+
+@node Configuration file
+@chapter Configuration file
+
+The orgadoc configuration file use the standard unix format for
+configuration files, you can comment a line with the caracter \#.
+
+Here is a list of configuration variable and there utility:
+@itemize @bullet
+@item XmlFile: name of xml file to read (default: readme.xml);
+@item HtmlFile: name of html file to generate (default: index.html);
+@item BibTexFile: name of bibtex file to generate (default: orgadoc.bib);
+@item LaTexFile: name of latex file to generate (default: orgadoc.tex);
+@item InputPath: path where xml files are stored;
+@item OutputPath: path to store html files;
+@item EnablePrivateDoc: Boolean (True or False), if false orgadoc will
+  restrict generation to public document;
+@item Mode: HTML, DISPLAY, BIBTEX or LATEX. Choose the default mode
+  for orgadoc output;
+@item Recursive: Boolean (True of False), if True, orgadoc will
+  explore ImputPath recursivelly;
+@item TemplatePath: Path where orgadoc will read templates documents
+  (defaults: /etc/orgadoc/templates);
+@item HttpdDocPath: Httpd prefix (prefix added when orgadoc generates
+  href).
+@end itemize
+
+Example of orgadoc.conf file:
+@begin verbatim
+XmlFile                 = readme.xml
+HtmlFile                = index.html
+BibTexFile              = orgadoc.bib
+LaTexFile               = orgadoc.tex
+InputPath               = /var/www/docs/xml/orgadoc
+OutputPath              = /var/www/docs/html
+HttpdDocPath            = http://docs.happycoders.org
+Mode                    = HTML
+EnablePrivateDoc        = True
+Recursive               = True
+TemplatePath            = /etc/orgadoc/templates
+@end verbatim
+
+@node Usage of OrgaDoc with CVS
+@chapter Usage of OrgaDoc with CVS
+When more than one person use orgadoc to manage a pool of
+documents, there is some synchronisation problems with xml
+files. To solve this problem, the suggested solution is to store xml
+files into a cvs server. Keeping xml files in a different directory
+than documentation is not a problem for orgadoc, therefore storing xml
+files in cvs works fine.  You simply need to to a ``cvs update''
+before running orgadoc.
+
+To simplify the upload of documentation on a main server, a script is
+provided with orgadoc. It commits a readme.xml file and uploads document on
+server with scp. A readme.xml file and a section have to be supplied and
+the script do  the remaining part of the work.
+
+For example:
+@begin verbatim
+./orgadoc_add_docs /tmp/readme.xml artificial_intelligence/neural_networks
+@end verbatim
+will commit changes into readme.xml file of
+artificial\_intelligence/neural\_networks section and scp new
+documentation files.
+
+@node CGI binary
+@chapter CGI binary
+You can use the orgadoc cgi binary to perform regexp search on your
+document pool, you simply need to send the query variable to cgi.
+
+Here is a example of HTML form to use with this cgi :
+@begin verbatim
+<FORM ACTION="cgi-bin/orgadoc_cgi" xmethod="PRE">
+<P>Regexp search :
+<INPUT NAME="query" SIZE="10">
+<INPUT TYPE="SUBMIT" VALUE="Search">
+</FORM>
+@end verbatim
+
+@bye

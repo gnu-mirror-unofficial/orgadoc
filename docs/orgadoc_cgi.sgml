@@ -1,0 +1,114 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+  <!ENTITY dhfirstname "<firstname>Julien Lemoine</firstname>">
+  <!ENTITY dhsurname   "<surname>SpeedBlue</surname>">
+  <!ENTITY dhdate      "<date>January 3, 2004</date>">
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>speedblue@happycoders.org</email>">
+  <!ENTITY dhusername  "Julien Lemoine">
+  <!ENTITY dhucpackage "<refentrytitle>orgadoc_cgi</refentrytitle>">
+  <!ENTITY dhpackage   "orgadoc_cgi">
+  <!ENTITY debian      "<productname>Debian</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2004</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>Perform a research from web</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>OPTIONS</title>
+    <para><command>&dhpackage;</command> does not take any argument</para>
+  </refsect1> 
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page briefly describes the
+      <command>&dhpackage;</command> command.</para>
+
+    <para><command>&dhpackage;</command> perform a query on documents
+    database from a web server. Usage is very simple, it use the
+    standard configuration file (/etc/orgadoc/orgadoc.conf) to read
+    the server configuration and use the cgi template to produce the
+    html output.
+    </para>
+    <para><command>&dhpackage;</command> read the query from the
+    "query" variable.
+    </para>
+  </refsect1>
+  <refsect1>
+    <title>SAMPLE</title>
+    <para>You can use orgadoc_cgi with the following html form</para>
+<programlisting>
+<![CDATA[
+<FORM ACTION="cgi-bin/orgadoc_cgi" xmethod="PRE">
+<P>Regexp search :
+<INPUT NAME="query" SIZE="10">
+<INPUT TYPE="SUBMIT" VALUE="Search">
+</FORM>
+]]>
+</programlisting>
+  </refsect1>
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>orgadoc, orgadoc_init_readmes, orgadoc_add_docs</para>
+
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>This manual page was written by &dhusername; &lt;&dhemail;&gt;.
+      Permission is
+      granted to copy, distribute and/or modify this document under
+      the terms of the <acronym>GNU</acronym> Free Documentation
+      License, Version 1.2 or any later version published by the Free
+      Software Foundation; with no Invariant Sections, no Front-Cover
+      Texts and no Back-Cover Texts.</para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
+
+

@@ -1,20 +1,23 @@
-2004-01-03   Julien LEMOINE <speedblue@debian.org>
+2004-01-09   Julien Lemoine <speedblue@happycoders.org>
+	* Improved man pages
+	
+2004-01-03   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of documentation for orgadoc_cgi, init_readmes
 	and add_docs
 	
-2003-12-29   Julien LEMOINE <speedblue@debian.org>
+2003-12-29   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of add_docs : a small shell script to add documents
 	to a server using cvs to store readme.xml and scp to store documents.
 
-2003-12-04   Julien LEMOINE <speedblue@debian.org>
+2003-12-04   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of init_readmes : a small shell script to get
 	information from document and add it into readme.xml
 	
-2003-11-03   Julien LEMOINE <speedblue@debian.org>
+2003-11-03   Julien Lemoine <speedblue@happycoders.org>
 	* Fixed a lot of warnings
 	* upgraded to autoconf/automake
 
-2003-11-02   Julien LEMOINE <speedblue@debian.org>
+2003-11-02   Julien Lemoine <speedblue@happycoders.org>
 	* Fixed a bug when reading template : last line was ignored when 
 	  there were no \n a then end
 	* Added a new feature : "%%FILENAME:file_name.ext%%" in the html 
@@ -23,16 +26,16 @@
 	* Fixed exploration bug (introduced in previous commit)
 	* Display a warning when there is no <language> tag
 
-2003-10-17  Julien LEMOINE <speedblue@debian.org>
+2003-10-17  Julien Lemoine <speedblue@happycoders.org>
 	* Improved a lot orgadoc errors message.
 	  now it give the missing xml markup for a file, ex :
 	  "Failed to convert [compil.pdf] : no <type></type> section"
 	* Fixed compilation problem when compiling with require
 
-2003-10-16  Julien LEMOINE <speedblue@debian.org>
+2003-10-16  Julien Lemoine <speedblue@happycoders.org>
 	* Added a cgi for web reserch
 
-2003-07-30  Julien LEMOINE <speedblue@debian.org>
+2003-07-30  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.7.1 was releaded
 
 	* Bug fix release.
@@ -40,31 +43,31 @@
 	 - fixed directory display problem (display doc directory instead of 
 	   full unix directory)
 
-2003-06-01  Julien LEMOINE <speedblue@debian.org>
+2003-06-01  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.7.0 was released
 
 	* This version include a new feature : html generated files are
           now completely independant of the document, they can be on another
           server (another vhost...)
 
-2003-03-10  Julien LEMOINE <speedblue@debian.org>
+2003-03-10  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.7 was released
 	
 	* Fixed problem of encoding with iso-8859-1 documents.
 
-2003-03-06  Julien LEMOINE <speedblue@debian.org>
+2003-03-06  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.7 pre-release (Need to ask a question to gobo team)
 
 	* Added --verbose (-V) option
 	* Fixed problem of document encoding (but this eat a character)
 
-2003-02-25  Julien LEMOINE <speedblue@debian.org>
+2003-02-25  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.6 was released
 	
 	* Added <nbpages> options
 	* Some code clean up
 
-2003-02-14  Julien LEMOINE <speedblue@debian.org>
+2003-02-14  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.5 was released
 	
 	* Fixed compilation problem with SmartEiffel
@@ -72,57 +75,57 @@
 	  smarteiffel and gobo to compile
 	* No new features, only a smarteiffel/gobo  port
 
-2002-10-27  Julien LEMOINE <speedblue@debian.org>
+2002-10-27  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.4 was released
 	
 	* Fixed parameters problem 
 	(when given anothor configuration file)
 
-2002-08-02  Julien LEMOINE <speedblue@debian.org>
+2002-08-02  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.3 was released
 
 	* Severals bugs fixed
 
-2002-07-30  Julien LEMOINE <speedblue@debian.org>
+2002-07-30  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.2 was released
 
 	* Added a rescue on bad xml header, a error message
 	  is now given to user
 	* fixed some problem with templates
 
-2002-07-27  Julien LEMOINE <speedblue@debian.org>
+2002-07-27  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.1 was released
 
 	* added templates for search result and bibtex
 	* changed latex template (and replace _ by \_)
 
-2002-07-23  Julien LEMOINE <speedblue@debian.org>
+2002-07-23  Julien Lemoine <speedblue@happycoders.org>
 
 	Orgadoc 0.6 was released
 
 	* added LaTex export with templates
 	* Fixed some bugs
 
-2002-06-30  Julien LEMOINE <speedblue@debian.org>
+2002-06-30  Julien Lemoine <speedblue@happycoders.org>
 	
 	OrgaDoc 0.5 was released
 	
 	* added expat support (resolve problem with french characters)
 	* first release with BibTex support
 
-2002-06-26  Julien LEMOINE <speedblue@debian.org>
+2002-06-26  Julien Lemoine <speedblue@happycoders.org>
 	* Integrated Bibtex
 	* Fixed some bug (with conffile)
 	* pre0.5 now
 
-2002-06-24  Julien LEMOINE <speedblue@debian.org>
+2002-06-24  Julien Lemoine <speedblue@happycoders.org>
 	* added <url></url> tag in readme.xml
 	  add display in visitors
 	* added BibTex support in configuration file, man page
 	  and command line
 	* added BibTex Visitors (not used for the moment)
 
-2002-06-22  Julien LEMOINE <speedblue@debian.org>
+2002-06-22  Julien Lemoine <speedblue@happycoders.org>
 
 	OrgaDoc 0.4.1 was released
 
@@ -131,7 +134,7 @@
 	  - improved directories exploration
 	  - added number of document in each directory
 
-2002-06-17  Julien LEMOINE <speedblue@debian.org>
+2002-06-17  Julien Lemoine <speedblue@happycoders.org>
 	
 	OrgaDoc 0.4 was released
 
@@ -139,28 +142,28 @@
 	* Cleaned up code
 	* Removed case sensitive in Xml
 
-2002-06-16  Julien LEMOINE <speedblue@debian.org>
+2002-06-16  Julien Lemoine <speedblue@happycoders.org>
 	* Added Configuration File Support
 	  (Not used for the moment)
 
-2002-06-15  Julien LEMOINE <speedblue@debian.org>
+2002-06-15  Julien Lemoine <speedblue@happycoders.org>
 	
 	OrgaDoc 0.3 was released
 
 	* Added Template Support
 
-2002-06-12  Julien LEMOINE <speedblue@debian.org>
+2002-06-12  Julien Lemoine <speedblue@happycoders.org>
 	
 	* Added Manpage
 
-2002-06-10  Julien LEMOINE <speedblue@debian.org>
+2002-06-10  Julien Lemoine <speedblue@happycoders.org>
 
 	OrgaDoc 0.2 was released
 
 	* Fix some bugs on html_visitor
 	* Add grep_visitor and search functions
 
-2002-06-10  Julien LEMOINE <speedblue@debian.org>
+2002-06-10  Julien Lemoine <speedblue@happycoders.org>
 
 	OrgaDoc 0.1 was released
 	

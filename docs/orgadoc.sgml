@@ -34,7 +34,7 @@
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>Generates Documentation from XMLs files</refpurpose>
+    <refpurpose>Organizes documents from XML descriptions</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
@@ -61,10 +61,12 @@
     <title>DESCRIPTION</title>
 
     <para>This manual page briefly describes the
-      <command>&dhpackage;</command> commands.</para>
+      <command>&dhpackage;</command> command.</para>
 
-    <para><command>&dhpackage;</command> generates
-    Documents (Html, Tex...) from XML files describing the Documentations
+    <para><command>&dhpackage;</command>  uses XML files to describe
+    your documents and convert them to a tree of HTML files, a bibtex
+    file or a latex file. It also includes a search tool to perform
+    query on these XML files (with regexp support).
     </para>
 
   </refsect1>
@@ -219,7 +221,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>orgadoc_cgi, init_readmes, add_docs</para>
+    <para>orgadoc_cgi, orgadoc_init_readmes, orgadoc_add_docs</para>
 
   </refsect1>
   <refsect1>

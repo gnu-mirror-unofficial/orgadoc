@@ -20,13 +20,17 @@ bibtextpl_DATA	= ./templates/bibtex/document.tpl
 exampledir	= $(datadir)/doc/orgadoc/examples
 example_DATA  	= docs/readme.xml
 
-man_MANS  	= orgadoc.1 orgadoc_cgi.1
+info_TEXINFOS	= docs/orgadoc.texinfo
+man_MANS  	= docs/orgadoc.1 docs/orgadoc_cgi.1 		\
+		  docs/orgadoc_init_readmes.1			\
+		  docs/orgadoc_add_docs.1
 
 SUBDIRS 	= src config utils
 
 EXTRA_DIST 	= 						\
 AUTHORS COPYING ChangeLog INSTALL README TODO NEWS		\
-./docs/orgadoc.conf ./docs/orgadoc.sgml				\
+./docs/orgadoc.conf ./docs/orgadoc.sgml ./docs/orgadoc_cgi.sgml	\
+./docs/orgadoc_init_readmes.sgml ./docs/orgadoc_add_docs.sgml	\
 ./docs/readme.xml ./templates/ast/document.tpl 			\
 ./templates/ast/comment.tpl ./templates/html/document.tpl 	\
 ./templates/html/global.tpl ./templates/html/comment.tpl	\
@@ -36,18 +40,14 @@ AUTHORS COPYING ChangeLog INSTALL README TODO NEWS		\
 ./templates/cgi/document.tpl ./templates/cgi/link.tpl		\
 ./templates/cgi/global.tpl
 
-CLEANFILES      = *~ orgadoc.1 orgadoc_cgi.1 config.e
+CLEANFILES      = *~ docs/*.1 config.e docs/manpage.links docs/manpage.refs
 
-orgadoc.1: docs/orgadoc.sgml
-	@if [ -f /usr/bin/docbook2man ]; then                          	\
-                /usr/bin/docbook2man docs/orgadoc.sgml;                	\
-        else                                                           	\
-                /usr/bin/docbook-to-man docs/orgadoc.sgml > orgadoc.1; 	\
-        fi
+SUFFIXES	= .sgml .1
 
-orgadoc_cgi.1: docs/orgadoc_cgi.sgml
+.sgml.1: $<
+	@echo "Generating man page $@"
 	@if [ -f /usr/bin/docbook2man ]; then                          	\
-                /usr/bin/docbook2man docs/orgadoc_cgi.sgml;             \
+                cd docs && /usr/bin/docbook2man ../$<;	                \
         else                                                           	\
-                /usr/bin/docbook-to-man docs/orgadoc_cgi.sgml > orgadoc_cgi.1;\
+                /usr/bin/docbook-to-man $< > $@;		 	\
         fi
