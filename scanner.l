@@ -51,6 +51,7 @@ creation
 "XmlFile"		last_token := T_XML
 "HtmlFile"		last_token := T_HTML
 "BibTexFile"		last_token := T_BIBTEX
+"LaTexFile"		last_token := T_LATEX
 "InputPath"		last_token := T_INPUT
 "OutputPath"		last_token := T_OUTPUT
 "EnablePrivateDoc"	last_token := T_PRIVATE

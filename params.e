@@ -57,6 +57,12 @@ feature {ANY}
 	       else
 		  output_file := DEFAULT_BIBTEX_FILE
 	       end
+	    elseif latex_mode then
+	       if parser.get_data.latex_file /= void then
+		  output_file := parser.get_data.latex_file
+	       else
+		  output_file := DEFAULT_LATEX_FILE
+	       end	       
 	    else
 	       output_file := DEFAULT_HTML_FILE
 	    end
@@ -87,7 +93,8 @@ feature {PARAMS}
 	    std_output.put_string("  -r, --recursive%T%TRecursively %
 				  %convert directories.%N")
 	    std_output.put_string("  -t, --html%T%T%Toutput in html%N")
-	    std_output.put_string("  -b, --bibtex%T%T%Toutput in bibTex%N")
+	    std_output.put_string("  -b, --bibtex%T%T%Toutput in BibTex%N")
+	    std_output.put_string("  -l, --latex%T%T%Toutput in LaTex%N")
 	    std_output.put_string("  -d, --display-ast%T%Tdisplay AST%N")
 	    std_output.put_string("  -v, --version%T%T%Toutput version %
 				  %information and exit%N")
@@ -109,6 +116,9 @@ feature {PARAMS}
 	    elseif (parser_switch.is_equal("--bibtex") or
 		parser_switch.is_equal("-b")) then
 	       bibtex_mode := true
+	    elseif (parser_switch.is_equal("--latex") or
+		parser_switch.is_equal("-l")) then
+	       latex_mode := true	    
 	    elseif (parser_switch.is_equal("--display-ast") or
 		    parser_switch.is_equal("-d")) then
 	       display_mode := true
@@ -207,6 +217,12 @@ feature {PARAMS}
 		  output_file := data.bibtex_file
 	       end	    
 	    end
+	    if data.is_latex_mode /= void then
+	       latex_mode := data.is_latex_mode
+	       if data.latex_file /= void and latex_mode then
+		  output_file := data.latex_file
+	       end	    
+	    end	    
 	    if data.template_path /= void then
 	       template_path := data.template_path
 	    end
@@ -217,6 +233,7 @@ feature {ANY}
    html_mode		: BOOLEAN
    display_mode		: BOOLEAN
    bibtex_mode		: BOOLEAN
+   latex_mode		: BOOLEAN
    xml_file		: STRING
    input_path		: STRING
    recursive		: BOOLEAN
@@ -234,6 +251,7 @@ feature {PARAMS}
    DEFAULT_XML_FILE	: STRING is "readme.xml"
    DEFAULT_HTML_FILE	: STRING is "index.html"
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
+   DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
    NAME			: STRING is "OrgaDoc"
    VERSION		: STRING is "0.5.0"
 end

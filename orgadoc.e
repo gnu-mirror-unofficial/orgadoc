@@ -30,7 +30,7 @@ feature {ANY}
       	 ofile	: STD_FILE_WRITE
       do
 	 bibtex_index := 1
-	 !!bibtex_str.make_empty
+	 !!tex_str.make_empty
 	 nb_docs := 0
 	 !!params.make
 	 if (params.recursive) then -- explore all files in sub directories
@@ -43,10 +43,18 @@ feature {ANY}
 	    !!ofile.connect_to(correct(params.output_path) + 
 			       params.output_file)
 	    if (ofile /= void and ofile.is_connected) then
-	       ofile.put_string(bibtex_str)
+	       ofile.put_string(tex_str)
 	       ofile.disconnect
 	    end
 	 end
+	 if params.latex_mode then	 
+	    !!ofile.connect_to(correct(params.output_path) + 
+			       params.output_file)
+	    if (ofile /= void and ofile.is_connected) then
+	       ofile.put_string(tex_str)
+	       ofile.disconnect
+	    end
+	 end      
       end
    
 feature {ORGADOC}
@@ -133,6 +141,7 @@ feature {ORGADOC}
 	 end
       end
    
+   -- convert to BibTex format
    convert_bibtex_file(ast : AST; path : STRING) is
       local
 	 bibtex		: BIBTEX_VISITOR
@@ -141,9 +150,20 @@ feature {ORGADOC}
 		       path, bibtex_index);
 	 bibtex.visit
 	 bibtex_index := bibtex.get_pos
-	 bibtex_str.append(bibtex.get_result)
+	 tex_str.append(bibtex.get_result)
       end
-		       
+   
+   -- convert to LaTex format
+   convert_latex_file(ast : AST; path : STRING) is
+      local
+	 latex		: LATEX_VISITOR
+      do
+	 !!latex.make(ast, params.enable_private, 
+		      path);
+	 latex.visit
+	 tex_str.append(latex.get_result)
+      end
+
    --convert a file
    convert_file(path, file : STRING; 
 		sub_paths : LINKED_LIST[STRING];
@@ -244,5 +264,5 @@ feature {ORGADOC}
    params	: PARAMS
    nb_docs	: INTEGER
    bibtex_index : INTEGER
-   bibtex_str	: STRING
+   tex_str	: STRING
 end
