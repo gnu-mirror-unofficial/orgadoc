@@ -14,6 +14,7 @@ width="100%">
 <tr><td valign=top>Type</td><td>%%TYPE%%</td></tr>
 <tr><td valign=top>Url</td><td>%%URL%%</td></tr>
 <tr><td valign=top>Summary</td><td>%%SUMMARY%%</td></tr>
+<tr><td valign=top>Pages</td><td>%%NBPAGES%%</td></tr>
 <tr><td valign=top>Parts</td><td>%%PARTS%%</td></tr>
 </table>
 </font> </td> </tr> </table> </tr> </table>

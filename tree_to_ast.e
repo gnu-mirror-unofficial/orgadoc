@@ -78,6 +78,7 @@ feature {TREE_TO_AST}
 	    type := void
 	    file := void
 	    summary := void
+	    nbpages := void
 	 elseif (name.same_as(CCOMMENT)) then
 	    content := void
 	    author_name := void
@@ -99,6 +100,7 @@ feature {TREE_TO_AST}
 	    document.set_authors(authors)
 	    document.set_comments(comments)
 	    document.set_summary(summary)
+	    document.set_nbpages(nbpages)
 	    document.set_date(date)
 	    document.set_type(type)
 	    document.set_url(url)
@@ -117,6 +119,8 @@ feature {TREE_TO_AST}
 	    authors.add_last(node_content)
 	 elseif (name.same_as(CCOMMENT)) then
 	    comments.add_last(comment)
+	 elseif (name.same_as(CNBPAGES)) then
+	    nbpages := node_content
 	 elseif (name.same_as(CSUMMARY)) then
 	    summary := node_content
 	 elseif (name.same_as(CDATE)) then
@@ -172,6 +176,7 @@ feature {TREE_TO_AST}
    authors	: LINKED_LIST[STRING]
    comments	: LINKED_LIST[COMMENT]
    summary	: STRING
+   nbpages	: STRING
    date		: STRING
    type		: STRING
    file		: STRING
@@ -196,6 +201,7 @@ feature {TREE_TO_AST}
    CPART	: STRING is "part"
    CAUTHOR	: STRING is "author"
    CSUMMARY	: STRING is "summary"
+   CNBPAGES	: STRING is "nbpages"
    CDATE	: STRING is "date"
    CTYPE	: STRING is "type"
    CURL		: STRING is "url"

@@ -73,6 +73,13 @@ feature {ANY}
 	 comments.add_last(comment)
       end
    
+   set_nbpages (p_nbpages : STRING) is
+      require
+	 p_nbpages /= void
+      do
+	 nbpages := p_nbpages
+      end
+   
    set_summary (p_summary : STRING) is
       require
 	 p_summary /= void
@@ -132,6 +139,7 @@ feature {ANY}
    authors	: LINKED_LIST[STRING]
    comments	: LINKED_LIST[COMMENT]
    summary	: STRING
+   nbpages	: STRING
    date		: STRING
    type		: STRING
    file		: STRING

@@ -62,9 +62,10 @@ feature {PRINT_VISITOR} -- visitor function
 	       tdocument.replace(LANGUAGE, doc.language)
 	       tdocument.replace(TYPE, doc.type)
 	       tdocument.replace(URL, doc.url)
+	       tdocument.replace(NBPAGES, doc.nbpages)
 	       tdocument.replace(SUMMARY, doc.summary)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 
@@ -94,14 +95,14 @@ feature {PRINT_VISITOR} -- visitor function
 	 end
       end
    
-   visit_cmts (comments : LINKED_LIST[COMMENT]) : STRING is
+   visit_cmts (p_comments : LINKED_LIST[COMMENT]) : STRING is
       local
 	 i : INTEGER
       do
 	 Result := ""
-	 if (comments /= void) then
-	    from i := 1 until i > comments.count loop
-	       Result.append(visit_cmt(comments.item(i)))
+	 if (p_comments /= void) then
+	    from i := 1 until i > p_comments.count loop
+	       Result.append(visit_cmt(p_comments.item(i)))
 	       i := i + 1
 	    end
 	 end
@@ -129,22 +130,4 @@ feature {PRINT_VISITOR}
    CTDOCUMENT	: STRING is "/ast/document.tpl"
    CTCOMMENT	: STRING is "/ast/comment.tpl"
 	 
-   -- Strings to Replace 
-   AUTHOR	: STRING is "%%%%AUTHOR%%"
-   CONTENT	: STRING is "%%%%CONTENT%%"
-   TITREL	: STRING is "%%%%TITLEL%%"
-   TITRE	: STRING is "%%%%TITLE%%"
-   AUTHORS	: STRING is "%%%%AUTHORS%%"
-   DATE		: STRING is "%%%%DATE%%"
-   LANGUAGE	: STRING is "%%%%LANGUAGE%%"
-   TYPE		: STRING is "%%%%TYPE%%"
-   URL		: STRING is "%%%%URL%%"
-   SUMMARY	: STRING is "%%%%SUMMARY%%"
-   PARTS	: STRING is "%%%%PARTS%%"
-   CCOMMENTS	: STRING is "%%%%COMMENTS%%"
-   DOCUMENTS	: STRING is "%%%%DOCUMENTS%%"
-   LINKS	: STRING is "%%%%LINKS%%"
-   LINK		: STRING is "%%%%LINK%%"
-   NUMBER	: STRING is "%%%%NUMBER%%"
-   VERSION	: STRING is "%%%%VERSION%%"
 end

@@ -54,6 +54,7 @@ feature {GREP_VISITOR}
 	    visit_strings(doc.parts)
 	    visit_comments(doc.comments)
 	    visit_string(doc.summary)
+	    visit_string(doc.nbpages)
 	    visit_string(doc.date)
 	    visit_string(doc.type)
 	    visit_string(doc.file)
@@ -75,10 +76,6 @@ feature {GREP_VISITOR}
       end
    
 feature {GREP_VISITOR}
-   -- Public
-   PUBLIC		: STRING is "public"
-   PUBLIQUE		: STRING is "publique"
-   
    -- Vars
    regexp		: LX_DFA_REGULAR_EXPRESSION
    res			: BOOLEAN

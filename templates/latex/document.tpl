@@ -15,6 +15,8 @@ Url & %%URL%% \\
 \hline
 Summary & %%SUMMARY%% \\
 \hline
+Number of pages & %%NBPAGES%%\\
+\hline
 Parts & %%PARTS%% \\
 \hline
 \end{tabularx}

@@ -34,9 +34,8 @@ ace: test_xace
 	SmartEiffel=$(SmartEiffel)	\
 	GOBO=$(GOBO) 			\
 	CURRENT_DIR=$(CURRENT_DIR)	\
-        GOBO_XML_EXPAT="true"           \
         EXPAT=/usr                      \
-	$(XACE) --system=se orgadoc.xace
+	$(XACE) --define="GOBO_XML_EXPAT" --system=se orgadoc.xace
 
 ################ FLEX/BISON ################
 scanner: test_gelex
@@ -50,7 +49,6 @@ binary: scanner parser
 	SmartEiffel=$(SmartEiffel)	\
 	GOBO=$(GOBO) 			\
 	CURRENT_DIR=$(CURRENT_DIR)	\
-        GOBO_XML_EXPAT="true"           \
         EXPAT=/usr                      \
 	$(SE) ./se.ace
 

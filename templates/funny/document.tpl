@@ -13,6 +13,7 @@ width="100%">
 <tr><td>Language</td><td>%%LANGUAGE%%</td></tr>
 <tr><td>Type</td><td>%%TYPE%%</td></tr>
 <tr><td>Url</td><td>%%URL%%</td></tr>
+<tr><td>Pages</td><td>%%NBPAGES%%</td></tr>
 <tr><td>Summary</td><td>%%SUMMARY%%</td></tr>
 <tr><td>Parts</td><td>%%PARTS%%</td></tr>
 </table>

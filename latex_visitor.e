@@ -61,8 +61,9 @@ feature {LATEX_VISITOR}
 	       tdocument.replace(TYPE, correct(doc.type))
 	       tdocument.replace(URL, correct(doc.url))
 	       tdocument.replace(SUMMARY, correct(doc.summary))
+	       tdocument.replace(NBPAGES, correct(doc.nbpages))
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 	 end
@@ -110,14 +111,14 @@ feature {LATEX_VISITOR}
 	 end
       end
    
-   visit_cmts (comments : LINKED_LIST[COMMENT]) : STRING is
+   visit_cmts (p_comments : LINKED_LIST[COMMENT]) : STRING is
       local
 	 i : INTEGER
       do
 	 Result := ""
-	 if (comments /= void) then
-	    from i := 1 until i > comments.count loop
-	       Result.append(visit_cmt(comments.item(i)))
+	 if (p_comments /= void) then
+	    from i := 1 until i > p_comments.count loop
+	       Result.append(visit_cmt(p_comments.item(i)))
 	       i := i + 1
 	    end
 	 end
@@ -136,29 +137,6 @@ feature {LATEX_VISITOR}
       end
    
 feature {LATEX_VISITOR}
-   -- Public
-   PUBLIC		: STRING is "public"
-   PUBLIQUE		: STRING is "publique"
-   
-	 -- Strings to Replace 
-   AUTHOR		: STRING is "%%%%AUTHOR%%"
-   CONTENT		: STRING is "%%%%CONTENT%%"
-   TITREL		: STRING is "%%%%TITLEL%%"
-   TITRE		: STRING is "%%%%TITLE%%"
-   AUTHORS		: STRING is "%%%%AUTHORS%%"
-   DATE			: STRING is "%%%%DATE%%"
-   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
-   TYPE			: STRING is "%%%%TYPE%%"
-   URL			: STRING is "%%%%URL%%"
-   SUMMARY		: STRING is "%%%%SUMMARY%%"
-   PARTS		: STRING is "%%%%PARTS%%"
-   CCOMMENTS		: STRING is "%%%%COMMENTS%%"
-   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
-   LINKS		: STRING is "%%%%LINKS%%"
-   LINK			: STRING is "%%%%LINK%%"
-   NUMBER		: STRING is "%%%%NUMBER%%"
-   VERSION		: STRING is "%%%%VERSION%%"
-	 
    -- Vars
    enable_private	: BOOLEAN
    path			: STRING

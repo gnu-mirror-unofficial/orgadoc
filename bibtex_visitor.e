@@ -1,7 +1,7 @@
 indexing
    description: "Convert AST to BibTex"
    author: "Julien LEMOINE <speedblue@debian.org>"
-   --| Copyright (C) 2002 Julien LEMOINE
+   --| Copyright (C) 2002-2003 Julien LEMOINE
    --| This program is free software; you can redistribute it and/or modify
    --| it under the terms of the GNU General Public License as published by
    --| the Free Software Foundation; either version 2 of the License, or
@@ -68,6 +68,7 @@ feature {BIBTEX_VISITOR}
 	       tdocument.replace(TYPE, doc.type)
 	       tdocument.replace(URL, doc.url)
 	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(NBPAGES, doc.nbpages)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
 	       str.append(tdocument.stop)
 	    end
@@ -99,36 +100,12 @@ feature {BIBTEX_VISITOR}
       end
    
 feature {BIBTEX_VISITOR}
-   -- Public
-   PUBLIC		: STRING is "public"
-   PUBLIQUE		: STRING is "publique"
-   
    -- Vars
    enable_private	: BOOLEAN
    pos			: INTEGER
    path			: STRING
    str			: STRING
    tdocument		: TEMPLATE
-   
-   -- Strings to Replace 
-   AUTHOR		: STRING is "%%%%AUTHOR%%"
-   CONTENT		: STRING is "%%%%CONTENT%%"
-   TITREL		: STRING is "%%%%TITLEL%%"
-   TITRE		: STRING is "%%%%TITLE%%"
-   AUTHORS		: STRING is "%%%%AUTHORS%%"
-   DATE			: STRING is "%%%%DATE%%"
-   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
-   TYPE			: STRING is "%%%%TYPE%%"
-   URL			: STRING is "%%%%URL%%"
-   SUMMARY		: STRING is "%%%%SUMMARY%%"
-   PARTS		: STRING is "%%%%PARTS%%"
-   COMMENTS		: STRING is "%%%%COMMENTS%%"
-   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
-   LINKS		: STRING is "%%%%LINKS%%"
-   LINK			: STRING is "%%%%LINK%%"
-   NUMBER		: STRING is "%%%%NUMBER%%"
-   VERSION		: STRING is "%%%%VERSION%%"
-   ID			: STRING is "%%%%ID%%"
    
    -- Template files
    CTDOCUMENT		: STRING is "/bibtex/document.tpl"

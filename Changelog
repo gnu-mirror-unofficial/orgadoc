@@ -1,3 +1,9 @@
+2003-02-25  Julien LEMOINE <speedblue@debian.org>
+	Orgadoc 0.6.6 was released
+	
+	* Added <nbpages> options
+	* Some code clean up
+
 2003-02-14  Julien LEMOINE <speedblue@debian.org>
 	Orgadoc 0.6.5 was released
 	

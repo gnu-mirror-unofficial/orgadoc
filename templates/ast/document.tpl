@@ -10,5 +10,6 @@ File     : %%TITLEL%%
 Url      : %%URL%%
 Summary  : %%SUMMARY%%
 Parts    : %%PARTS%%
+Nb Pages : %%NBPAGES%%
 
 %%COMMENTS%%

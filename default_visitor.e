@@ -52,6 +52,7 @@ feature {DEFAULT_VISITOR}
 	 visit_strings(doc.parts)
 	 visit_comments(doc.comments)
 	 visit_string(doc.summary)
+	 visit_string(doc.nbpages)
 	 visit_string(doc.date)
 	 visit_string(doc.type)
 	 visit_string(doc.file)
@@ -81,13 +82,13 @@ feature {DEFAULT_VISITOR}
 	 end
       end
    
-   visit_comments (comments : LINKED_LIST[COMMENT]) is
+   visit_comments (p_comments : LINKED_LIST[COMMENT]) is
       local
 	 i : INTEGER
       do
-	 if (comments /= void) then
-	    from i := 1 until i > comments.count loop
-	       visit_comment(comments.item(i))
+	 if (p_comments /= void) then
+	    from i := 1 until i > p_comments.count loop
+	       visit_comment(p_comments.item(i))
 	       i := i + 1
 	    end
 	 end
@@ -95,5 +96,30 @@ feature {DEFAULT_VISITOR}
    
 feature {DEFAULT_VISITOR}
    ast : AST
+   
+   -- Public
+   PUBLIC		: STRING is "public"
+   PUBLIQUE		: STRING is "publique"
+
+   -- Strings to Replace 
+   AUTHOR		: STRING is "%%%%AUTHOR%%"
+   CONTENT		: STRING is "%%%%CONTENT%%"
+   TITREL		: STRING is "%%%%TITLEL%%"
+   TITRE		: STRING is "%%%%TITLE%%"
+   AUTHORS		: STRING is "%%%%AUTHORS%%"
+   DATE			: STRING is "%%%%DATE%%"
+   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
+   TYPE			: STRING is "%%%%TYPE%%"
+   URL			: STRING is "%%%%URL%%"
+   SUMMARY		: STRING is "%%%%SUMMARY%%"
+   NBPAGES		: STRING is "%%%%NBPAGES%%"
+   PARTS		: STRING is "%%%%PARTS%%"
+   COMMENTS		: STRING is "%%%%COMMENTS%%"
+   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
+   LINKS		: STRING is "%%%%LINKS%%"
+   LINK			: STRING is "%%%%LINK%%"
+   NUMBER		: STRING is "%%%%NUMBER%%"
+   VERSION		: STRING is "%%%%VERSION%%"
+   ID			: STRING is "%%%%ID%%"
 end
 

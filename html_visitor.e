@@ -35,13 +35,13 @@ feature {ANY}
 	 template_path : STRING; params : PARAMS) is
       local
 	 i	: INTEGER
-	 link	: TEMPLATE
+	 tlink	: TEMPLATE
       do
 	 !!cerr.make
 	 make_default(a)
 	 allow_private := params.enable_private
 	 !!str.make_empty
-	 !!link.make(template_path + CTLINK)
+	 !!tlink.make(template_path + CTLINK)
 	 !!tglobal.make(template_path + CTGLOBAL)
 	 !!tdocument.make(template_path + CTDOCUMENT)
 	 !!tcomment.make(template_path + CTCOMMENT)
@@ -50,13 +50,15 @@ feature {ANY}
 	 if (is_writable) then
 	    path := paths.item(1)
 	    from i := 2 until i > paths.count loop
-	       if link.start and (i - 1) <= nbs.count and nbs.item(i - 1) > 0 then
-		  link.replace(CLINK,concat(output_path,
-					   paths.item(i), 
-					   ppath) + file);
-		  link.replace(CONTENT, paths.item(i));
-		  link.replace(NUMBER, nbs.item(i - 1).to_string);
-		  str.append(link.stop)
+	       if tlink.start and (i - 1) <= nbs.count and 
+		  nbs.item(i - 1) > 0 then
+		  
+		  tlink.replace(LINK, concat(output_path,
+					     paths.item(i), 
+					     ppath) + file);
+		  tlink.replace(CONTENT, paths.item(i));
+		  tlink.replace(NUMBER, nbs.item(i - 1).to_string);
+		  str.append(tlink.stop)
 	       end
 	       i := i + 1
 	    end
@@ -124,8 +126,9 @@ feature {HTML_VISITOR}
 	       tdocument.replace(TYPE, doc.type)
 	       tdocument.replace(URL, doc.url)
 	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(NBPAGES, doc.nbpages)
 	       tdocument.replace(PARTS, visit_strs(doc.parts))
-	       tdocument.replace(CCOMMENTS, visit_cmts(doc.comments))
+	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
 	       str.append(tdocument.stop)
 	    end
 	 end
@@ -154,14 +157,14 @@ feature {HTML_VISITOR}
 	 end
       end
    
-   visit_cmts (comments : LINKED_LIST[COMMENT]) : STRING is
+   visit_cmts (p_comments : LINKED_LIST[COMMENT]) : STRING is
       local
 	 i : INTEGER
       do
 	 Result := ""
-	 if (comments /= void) then
-	    from i := 1 until i > comments.count loop
-	       Result.append(visit_cmt(comments.item(i)))
+	 if (p_comments /= void) then
+	    from i := 1 until i > p_comments.count loop
+	       Result.append(visit_cmt(p_comments.item(i)))
 	       i := i + 1
 	    end
 	 end
@@ -193,29 +196,6 @@ feature {HTML_VISITOR} -- Constants
    is_writable		: BOOLEAN
    value		: INTEGER
    cerr			: STD_ERROR
-   
-   -- Public
-   PUBLIC		: STRING is "public"
-   PUBLIQUE		: STRING is "publique"
-   
-   -- Strings to Replace 
-   AUTHOR		: STRING is "%%%%AUTHOR%%"
-   CONTENT		: STRING is "%%%%CONTENT%%"
-   TITREL		: STRING is "%%%%TITLEL%%"
-   TITRE		: STRING is "%%%%TITLE%%"
-   AUTHORS		: STRING is "%%%%AUTHORS%%"
-   DATE			: STRING is "%%%%DATE%%"
-   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
-   TYPE			: STRING is "%%%%TYPE%%"
-   URL			: STRING is "%%%%URL%%"
-   SUMMARY		: STRING is "%%%%SUMMARY%%"
-   PARTS		: STRING is "%%%%PARTS%%"
-   CCOMMENTS		: STRING is "%%%%COMMENTS%%"
-   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
-   LINKS		: STRING is "%%%%LINKS%%"
-   CLINK		: STRING is "%%%%LINK%%"
-   NUMBER		: STRING is "%%%%NUMBER%%"
-   VERSION		: STRING is "%%%%VERSION%%"
    
    -- Template files
    CTLINK		: STRING is "/html/link.tpl"
