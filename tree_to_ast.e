@@ -22,6 +22,7 @@ inherit KL_IMPORTED_STRING_ROUTINES; XM_NODE_PROCESSOR
       redefine
 	 process_document, process_element, 
 	 process_character_data
+      end
    
 creation
    make
