@@ -1,0 +1,53 @@
+#!/bin/sh
+##
+## add_docs.sh
+## Login : <speedblue@morpheus>
+## Started on  Sat Jan  3 15:28:44 2004 Julien Lemoine
+## $Id: add_docs,v 1.1 2004/01/03 21:04:37 speedblue Exp $
+## 
+## Copyright (C) 2004 Julien Lemoine
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+## 
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+## 
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+##
+
+if [ "$1" == "" ]; then
+  echo "Error: You must give a CVS directory"
+  echo
+  echo "$0 CVS_directory doc_directory"
+  echo 
+  echo "doc_directory must contain the modified readme.xml file, or new one"
+  exit 1
+fi
+if [ "$2" == "" ]; then
+  echo "Error: You must give a doc directory"
+  echo
+  echo "$0 CVS_directory doc_directory"
+  echo 
+  echo "doc_directory must contain the modified readme.xml file, or new one"
+  exit 1
+fi
+
+for file in `find $2 -name readme.xml`; do
+  other=`echo $file | perl -pe "s:$2:$1:"`
+  if ! diff $file $other > /dev/null 2>&1; then
+    # Files are not the same, commit is necessary !
+    # create a CVS directory in the correct location
+    dir=`echo $file | sed -e 's/\/[^/]*$//' -e 's/^[^/]*$/./'`
+    mkdir $dir/CVS
+    echo "happycoders.org:/home/cvs" > $dir/CVS/Root
+    echo orgadoc/$dir > $dir/CVS/Repository
+    pwd=`pwd`
+    cd $dir; cvs update -d; cvs checkout; cd $pwd
+  fi
+done

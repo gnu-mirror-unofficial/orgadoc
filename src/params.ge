@@ -1,7 +1,7 @@
 indexing
    description: "Parse command options"
-   author: "Julien LEMOINE <speedblue@debian.org>"
-	--| Copyright (C) 2002-2003 Julien LEMOINE
+   author: "Julien Lemoine <speedblue@happycoders.org>"
+	--| Copyright (C) 2002-2004 Julien Lemoine
 	--| This program is free software; you can redistribute it and/or modify
 	--| it under the terms of the GNU General Public License as published by
 	--| the Free Software Foundation; either version 2 of the License, or
@@ -237,9 +237,9 @@ feature {PARAMS}
    display_version is
       do
 			std_output.put_string(NAME + " version " + VERSION + "%N%N")
-			std_output.put_string("Copyright 2002-2003")
-			std_output.put_string(" Julien LEMOINE <julien@happycoders.org>%N")
-			std_output.put_string("%NReport bugs to <julien@happycoders.org>.%N")
+			std_output.put_string("Copyright 2002-2004")
+			std_output.put_string(" Julien Lemoine <speedblue@happycoders.org>%N")
+			std_output.put_string("%NReport bugs to <speedblue@happycoders.org>.%N")
 			die_with_code(0)
       end
    

@@ -124,7 +124,7 @@ if test "x$GOBO_EIFFEL" = "xse"; then
     if test ! "x"$SmartEiffel = "x"; then
       EIFFEL_COMPILER_HEADER_DIR=`echo $SmartEiffel | sed -e 's/\(.*\)SmartEiffel\(.*\)/\1SmartEiffel/'`
     else
-      if test ! "x"$SmallEiffel = "x"; then
+      if ! test "x"$SmallEiffel = "x"; then
         EIFFEL_COMPILER_HEADER_DIR=`echo $SmallEiffel | sed -e 's/\(.*\)SmallEiffel\(.*\)/\1SmallEiffel/'`
       else
         AC_MSG_ERROR(The SmartEiffel environment variable is not set)

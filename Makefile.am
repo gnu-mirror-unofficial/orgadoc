@@ -20,9 +20,9 @@ bibtextpl_DATA	= ./templates/bibtex/document.tpl
 exampledir	= $(datadir)/doc/orgadoc/examples
 example_DATA  	= docs/readme.xml
 
-man_MANS  	= orgadoc.1
+man_MANS  	= orgadoc.1 orgadoc_cgi.1
 
-SUBDIRS 	= src config
+SUBDIRS 	= src config utils
 
 EXTRA_DIST 	= 						\
 AUTHORS COPYING ChangeLog INSTALL README TODO NEWS		\
@@ -36,11 +36,18 @@ AUTHORS COPYING ChangeLog INSTALL README TODO NEWS		\
 ./templates/cgi/document.tpl ./templates/cgi/link.tpl		\
 ./templates/cgi/global.tpl
 
-CLEANFILES      = *~ orgadoc.1 config.e
+CLEANFILES      = *~ orgadoc.1 orgadoc_cgi.1 config.e
 
 orgadoc.1: docs/orgadoc.sgml
 	@if [ -f /usr/bin/docbook2man ]; then                          	\
                 /usr/bin/docbook2man docs/orgadoc.sgml;                	\
         else                                                           	\
                 /usr/bin/docbook-to-man docs/orgadoc.sgml > orgadoc.1; 	\
+        fi
+
+orgadoc_cgi.1: docs/orgadoc_cgi.sgml
+	@if [ -f /usr/bin/docbook2man ]; then                          	\
+                /usr/bin/docbook2man docs/orgadoc_cgi.sgml;             \
+        else                                                           	\
+                /usr/bin/docbook-to-man docs/orgadoc_cgi.sgml > orgadoc_cgi.1;\
         fi

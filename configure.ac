@@ -85,7 +85,7 @@ AC_SUBST(DEBUG)
 # update version informations in config.e
 echo "   VERSION : STRING is \"$VERSION\"" > config.e
 
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile utils/Makefile])
 
 # Intantiate the output files.
 AC_OUTPUT

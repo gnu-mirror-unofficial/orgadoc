@@ -1,9 +1,9 @@
 <!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
   <!ENTITY dhfirstname "<firstname>Julien LEMOINE</firstname>">
   <!ENTITY dhsurname   "<surname>SpeedBlue</surname>">
-  <!ENTITY dhdate      "<date>June 11, 2002</date>">
+  <!ENTITY dhdate      "<date>January 3, 2004</date>">
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
-  <!ENTITY dhemail     "<email>speedblue@debian.org</email>">
+  <!ENTITY dhemail     "<email>speedblue@happycoders.org</email>">
   <!ENTITY dhusername  "Julien LEMOINE">
   <!ENTITY dhucpackage "<refentrytitle>orgadoc</refentrytitle>">
   <!ENTITY dhpackage   "orgadoc">
@@ -21,7 +21,7 @@
       &dhsurname;
     </author>
     <copyright>
-      <year>2001</year>
+      <year>2004</year>
       <holder>&dhusername;</holder>
     </copyright>
     &dhdate;
@@ -219,7 +219,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>cocoon.</para>
+    <para>orgadoc_cgi, init_readmes, add_docs</para>
 
   </refsect1>
   <refsect1>

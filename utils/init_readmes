@@ -1,0 +1,128 @@
+#!/bin/sh
+##
+## add_docs.sh
+## Login : <speedblue@morpheus>
+## Started on  Fri Dec 12 15:18:49 2003 Julien Lemoine
+## $Id: init_readmes,v 1.1 2004/01/03 21:04:37 speedblue Exp $
+## 
+## Copyright (C) 2003 Julien Lemoine
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+## 
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+## 
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+##
+
+if [ "$1" = "" ]; then
+  echo "Usage : $0 directory"
+  exit 1
+fi
+
+PATTERNS='-i -e .pdf$ -e .doc$ -e .ps$ -e .ps.gz$
+          -e .html$ -e .htm$ -e .ps.Z$'
+SUBDIRS=`find $1 -maxdepth 1 -type d`
+FILES=`find $1 -maxdepth 1 -type f`
+
+echo "Entering directory [$1]"
+if test -f $1/readme.xml; then
+  cat $1/readme.xml | (
+    read lineb
+    while read line; do
+      echo $lineb >> /tmp/1
+      lineb=$line
+    done
+  )
+  cp /tmp/1 $1/readme.xml
+  rm -f /tmp/1
+fi
+for file in $FILES; do
+  if echo $file | grep $PATTERNS > /dev/null; then
+    if ! test -f $1/readme.xml; then
+      echo "<readme>" >> $1/readme.xml;
+    fi
+    echo "<document>" >> $1/readme.xml;
+    case $file in
+      *.pdf)
+	    TITLE=`pdfinfo $file 2> /dev/null | grep Title: | sed 's/Title:[ \t]\+//'`
+	    AUTHOR=`pdfinfo $file 2> /dev/null | grep Author: | sed 's/Author:[ \t]\+//'`
+	    PAGES=`pdfinfo $file 2> /dev/null | grep Pages: | sed 's/Pages:[ \t]\+//'`
+	    DATE=`pdfinfo $file 2> /dev/null | grep CreationDate: | sed 's/CreationDate:[ \t]\+//'`
+	    echo "<title>$TITLE</title>" >> $1/readme.xml
+	    echo "<file>$file</file>" >> $1/readme.xml
+	    echo "<type>public</public>" >> $1/readme.xml
+	    echo "<author>$AUTHOR</author>" >> $1/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $1/readme.xml
+	    echo "<language>FIXME: LANGUAGE</language>" >> $1/readme.xml
+	    echo "<summary>FIXME: SUMMARY</summary>" >> $1/readme.xml
+	    if pdfinfo $file 2> /dev/null | grep Tagged | grep yes > /dev/null; then
+	      SECTIONS=`strings $file | grep '/Title ' | sed 's/\/Title[ \t]\+//'`
+	      IFS='
+'
+	      for section in $SECTIONS; do
+                echo "<part>$section</part>" >> $1/readme.xml;
+              done
+	      IFS='	 
+'
+	    else
+		echo "<part>FIXME: PART</part>" >> $1/readme.xml
+	    fi
+	    ;;
+	*.ps.gz | *.ps.Z)
+	    PAGES=`zcat $file | grep '^%%Pages:' | head -1 | sed 's/%%Pages:[ \t]\+//'`
+	    echo "<title>FIXME: TITLE</title>" >> $1/readme.xml
+	    echo "<file>$file</file>" >> $1/readme.xml
+	    echo "<type>public</public>" >> $1/readme.xml
+	    echo "<author>FIXME: AUTHOR</author>" >> $1/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $1/readme.xml
+	    echo "<language>FIXME: LANGUAGE</language>" >> $1/readme.xml
+	    echo "<summary>FIXME: SUMMARY</summary>" >> $1/readme.xml
+	    echo "<part>FIXME: PART</part>" >> $1/readme.xml
+	    ;;
+	*.ps)
+	    PAGES=`cat $file | grep '^%%Pages:' | head -1 | sed 's/%%Pages:[ \t]\+//'`
+	    echo "<title>FIXME: TITLE</title>" >> $1/readme.xml
+	    echo "<file>$file</file>" >> $1/readme.xml
+	    echo "<type>public</public>" >> $1/readme.xml
+	    echo "<author>FIXME: AUTHOR</author>" >> $1/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $1/readme.xml
+	    echo "<language>FIXME: LANGUAGE</language>" >> $1/readme.xml
+	    echo "<summary>FIXME: SUMMARY</summary>" >> $1/readme.xml
+	    echo "<part>FIXME: PART</part>" >> $1/readme.xml
+	    ;;
+	*)
+	    echo "<title>FIXME: TITLE</title>" >> $1/readme.xml
+	    echo "<file>$file</file>" >> $1/readme.xml
+	    echo "<type>public</public>" >> $1/readme.xml
+	    echo "<author>FIXME: AUTHOR</author>" >> $1/readme.xml
+	    echo "<language>FIXME: LANGUAGE</language>" >> $1/readme.xml
+	    echo "<summary>FIXME: SUMMARY</summary>" >> $1/readme.xml
+	    echo "<part>FIXME: PART</part>" >> $1/readme.xml
+	    ;;
+    esac
+    echo "</document>" >> $1/readme.xml;
+  fi
+done
+if test -f $1/readme.xml; then
+  echo "</readme>" >> $1/readme.xml;
+fi
+
+echo "Leaving directory [$1]"
+
+for dir in $SUBDIRS; do
+  if [ "$dir" != "." ]; then
+    if [ "$dir" != "$1" ]; then
+      $0 $dir
+    fi
+  fi
+done
+
+echo "--- END ---"
+echo "readme.xml files are now created, please edit the FIXME lines"

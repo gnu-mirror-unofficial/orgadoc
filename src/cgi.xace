@@ -2,9 +2,9 @@
 <system name="orgadoc_cgi">
         <description>
                 system: "OrgaDoc"
-                copyright: "Copyright (c) 2002-2003, Julien LEMOINE"
+                copyright: "Copyright (c) 2002-2004, Julien Lemoine"
                 license: "GPL, GNU General Public Licence"
-                date: "$Date: 2003/11/03 12:27:37 $"
+                date: "$Date: 2004/01/03 21:04:37 $"
         </description>
 	<root class="CGI" creation="make"/>
 

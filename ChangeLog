@@ -1,3 +1,15 @@
+2004-01-03   Julien LEMOINE <speedblue@debian.org>
+	* Creation of documentation for orgadoc_cgi, init_readmes
+	and add_docs
+	
+2003-12-29   Julien LEMOINE <speedblue@debian.org>
+	* Creation of add_docs : a small shell script to add documents
+	to a server using cvs to store readme.xml and scp to store documents.
+
+2003-12-04   Julien LEMOINE <speedblue@debian.org>
+	* Creation of init_readmes : a small shell script to get
+	information from document and add it into readme.xml
+	
 2003-11-03   Julien LEMOINE <speedblue@debian.org>
 	* Fixed a lot of warnings
 	* upgraded to autoconf/automake
