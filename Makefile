@@ -5,7 +5,7 @@
 ## Login   <speedblue@debian.org>
 ##
 ## Started on  Sun Apr 14 05:40:53 2002 Julien LEMOINE
-## Last update Tue Jun 18 00:07:02 2002 Julien LEMOINE
+## Last update Thu Jul 25 03:19:09 2002 Julien LEMOINE
 ## 
 
 SmallEiffel	= /usr/lib/smalleiffel
@@ -17,8 +17,8 @@ XACE		= $(shell which xace || echo "/usr/bin/xace")
 CURRENT_DIR	= $(shell pwd)
 GELEX		= $(shell which gelex || echo "/usr/bin/gelex")
 GEYACC		= $(shell which geyacc || echo "/usr/bin/geyacc")
-ETC		= /etc
-PREFIX		= /usr
+ETC		= $(DESTDIR)/etc
+PREFIX		= $(DESTDIR)/usr
 
 ################ GENERAL RULES ################
 all: ace no_debug binary
@@ -98,6 +98,8 @@ install:
 		cp orgadoc.conf $(ETC)/orgadoc;				\
 		mkdir $(ETC)/orgadoc/templates;				\
 		mkdir $(ETC)/orgadoc/templates/html;			\
-		cp templates/*.tpl $(ETC)/orgadoc/templates/html;	\
+		mkdir $(ETC)/orgadoc/templates/latex;			\
+		cp templates/html/*.tpl $(ETC)/orgadoc/templates/html;	\
+		cp templates/latex/*.tpl $(ETC)/orgadoc/templates/latex;\
 		cp orgadoc $(PREFIX)/bin/;				\
 	fi

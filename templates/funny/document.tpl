@@ -5,7 +5,7 @@
 width="100%">
 <tr><td valign=top><table border=0 cellpadding=0 cellspacing=0>
 <tr><td> </td>
-<td><B><a href="%%TITREL%%">%%TITRE%%</a></B>
+<td><B><a href="%%TITLEL%%">%%TITLE%%</a></B>
  - <font size=-1><b>(%%DATE%%)</b></font></td>
 </tr> </table> </td> </tr><tr bgcolor=#ffffff> <td valign=top> <font size=-1>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">

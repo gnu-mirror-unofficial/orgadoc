@@ -1,24 +1,18 @@
 Document : \\
-\begin{center}
-\begin{tabular}[c]{|c|c|}
-\hline
-Title & %%TITRE%%
-\hline
-Authors & %%AUTHORS%%
-\hline
-Date & %%DATE%%
-\hline
-Language & %%LANGUAGE%%
-\hline
-Type & %%TYPE%%
-\hlineza
-Url & %%URL%%
-\hline
-Summary & %%SUMMARY%%
-\hline
-Parts & %%PARTS%%
-\hline
-\end{tabular}
-\end{center}\\
+\section{ %%TITLE%% }
+\subsection{Authors}
+%%AUTHORS%%
+\subsection{Date}
+%%DATE%%
+\subsection{Language}
+%%LANGUAGE%%
+\subsection{Type}
+%%TYPE%%
+\subsection{Url}
+%%URL%%
+\subsection{Summary}
+%%SUMMARY%%
+\subsection{Parts}
+%%PARTS%%
 
 %%COMMENTS%%

@@ -2,9 +2,9 @@ Comment : \\
 \begin{center}
 \begin{tabular}[c]{|c|c|}
 \hline
-Author & %%AUTHOR%%
+Author & %%AUTHOR%% \\
 \hline
-Content & %%CONTENT%%
+Content & %%CONTENT%% \\
 \hline
 \end{tabular}
-\end{center}\\
+\end{center}

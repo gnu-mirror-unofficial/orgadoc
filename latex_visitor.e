@@ -35,15 +35,13 @@ feature {ANY}
 	 enable_private := private
 	 path := ppath
 	 !!str.make_empty
-	 !!tglobal.make(template_path + TGLOBAL)
 	 !!tdocument.make(template_path + TDOCUMENT)
 	 !!tcomment.make(template_path + TCOMMENT)
       end
    
    get_result : STRING is
       do
-	 tglobal.replace(DOCUMENTS, str)
-	 Result := tglobal.stop
+	 Result := str
       end
    
 feature {LATEX_VISITOR}
@@ -54,8 +52,8 @@ feature {LATEX_VISITOR}
 	 if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
 	    if (tdocument.start) then
-	       tdocument.replace(TITREL, path + doc.file)
 	       tdocument.replace(TITRE, doc.title)
+	       tdocument.replace(TITREL, path + doc.file)
 	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
 	       tdocument.replace(DATE, doc.date)
 	       tdocument.replace(LANGUAGE, doc.language)
@@ -87,7 +85,7 @@ feature {LATEX_VISITOR}
 	    Result.append(visit_str(strs.item(i)))
 	    i := i + 1
 	    if (i <= strs.count) then
-	       Result.append ("<br>")
+	       Result.append (" \\")
 	    end
 	 end
       end
@@ -125,8 +123,8 @@ feature {LATEX_VISITOR}
 	 -- Strings to Replace 
    AUTHOR		: STRING is "%%%%AUTHOR%%"
    CONTENT		: STRING is "%%%%CONTENT%%"
-   TITREL		: STRING is "%%%%TITREL%%"
-   TITRE		: STRING is "%%%%TITRE%%"
+   TITREL		: STRING is "%%%%TITLEL%%"
+   TITRE		: STRING is "%%%%TITLE%%"
    AUTHORS		: STRING is "%%%%AUTHORS%%"
    DATE			: STRING is "%%%%DATE%%"
    LANGUAGE		: STRING is "%%%%LANGUAGE%%"
@@ -139,19 +137,19 @@ feature {LATEX_VISITOR}
    LINKS		: STRING is "%%%%LINKS%%"
    LINK			: STRING is "%%%%LINK%%"
    NUMBER		: STRING is "%%%%NUMBER%%"
+   VERSION		: STRING is "%%%%VERSION%%"
 	 
    -- Vars
    enable_private	: BOOLEAN
    path			: STRING
    str			: STRING
    tdocument		: TEMPLATE
-   tglobal		: TEMPLATE
    tcomment		: TEMPLATE
    
+feature {ANY}
    -- Templates Files
-   TGLOBAL		: STRING is "/html/global.tpl"
-   TDOCUMENT		: STRING is "/html/document.tpl"
-   TCOMMENT		: STRING is "/html/comment.tpl"
+   TGLOBAL		: STRING is "/latex/global.tpl"
+   TDOCUMENT		: STRING is "/latex/document.tpl"
+   TCOMMENT		: STRING is "/latex/comment.tpl"
 
 end -- latex_vivitor
-

@@ -28,18 +28,18 @@ creation
    make
    
 feature {ANY}
-   make (a : AST; private : BOOLEAN; 
+   make (a : AST;
 	 output_path, file, ppath : STRING;
 	 paths : LINKED_LIST[STRING];
 	 nbs : LINKED_LIST[INTEGER];
-	 template_path : STRING) is
+	 template_path : STRING; params : PARAMS) is
       local
 	 i	: INTEGER
 	 link	: TEMPLATE
       do
 	 !!cerr.make
 	 make_default(a)
-	 allow_private := private
+	 allow_private := params.enable_private
 	 !!str.make_empty
 	 !!link.make(template_path + TLINK)
 	 !!tglobal.make(template_path + TGLOBAL)
@@ -61,6 +61,7 @@ feature {ANY}
 	       i := i + 1
 	    end
 	    tglobal.replace(LINKS, str)
+	    tglobal.replace(VERSION, params.get_version)
 	 else
 	    cerr.put_string ("Error : Could not load " +
 			     template_path + TGLOBAL + "%N")
@@ -214,6 +215,7 @@ feature {HTML_VISITOR} -- Constants
    LINKS		: STRING is "%%%%LINKS%%"
    LINK			: STRING is "%%%%LINK%%"
    NUMBER		: STRING is "%%%%NUMBER%%"
+   VERSION		: STRING is "%%%%VERSION%%"
    
    -- Template files
    TLINK		: STRING is "/html/link.tpl"

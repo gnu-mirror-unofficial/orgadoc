@@ -24,15 +24,21 @@ feature {ANY}
    -- Constructor
    make is
       local
-	 paths	: LINKED_LIST[STRING]
-	 i	: INTEGER
-	 b	: BOOLEAN
-      	 ofile	: STD_FILE_WRITE
+	 paths		: LINKED_LIST[STRING]
+	 i		: INTEGER
+	 b		: BOOLEAN
+      	 ofile		: STD_FILE_WRITE
+	 latex		: TEMPLATE
+	 can_write	: BOOLEAN
       do
 	 bibtex_index := 1
 	 !!tex_str.make_empty
 	 nb_docs := 0
 	 !!params.make
+	 !!latex.make(params.template_path + LATEXTPL)
+	 if params.latex_mode then
+	    can_write := latex.start
+	 end
 	 if (params.recursive) then -- explore all files in sub directories
 	    b := recursive_convert(params.input_path)
 	 else -- convert only one file
@@ -51,8 +57,15 @@ feature {ANY}
 	    !!ofile.connect_to(correct(params.output_path) + 
 			       params.output_file)
 	    if (ofile /= void and ofile.is_connected) then
-	       ofile.put_string(tex_str)
-	       ofile.disconnect
+	       if can_write then
+		  latex.replace(VERSION, params.get_version)
+		  latex.replace(DOCUMENTS, tex_str)
+		  ofile.put_string(latex.stop)
+		  ofile.disconnect
+	       else
+		  print("Error, cannot localize template : " +
+			params.template_path + LATEXTPL + "%N")
+	       end
 	    end
 	 end      
       end
@@ -102,11 +115,10 @@ feature {ORGADOC}
 	    new_path := "./" 
 	 end
 	 create_dirs(correct(params.output_path) + new_path)
-	 !!html.make(ast, params.enable_private, 
-		     correct(params.output_path), 
+	 !!html.make(ast, correct(params.output_path), 
 		     params.output_file, params.input_path,
 		     sub_paths, sub_nb_docs,
-		     correct(params.template_path))
+		     correct(params.template_path), params)
 	 html.visit
 	 nb_docs := html.get_nb_docs
 	 !!ofile.connect_to(correct(params.output_path) + 
@@ -267,4 +279,10 @@ feature {ORGADOC}
    nb_docs	: INTEGER
    bibtex_index : INTEGER
    tex_str	: STRING
+
+   -- csts
+   LATEXTPL	: STRING is "/latex/global.tpl"
+   DOCUMENTS	: STRING is "%%%%DOCUMENTS%%"	 
+   VERSION	: STRING is "%%%%VERSION%%"	 
+
 end

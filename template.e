@@ -62,11 +62,17 @@ feature {ANY}
 	 else
 	    new_dst := dst;
 	 end
-	 index := buff.first_substring_index(src)
-	 if (index > 0) then
-	    buff.replace_substring(new_dst, 
-				   index,
-				   index + src.count)
+	 if (buff /= void) then
+	    index := buff.first_substring_index(src)
+	    if (index > 0) then
+	       buff.replace_substring(new_dst, 
+				      index,
+				      index + src.count)
+	    end
+	    
+	 else
+	    print("could not open template%N");
+	    !!buff.make_from_string("")
 	 end
       end
    

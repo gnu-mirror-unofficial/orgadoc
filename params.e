@@ -72,6 +72,11 @@ feature {ANY}
 	 end
       end
    
+   get_version : STRING is
+      do
+	 Result := VERSION
+      end
+   
 feature {PARAMS}
    reinit is
       do
