@@ -58,11 +58,11 @@
   <refsect1>
     <title>DESCRIPTION</title>
 
-    <para>This manual page documents briefly the
+    <para>This manual page briefly describes the
       <command>&dhpackage;</command> commands.</para>
 
     <para><command>&dhpackage;</command> generates
-    Documents (Html, Tex...) from XML files  describing the Documentations
+    Documents (Html, Tex...) from XML files describing the Documentations
     </para>
 
   </refsect1>
@@ -95,7 +95,7 @@
           <option>--conf-file</option>
         </term>
         <listitem>
-          <para>Specifies the name of the configuration file.The default is
+          <para>Specifies the name of the configuration file. The default is
              /etc/orgadoc/orgadoc.conf.</para>
         </listitem>
       </varlistentry>
@@ -136,7 +136,7 @@
           <option>--search</option>
         </term>
         <listitem>
-          <para>Display infos about files which matches the given pattern</para>
+          <para>Display info about files that match the given pattern</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -144,7 +144,7 @@
           <option>--case-insensitive</option>
         </term>
         <listitem>
-          <para>Ignore case distinctions in search.</para>
+          <para>Ignore case in search.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -152,7 +152,7 @@
           <option>--with-private</option>
         </term>
         <listitem>
-          <para>Activate the generation of HTML document for private document.</para>
+          <para>Activate the generation of HTML document for private documents.</para>
         </listitem>
       </varlistentry>
       <varlistentry>
@@ -176,7 +176,7 @@
           <option>--display-ast</option>
         </term>
         <listitem>
-          <para>display of Abstract Syntax Tree for each XML file.</para>
+          <para>display the Abstract Syntax Tree for each XML file.</para>
         </listitem>
       </varlistentry>
     </variablelist>
