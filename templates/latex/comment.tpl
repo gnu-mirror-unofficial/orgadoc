@@ -1,5 +1,10 @@
-<br>Comment : <br><table border="1" cellspacing="0" cellpadding="0">
-<tr><td>Author</td><td>%%AUTHOR%%</td></tr>
-<tr><td>Author</td><td>%%CONTENT%%</td></tr>
-</table>
-
+Comment : \\
+\begin{center}
+\begin{tabular}[c]{|c|c|}
+\hline
+Author & %%AUTHOR%%
+\hline
+Content & %%CONTENT%%
+\hline
+\end{tabular}
+\end{center}\\
