@@ -216,9 +216,9 @@ feature {HTML_VISITOR} -- Constants
    NUMBER		: STRING is "%%%%NUMBER%%"
    
    -- Template files
-   TLINK		: STRING is "link.tpl"
-   TGLOBAL		: STRING is "global.tpl"
-   TDOCUMENT		: STRING is "document.tpl"
-   TCOMMENT		: STRING is "comment.tpl"
+   TLINK		: STRING is "/html/link.tpl"
+   TGLOBAL		: STRING is "/html/global.tpl"
+   TDOCUMENT		: STRING is "/html/document.tpl"
+   TCOMMENT		: STRING is "/html/comment.tpl"
    
 end

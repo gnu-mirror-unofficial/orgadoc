@@ -159,7 +159,7 @@ feature {ORGADOC}
 	 latex		: LATEX_VISITOR
       do
 	 !!latex.make(ast, params.enable_private, 
-		      path);
+		      path, params.template_path);
 	 latex.visit
 	 tex_str.append(latex.get_result)
       end

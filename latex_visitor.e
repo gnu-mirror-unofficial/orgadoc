@@ -29,17 +29,21 @@ creation
    make
 	 
 feature {ANY}
-   make (a : AST; private : BOOLEAN; ppath : STRING) is
+   make (a : AST; private : BOOLEAN; ppath, template_path : STRING) is
       do
 	 make_default(a)
 	 enable_private := private
 	 path := ppath
 	 !!str.make_empty
+	 !!tglobal.make(template_path + TGLOBAL)
+	 !!tdocument.make(template_path + TDOCUMENT)
+	 !!tcomment.make(template_path + TCOMMENT)
       end
    
    get_result : STRING is
       do
-	 Result := str
+	 tglobal.replace(DOCUMENTS, str)
+	 Result := tglobal.stop
       end
    
 feature {LATEX_VISITOR}
@@ -49,33 +53,67 @@ feature {LATEX_VISITOR}
       do
 	 if (enable_private or doc.type.same_as(PUBLIQUE) or
 	     doc.type.same_as(PUBLIC)) then
-	    str.append("@article{orgadoc.0,%N")
-	    item_visitor("title=%"",doc.title)
-	    items_visitor("author=%"", doc.authors)
-	    item_visitor("url=%"", path + doc.file)
-	    item_visitor("url=%"", doc.url)
-	    item_visitor("year=%"", doc.date)
-	    item_visitor("abstract=%"", doc.summary)
-	    str.append("}%N")
+	    if (tdocument.start) then
+	       tdocument.replace(TITREL, path + doc.file)
+	       tdocument.replace(TITRE, doc.title)
+	       tdocument.replace(AUTHORS, visit_strs(doc.authors))
+	       tdocument.replace(DATE, doc.date)
+	       tdocument.replace(LANGUAGE, doc.language)
+	       tdocument.replace(TYPE, doc.type)
+	       tdocument.replace(URL, doc.url)
+	       tdocument.replace(SUMMARY, doc.summary)
+	       tdocument.replace(PARTS, visit_strs(doc.parts))
+	       tdocument.replace(COMMENTS, visit_cmts(doc.comments))
+	       str.append(tdocument.stop)
+	    end
 	 end
       end
    
-   items_visitor(desc : STRING; strs : LINKED_LIST[STRING]) is
+   visit_str (name : STRING) : STRING is
+      do
+	 if (name /= void) then
+	    Result := name
+	 else
+	    Result := ""
+	 end
+      end
+   
+   visit_strs (strs : LINKED_LIST[STRING]) : STRING is
       local
 	 i : INTEGER
       do
-	 if strs /= void then
-	    from i := 1 until i > strs.count loop
-	       item_visitor(desc, strs.item(i))
-	       i := i + 1
+	 Result := ""
+	 from i := 1 until i > strs.count loop
+	    Result.append(visit_str(strs.item(i)))
+	    i := i + 1
+	    if (i <= strs.count) then
+	       Result.append ("<br>")
 	    end
-	 end	 
+	 end
       end
    
-   item_visitor(desc : STRING; pstr : STRING) is
+   visit_cmts (comments : LINKED_LIST[COMMENT]) : STRING is
+      local
+	 i : INTEGER
       do
-	 if pstr /= void then
-	    str.append(desc + pstr + "%",%N")
+	 Result := ""
+	 if (comments /= void) then
+	    from i := 1 until i > comments.count loop
+	       Result.append(visit_cmt(comments.item(i)))
+	       i := i + 1
+	    end
+	 end
+      end
+
+   visit_cmt (comment : COMMENT) : STRING is
+      do   
+	 Result := ""
+	 if (comment /= void) then
+	    if (tcomment.start) then
+	       tcomment.replace(AUTHOR, comment.author_name)
+	       tcomment.replace(CONTENT, comment.content)
+	       Result.append(tcomment.stop)
+	    end
 	 end
       end
    
@@ -84,10 +122,36 @@ feature {LATEX_VISITOR}
    PUBLIC		: STRING is "public"
    PUBLIQUE		: STRING is "publique"
    
+	 -- Strings to Replace 
+   AUTHOR		: STRING is "%%%%AUTHOR%%"
+   CONTENT		: STRING is "%%%%CONTENT%%"
+   TITREL		: STRING is "%%%%TITREL%%"
+   TITRE		: STRING is "%%%%TITRE%%"
+   AUTHORS		: STRING is "%%%%AUTHORS%%"
+   DATE			: STRING is "%%%%DATE%%"
+   LANGUAGE		: STRING is "%%%%LANGUAGE%%"
+   TYPE			: STRING is "%%%%TYPE%%"
+   URL			: STRING is "%%%%URL%%"
+   SUMMARY		: STRING is "%%%%SUMMARY%%"
+   PARTS		: STRING is "%%%%PARTS%%"
+   COMMENTS		: STRING is "%%%%COMMENTS%%"
+   DOCUMENTS		: STRING is "%%%%DOCUMENTS%%"
+   LINKS		: STRING is "%%%%LINKS%%"
+   LINK			: STRING is "%%%%LINK%%"
+   NUMBER		: STRING is "%%%%NUMBER%%"
+	 
    -- Vars
    enable_private	: BOOLEAN
    path			: STRING
    str			: STRING
+   tdocument		: TEMPLATE
+   tglobal		: TEMPLATE
+   tcomment		: TEMPLATE
    
+   -- Templates Files
+   TGLOBAL		: STRING is "/html/global.tpl"
+   TDOCUMENT		: STRING is "/html/document.tpl"
+   TCOMMENT		: STRING is "/html/comment.tpl"
+
 end -- latex_vivitor
 
