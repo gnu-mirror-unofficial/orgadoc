@@ -89,7 +89,7 @@ feature {HTML_VISITOR}
 	 new_s2 : STRING
 	 i, max : INTEGER
       do
-	 new_s2 := "." + s2.substring(ppath.count + 1, s2.count)
+	 new_s2 := s2.substring(ppath.count + 1, s2.count)
 	 if (s1.last = '/' and new_s2.first = '/') then
 	    Result := s1 + new_s2.substring(2, new_s2.count)
 	 else

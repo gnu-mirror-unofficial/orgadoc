@@ -51,6 +51,9 @@ feature {ANY}                   -- creation
 	    tree.parse_from_file_name(str);
 	    if (tree /= void) then
 	       Result := tree.is_correct
+	       if Result /= true then
+		  print("Tree not correct%N");
+	       end
 	    else
 	       Result := false
 	    end

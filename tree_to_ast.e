@@ -140,7 +140,7 @@ feature {TREE_TO_AST}
    
    process_character_data(c : XM_CHARACTER_DATA) is
       do
-	 node_content := node_content + c.content.to_utf8
+	 node_content := node_content + c.content.out --to_utf8
       end
    
    process_composite(c : XM_COMPOSITE) is

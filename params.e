@@ -28,7 +28,7 @@ feature {ANY}
 	 html_mode := false
 	 display_mode := false
 	 recursive := false
-	 output_path := ""
+	 output_path := "./"
 	 enable_private := false
 	 insensitive := false
 	 template_path := DEFAULT_TPL_PATH
@@ -194,7 +194,7 @@ feature {PARAMS}
 	    end
 	    if data.is_html_mode /= void then
 	       html_mode := data.is_html_mode 
-	       if data.html_file /= void then
+	       if data.html_file /= void and html_mode then
 		  output_file := data.html_file
 	       end
 	    end
@@ -203,7 +203,7 @@ feature {PARAMS}
 	    end
 	    if data.is_bibtex_mode /= void then
 	       bibtex_mode := data.is_bibtex_mode
-	       if data.bibtex_file /= void then
+	       if data.bibtex_file /= void and bibtex_mode then
 		  output_file := data.bibtex_file
 	       end	    
 	    end
