@@ -191,7 +191,7 @@ A document node contains a number of subnodes:
   document;
 @item author : authors of the document;
 @item comment : this node is designed to add some comments about your
-  documents. Comments are splitted in two  subnodes ``author\_name'' and
+  documents. Comments are splitted in two  subnodes ``author_name'' and
   ``content'' (see the example below).
 @end itemize
 
@@ -239,7 +239,7 @@ Here is an example of an xml file describing a directory:
 
 Some documentation can contain a piece of this information, for example pdf
 documents contains the author, the number of pages...
-This information can be extracted using the orgadoc\_init\_readmes script.
+This information can be extracted using the orgadoc_init_readmes script.
 This script takes a directory in argument, explores it recursively and generates a readme.xml file per directory
 containing extractable informations. XML section that can not be
 extracted are filled with a FIXME.
@@ -324,7 +324,7 @@ For details on orgadoc binary, please consult the man page.
 @chapter Configuration file
 
 The orgadoc configuration file use the standard unix format for
-configuration files, you can comment a line with the caracter \#.
+configuration files, you can comment a line with the caracter #.
 
 Here is a list of configuration variable and there utility:
 @itemize @bullet
@@ -381,7 +381,7 @@ For example:
 ./orgadoc_add_docs /tmp/readme.xml artificial_intelligence/neural_networks
 @end verbatim
 will commit changes into readme.xml file of
-artificial\_intelligence/neural\_networks section and scp new
+artificial_intelligence/neural_networks section and scp new
 documentation files.
 
 @node CGI binary
