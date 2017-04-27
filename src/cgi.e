@@ -1,22 +1,39 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-	--| $Id: cgi.e,v 1.2 2004/01/03 21:04:37 speedblue Exp $
-	--| 
-	--| Copyright (C) 2003-2004 Julien Lemoine
-	--| This program is free software; you can redistribute it and/or modify
-	--| it under the terms of the GNU General Public License as published by
-	--| the Free Software Foundation; either version 2 of the License, or
-	--| (at your option) any later version.
-	--| 
-	--| This program is distributed in the hope that it will be useful,
-	--| but WITHOUT ANY WARRANTY; without even the implied warranty of
-	--| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	--| GNU General Public License for more details.
-	--|
-	--| You should have received a copy of the GNU General Public License
-	--| along with this program; if not, write to the Free Software
-	--| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
+   --| $Id: cgi.e,v 2.0 2017/04/27 20:40:44 atsb Exp $
+   --| 
+   --| Copyright (C) 2003-2004 Julien Lemoine
+   --| This program is free software; you can redistribute it and/or modify
+   --| it under the terms of the GNU General Public License as published by
+   --| the Free Software Foundation; either version 2 of the License, or
+   --| (at your option) any later version.
+   --| 
+   --| This program is distributed in the hope that it will be useful,
+   --| but WITHOUT ANY WARRANTY; without even the implied warranty of
+   --| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   --| GNU General Public License for more details.
+   --|
+   --| You should have received a copy of the GNU General Public License
+   --| along with this program; if not, write to the Free Software
+   --| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
+	
+   maintainer: "Adam Bilbrough <abilbrou@gmail.com>"
+   --| Copyright (C) 2017 Adam Bilbrough
+   --| This file is part of GNU OrgaDoc.
+   --|
+   --| GNU OrgaDoc is free software: you can redistribute it
+   --| and/or modify it under the terms of the GNU General Public License
+   --| as published by the Free Software Foundation, either version 3
+   --| of the License, or (at your option) any later version.
+   --|
+   --| GNU OrgaDoc is distributed in the hope that it will be useful,
+   --| but WITHOUT ANY WARRANTY; without even the implied warranty of
+   --| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   --| See the GNU General Public License for more details.
+   --|
+   --| You should have received a copy of the GNU General Public License
+   --| along with this program. If not, see http://www.gnu.org/licenses/.
 
 class CGI     
 creation
@@ -112,7 +129,7 @@ feature{NONE}
 	CQUERY		 : STRING is "query="
    VERSION		 : STRING is "%%%%VERSION%%"
 	DOCUMENTS	 : STRING is "%%%%DOCUMENTS%%"
-	TEMPL_PATH	 : STRING is "/etc/orgadoc/templates"
+	TEMPL_PATH	 : STRING is "/usr/local/etc/orgadoc/templates"
 	CTGLOBAL		 : STRING is "/cgi/global.tpl"
 
 end

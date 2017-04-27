@@ -1,20 +1,38 @@
 indexing
    description: "Parse command options"
    author: "Julien Lemoine <speedblue@happycoders.org>"
-	--| Copyright (C) 2002-2004 Julien Lemoine
-	--| This program is free software; you can redistribute it and/or modify
-	--| it under the terms of the GNU General Public License as published by
-	--| the Free Software Foundation; either version 2 of the License, or
-	--| (at your option) any later version.
-	--| 
-	--| This program is distributed in the hope that it will be useful,
-	--| but WITHOUT ANY WARRANTY; without even the implied warranty of
-	--| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	--| GNU General Public License for more details.
-	--|
-	--| You should have received a copy of the GNU General Public License
-	--| along with this program; if not, write to the Free Software
-	--| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
+   --| Copyright (C) 2002-2004 Julien Lemoine
+   --| This program is free software; you can redistribute it and/or modify
+   --| it under the terms of the GNU General Public License as published by
+   --| the Free Software Foundation; either version 2 of the License, or
+   --| (at your option) any later version.
+   --| 
+   --| This program is distributed in the hope that it will be useful,
+   --| but WITHOUT ANY WARRANTY; without even the implied warranty of
+   --| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   --| GNU General Public License for more details.
+   --|
+   --| You should have received a copy of the GNU General Public License
+   --| along with this program; if not, write to the Free Software
+   --| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+	   
+   maintainer: "Adam Bilbrough <abilbrou@gmail.com>"
+   --| Copyright (C) 2017 Adam Bilbrough
+   --| This file is part of GNU OrgaDoc.
+   --|
+   --| GNU OrgaDoc is free software: you can redistribute it
+   --| and/or modify it under the terms of the GNU General Public License
+   --| as published by the Free Software Foundation, either version 3
+   --| of the License, or (at your option) any later version.
+   --|
+   --| GNU OrgaDoc is distributed in the hope that it will be useful,
+   --| but WITHOUT ANY WARRANTY; without even the implied warranty of
+   --| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+   --| See the GNU General Public License for more details.
+   --|
+   --| You should have received a copy of the GNU General Public License
+   --| along with this program. If not, see http://www.gnu.org/licenses/. 
+
 
 class PARAMS
 creation
@@ -237,9 +255,10 @@ feature {PARAMS}
    display_version is
       do
 			std_output.put_string(NAME + " version " + VERSION + "%N%N")
-			std_output.put_string("Copyright 2002-2004")
-			std_output.put_string(" Julien Lemoine <speedblue@happycoders.org>%N")
-			std_output.put_string("%NReport bugs to <speedblue@happycoders.org>.%N")
+			std_output.put_string("Copyright (C) 2002-2004 Julien Lemoine <speedblue@happycoders.org>%N")
+			std_output.put_string("Copyright (C) 2017 Adam Bilbrough%N")
+			std_output.put_string("%NReport bugs on the OrgaDoc Savannah project page:%N")
+			std_output.put_string("https://savannah.gnu.org/projects/orgadoc/%N%N")
 			die_with_code(0)
       end
    
@@ -271,30 +290,30 @@ feature {PARAMS}
       end
    
 feature {ANY}
-   verbose			: BOOLEAN
+   verbose		: BOOLEAN
    html_mode		: BOOLEAN
-   display_mode	: BOOLEAN
+   display_mode		: BOOLEAN
    bibtex_mode		: BOOLEAN
    latex_mode		: BOOLEAN
-   xml_file			: STRING
+   xml_file		: STRING
    input_path		: STRING
    recursive		: BOOLEAN
-   output_file 	: STRING
+   output_file 		: STRING
    output_path		: STRING
    httpd_path		: STRING
    enable_private	: BOOLEAN
-   regexp			: STRING
+   regexp		: STRING
    insensitive		: BOOLEAN
-   conffile			: STRING
+   conffile		: STRING
    template_path	: STRING
    
 feature {PARAMS}
-   DEFAULT_CONF_FILE		: STRING is "/etc/orgadoc/orgadoc.conf"
-   DEFAULT_TPL_PATH		: STRING is "/etc/orgadoc/templates/html/"
-   DEFAULT_XML_FILE		: STRING is "readme.xml"
-   DEFAULT_HTML_FILE		: STRING is "index.html"
+   DEFAULT_CONF_FILE	: STRING is "/usr/local/etc/orgadoc/orgadoc.conf"
+   DEFAULT_TPL_PATH	: STRING is "/usr/local/etc/orgadoc/templates/html/"
+   DEFAULT_XML_FILE	: STRING is "readme.xml"
+   DEFAULT_HTML_FILE	: STRING is "index.html"
    DEFAULT_BIBTEX_FILE	: STRING is "orgadoc.bib"
    DEFAULT_LATEX_FILE	: STRING is "orgadoc.tex"
-   NAME						: STRING is "OrgaDoc"
+   NAME			: STRING is "GNU OrgaDoc"
 #include "../config.e"
 end
