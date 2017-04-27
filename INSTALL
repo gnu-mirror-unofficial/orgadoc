@@ -1,12 +1,34 @@
-Basic Installation
-==================
+GNU OrgaDoc Installation Guide
 
-You Need :
-  - Gobo (www.gobosoft.com)
-  - Eiffel Compiler (SmallEiffel for example)
-  - Expat library
+You will need the following mandatory programs (with specific versions):
+    
+	* Gobo 3.3
+	* SmartEiffel 1.1
+	* Expat library
 
-on debian you need to run "apt-get install gobo smarteiffel libexpat1-dev"
+The below are optional programs but which generate the documentation:
+    
+	* docbook-utils
+	* texinfo
 
-run "make" command.
-You have now a orgadoc binary
+On Trisquel GNU/Linux you need to run "sudo apt-get install libexpat1-dev docbook-utils texinfo". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
+
+Before moving onto generating the build scripts, add the following to your '.bashrc':
+	
+	* export SmartEiffel=/usr/lib/smarteiffel/sys/system.se (or another path where it is installed).
+
+Generating (in this order):
+	
+	* aclocal
+	* autoconf
+	* automake
+	   
+Now type './configure' and providing you have everything setup correctly, a makefile will be generated.
+
+Compiling and Installation:
+
+	* type 'make' and you will get a GNU OrgaDoc binary in 'src/'.
+
+To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program. The default path to the config file is '/usr/local/etc/orgadoc/orgadoc.conf'. The path can be changed in the config file to point to another location for the template files.
+
+For an in-depth usage of GNU OrgaDoc, please read the documentation generated from 'docs/orgadoc.texi'.

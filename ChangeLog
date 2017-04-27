@@ -1,3 +1,15 @@
+2017-04-23   Adam Bilbrough <abilbrou@gmail.com>
+	* Fixed deprecated functionality in the build scripts.
+	* Changed config and templates default path to '/usr/local/etc/orgadoc/'.
+	* Added 'GNU' to 'OrgaDoc' strings in templates, .texi and .e files.
+	* Improved the INSTALL instructions.
+	* Corrected some spelling mistakes in the documentation.
+	* Added Updated GPL3 notices.
+	* Updated TODO document.
+	* Removed 'debian' from manpages.
+	* Updated '--version' params.ge
+	* Bumped version to 0.9.
+	
 2004-01-09   Julien Lemoine <speedblue@happycoders.org>
 	* Improved man pages
 	

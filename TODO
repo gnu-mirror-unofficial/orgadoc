@@ -1,5 +1,7 @@
 ################ TODO LIST FOR ORGADOC ################
 
+#### FUTURE ####
+
 #### OPTIMISATION ####
 
 #### NEW FEATURE ####
@@ -8,11 +10,7 @@
  - Add IA (text-mining) to generate readme.xml files
  - add a script bibtex2orgadoc
 
-### DOC ###
- - create a Documentation
- - create a Web Site
-
-##### DONE (not yet released) #####
+##### DONE #####
 
  - read file HEADER and FOOTER like apache with moddir
  - Better error message : give the exact reason of error 

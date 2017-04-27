@@ -1,3 +1,18 @@
+# This file is part of GNU OrgaDoc.
+#
+# GNU OrgaDoc is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# GNU OrgaDoc is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+
 # Process this file with automake to produce Makefile.in
 
 orgadocdir 	= $(sysconfdir)/orgadoc
@@ -20,7 +35,7 @@ dist_bibtextpl_DATA= ./templates/bibtex/document.tpl
 exampledir	= $(datadir)/doc/orgadoc/examples
 dist_example_DATA= docs/readme.xml
 
-info_TEXINFOS	= docs/orgadoc.texinfo
+info_TEXINFOS	= docs/orgadoc.texi
 man_MANS  	= docs/orgadoc.1 docs/orgadoc_cgi.1 		\
 		  docs/orgadoc_init_readmes.1			\
 		  docs/orgadoc_add_docs.1
