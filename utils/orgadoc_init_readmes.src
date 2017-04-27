@@ -1,9 +1,24 @@
 #!/bin/sh
+# This file is part of GNU OrgaDoc.
+#
+# GNU OrgaDoc is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# GNU OrgaDoc is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+
 ##
 ## add_docs.sh
 ## Login : <speedblue@morpheus>
 ## Started on  Fri Dec 12 15:18:49 2003 Julien Lemoine
-## $Id: orgadoc_init_readmes.src,v 1.1 2004/03/25 21:34:03 speedblue Exp $
+## $Id: orgadoc_init_readmes.src,v 2.0 2017/04/27 20:32:57 atsb Exp $
 ## 
 ## Copyright (C) 2003 Julien Lemoine
 ## This program is free software; you can redistribute it and/or modify
@@ -43,8 +58,9 @@ version()
   echo "Version : [VERSION]"
   echo
   echo "Copyright 2002-2004 Julien Lemoine <speedblue@happycoders.org>"
+  echo "Copyright (C) 2017 Adam Bilbrough <abilbrou@gmail.com>"
   echo
-  echo "Report bugs to <speedblue@happycoders.org>."
+  echo "Report bugs on the OrgaDoc Savannah project page."
 }
 
 options()
