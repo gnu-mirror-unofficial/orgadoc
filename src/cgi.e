@@ -1,7 +1,7 @@
 indexing
    description: "cgi for web search"
    author: "Julien Lemoine <speedblue@morpheus>"
-   --| $Id: cgi.e,v 2.0 2017/04/27 20:40:44 atsb Exp $
+   --| $Id: cgi.e,v 2.1 2017/04/27 21:00:35 atsb Exp $
    --| 
    --| Copyright (C) 2003-2004 Julien Lemoine
    --| This program is free software; you can redistribute it and/or modify
@@ -18,7 +18,7 @@ indexing
    --| along with this program; if not, write to the Free Software
    --| Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 	
-   maintainer: "Adam Bilbrough <abilbrou@gmail.com>"
+   maintainer: "Adam Bilbrough"
    --| Copyright (C) 2017 Adam Bilbrough
    --| This file is part of GNU OrgaDoc.
    --|
