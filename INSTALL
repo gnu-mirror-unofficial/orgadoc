@@ -31,4 +31,6 @@ Compiling and Installation:
 
 To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program. The default path to the config file is '/usr/local/etc/orgadoc/orgadoc.conf'. The path can be changed in the config file to point to another location for the template files.
 
+For those without or who want to compile without setting up an Eiffel environment.  In src/c/ there are .c and .h files which have been generated, these can be compiled using gcc and linking with libexpat.
+
 For an in-depth usage of GNU OrgaDoc, please read the documentation generated from 'docs/orgadoc.texi'.
