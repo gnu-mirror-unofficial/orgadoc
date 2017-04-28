@@ -1,0 +1,10 @@
+These files are here to assist others who would like to easily compile or
+port the code to a new platform and who don't have (or don't want) an Eiffel development setup.
+
+You can compile the code in the normal way (using GCC) and linked with libexpat (make sure it is the development version).
+
+You would need access to the sudo command to install the binaries from 
+this source into the correct directory path.  See the INSTALL file
+in the root directory of orgadoc for more details.
+
+~atsb
