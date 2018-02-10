@@ -1,0 +1,226 @@
+#!/bin/bash
+# This file is part of GNU OrgaDoc.
+#
+# GNU OrgaDoc is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 3
+# of the License, or (at your option) any later version.
+#
+# GNU OrgaDoc is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+
+ORGADOC_DEBUG=0
+ORGADOC_SLEEP=0
+
+help()
+{
+  echo "OrgaDoc Init Readmes (Try to generate readme.xml files for orgadoc"
+  echo "                     automaticaly from documentation and text files."
+  echo
+  echo "Usage: $0 [OPTION] directory"
+  echo
+  echo "Options:"
+  echo -e "  -d, --debug\t\tTurn Debug on"
+  echo -e "  -v, --version\t\tOutput version information and exit"
+  echo -e "  -h, --help\t\tDisplay this help and exit"
+  echo -e "  -m, --merge\t\tMerge all readme.xml files into a directory"
+}
+
+version()
+{
+  echo "OrgaDoc Init Readmes"
+  echo "Version : 1.0"
+  echo
+  echo "Copyright 2002-2004 Julien Lemoine <speedblue@happycoders.org>"
+  echo "Copyright (C) 2017-2018 Adam Bilbrough <atsb@tutanota.de>"
+  echo
+  echo "Report bugs on the GNU OrgaDoc Savannah project page."
+}
+
+options()
+{
+  case "$1" in
+      -s)
+	  ORGADOC_SLEEP=1
+	  ;;
+      -d|--debug)
+	  ORGADOC_DEBUG=1
+	  ;;
+      -h|--help)
+	  help
+	  exit 0
+	  ;;
+      -v|--version)
+	  version
+	  exit 0
+	  ;;
+      -m|--merge)
+	  MERGE=TRUE
+	  ;;
+      *)
+	  if [ "$1" != "" ]; then
+            if [ "$ORGADOC_DIR" = "" ]; then
+	      ORGADOC_DIR=$1;
+	    else
+	      echo "Warning: unused option [$1]"
+	    fi
+          fi
+	  ;;
+  esac
+}
+
+options $1 $2
+while shift; do 
+  options $1 $2;
+done
+
+if [ "$ORGADOC_DIR" = "" ]; then
+  echo "Error: You must give a directory"
+  echo
+  help
+  exit 1
+fi
+
+PATTERNS='-i -e .pdf$ -e .doc$ -e .ps$ -e .ps.gz$
+          -e .html$ -e .htm$ -e .ps.Z$'
+SUBDIRS=`find $ORGADOC_DIR -maxdepth 1 -type d`
+FILES=`find $ORGADOC_DIR -maxdepth 1 -type f`
+
+echo "Entering directory [$ORGADOC_DIR]"
+if test -f $ORGADOC_DIR/readme.xml; then
+  tempfile=`tempfile`
+  cat $ORGADOC_DIR/readme.xml | (
+    read lineb
+    while read line; do
+      echo $lineb >> $tempfile
+      lineb=$line
+    done
+  )
+  cp $tempfile $ORGADOC_DIR/readme.xml
+  rm -f $tempfile
+fi
+for file in $FILES; do
+  if echo $file | grep $PATTERNS > /dev/null; then
+    if ! test -f $ORGADOC_DIR/readme.xml; then
+      echo '<?xml version="1.0" encoding="ISO-8859-1"?>' >> $ORGADOC_DIR/readme.xml;
+      echo "<readme id=\"$RANDOM\">" >> $ORGADOC_DIR/readme.xml;
+    fi
+    echo "<document id=\"$RANDOM\">" >> $ORGADOC_DIR/readme.xml;
+    FILE=`echo $file | sed "s:[^/]*/::g"`
+    case $file in
+      *.pdf)
+	    if [ "$ORGADOC_DEBUG" = "1" ]; then
+	      echo "Found $file, extract title, author, number of pages and date"
+	    fi
+	    TITLE=`pdfinfo $file 2> /dev/null | grep Title: | sed 's/Title:[ \t]\+//'`
+	    AUTHOR=`pdfinfo $file 2> /dev/null | grep Author: | sed 's/Author:[ \t]\+//'`
+	    PAGES=`pdfinfo $file 2> /dev/null | grep Pages: | sed 's/Pages:[ \t]\+//'`
+	    DATE=`pdfinfo $file 2> /dev/null | grep CreationDate: | sed 's/CreationDate:[ \t]\+//'`
+	    echo "<title>$TITLE</title>" >> $ORGADOC_DIR/readme.xml
+	    echo "<file>$FILE</file>" >> $ORGADOC_DIR/readme.xml
+	    echo "<date>$DATE</date>" >> $ORGADOC_DIR/readme.xml
+	    echo "<type>public</type>" >> $ORGADOC_DIR/readme.xml
+	    echo "<author>$AUTHOR</author>" >> $ORGADOC_DIR/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $ORGADOC_DIR/readme.xml
+	    echo "<language>FIXME LANGUAGE</language>" >> $ORGADOC_DIR/readme.xml
+	    echo "<summary>FIXME SUMMARY</summary>" >> $ORGADOC_DIR/readme.xml
+	    if pdfinfo $file 2> /dev/null | grep Tagged | grep yes > /dev/null; then
+	      SECTIONS=`strings $file | grep '/Title ' | sed 's/\/Title[ \t]\+//'`
+	      IFS='
+'
+	      for section in $SECTIONS; do
+                echo "<part>$section</part>" >> $ORGADOC_DIR/readme.xml;
+              done
+	      IFS='	 
+'
+	    else
+		echo "<part>FIXME PART</part>" >> $ORGADOC_DIR/readme.xml
+	    fi
+	    echo "<notes>FIXME NOTES</notes>" >> $ORGADOC_DIR/readme.xml
+	    ;;
+	*.ps.gz | *.ps.Z)
+	    if [ "$ORGADOC_DEBUG" = "1" ]; then
+	      echo "Found $file, extract number of pages"
+	    fi
+	    PAGES=`zcat $file | grep '^%%Pages:' | head -1 | sed 's/%%Pages:[ \t]\+//'`
+	    echo "<title>FIXME TITLE</title>" >> $ORGADOC_DIR/readme.xml
+	    echo "<file>$FILE</file>" >> $ORGADOC_DIR/readme.xml
+	    echo "<date>FIXME DATE</date>" >> $ORGADOC_DIR/readme.xml
+	    echo "<type>public</type>" >> $ORGADOC_DIR/readme.xml
+	    echo "<author>FIXME AUTHOR</author>" >> $ORGADOC_DIR/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $ORGADOC_DIR/readme.xml
+	    echo "<language>FIXME LANGUAGE</language>" >> $ORGADOC_DIR/readme.xml
+	    echo "<summary>FIXME SUMMARY</summary>" >> $ORGADOC_DIR/readme.xml
+	    echo "<part>FIXME PART</part>" >> $ORGADOC_DIR/readme.xml
+	    echo "<notes>FIXME NOTES</notes>" >> $ORGADOC_DIR/readme.xml
+	    ;;
+	*.ps)
+	    if [ "$ORGADOC_DEBUG" = "1" ]; then
+	      echo "Found $file, extract number of pages"
+	    fi
+	    PAGES=`cat $file | grep '^%%Pages:' | head -1 | sed 's/%%Pages:[ \t]\+//'`
+	    echo "<title>FIXME TITLE</title>" >> $ORGADOC_DIR/readme.xml
+	    echo "<file>$FILE</file>" >> $ORGADOC_DIR/readme.xml
+	    echo "<date>FIXME DATE</date>" >> $ORGADOC_DIR/readme.xml
+	    echo "<type>public</type>" >> $ORGADOC_DIR/readme.xml
+	    echo "<author>FIXME AUTHOR</author>" >> $ORGADOC_DIR/readme.xml
+	    echo "<nbpages>$PAGES</nbpages>" >> $ORGADOC_DIR/readme.xml
+	    echo "<language>FIXME LANGUAGE</language>" >> $ORGADOC_DIR/readme.xml
+	    echo "<summary>FIXME SUMMARY</summary>" >> $ORGADOC_DIR/readme.xml
+	    echo "<part>FIXME PART</part>" >> $ORGADOC_DIR/readme.xml
+	    echo "<notes>FIXME NOTES</notes>" >> $ORGADOC_DIR/readme.xml
+	    ;;
+	*)
+	    if [ "$ORGADOC_DEBUG" = "1" ]; then
+	      echo "Found $file, could not extract any informations from file"
+	    fi
+	    echo "<title>FIXME TITLE</title>" >> $ORGADOC_DIR/readme.xml
+	    echo "<file>$FILE</file>" >> $ORGADOC_DIR/readme.xml
+	    echo "<date>FIXME DATE</date>" >> $ORGADOC_DIR/readme.xml
+	    echo "<type>public</type>" >> $ORGADOC_DIR/readme.xml
+	    echo "<author>FIXME AUTHOR</author>" >> $ORGADOC_DIR/readme.xml
+	    echo "<language>FIXME LANGUAGE</languages>" >> $ORGADOC_DIR/readme.xml
+	    echo "<summary>FIXME SUMMARY</summary>" >> $ORGADOC_DIR/readme.xml
+	    echo "<part>FIXME PART</part>" >> $ORGADOC_DIR/readme.xml
+	    echo "<notes>FIXME NOTES</notes>" >> $ORGADOC_DIR/readme.xml
+	    ;;
+    esac
+    echo "</document>" >> $ORGADOC_DIR/readme.xml;
+  fi
+done
+if test -f $ORGADOC_DIR/readme.xml; then
+  echo "</readme>" >> $ORGADOC_DIR/readme.xml;
+fi
+
+echo "Leaving directory [$ORGADOC_DIR]"
+
+for dir in $SUBDIRS; do
+  if [ "$dir" != "." ]; then
+    if [ "$dir" != "$ORGADOC_DIR" ]; then
+      if [ "$ORGADOC_DEBUG" = "1" ]; then
+        $0 $dir -s -d
+      else
+        $0 $dir -s
+      fi
+    fi
+  fi
+done
+
+if [ "$ORGADOC_SLEEP" = "0" ]; then
+  echo
+  echo "readme.xml files are now created, please edit the FIXME lines"
+fi
+
+if [ "$MERGE" = "TRUE" ]; then
+    MOVE_DIR="$HOME/.orgadoc"
+    find $ORGADOC_DIR -type f \( -name '*.xml' -o -name 'readme.*' \) -exec sh -c '
+    mkdir -p "$MOVE_DIR/$0/${1%/*}";
+    cp -p "$1" "$MOVE_DIR/$0/$1"
+    ' ../$MOVE_DIR {} \;
+    echo "moving readme.xml files to $MOVE_DIR completed"
+fi

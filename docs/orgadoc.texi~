@@ -47,7 +47,7 @@ Copies published by the Free Software Foundation raise funds for
 @subtitle Organizes documents from XML descriptions
 @subtitle @value{UPDATED}, GNU OrgaDoc Version @value{VERSION}
 
-@author original program by Julien Lemoine.  C Rewrite by Adam Bilbrough.
+@author by Julien Lemoine. Maintained by Adam Bilbrough.
 
 @page
 @vskip 0pt plus 1filll
@@ -110,12 +110,14 @@ Required software to run orgadoc_init_readmes:
 package on GNU/Linux distributions such as Trisquel GNU/Linux).
 @end itemize
 
-GNU OrgaDoc uses a single makefile.
+GNU OrgaDoc uses autoconf, therefore the end user
+ should use the provided configure script (some options are available).
 
 To use GNU OrgaDoc, run these commands in user mode:
 @verbatim
 tar xzvf orgadoc-1.0.0.tar.gz
 cd orgadoc-1.0.0
+./configure
 make
 @end verbatim
 and to install GNU OrgaDoc, run in super user mode:
@@ -129,19 +131,16 @@ make install
 GNU Orgadoc uses XML files to describe your document(s) and convert them to
 another format using one of the available backends:
 @itemize @bullet
-@item HTML: generates a HTML file which you can easily browse into your
+@item HTML: generates a tree of HTML files, you can easily browse into your
   documentation;
-@item Bibtex: convert your documents pool into a Bibtex file for reference
+@item Bibtex: convert your documents pool into a bibtex file for reference
   into LaTex documents;
-@item Latex: generates a Latex document with the details of your
- documents, you can compile this into a pdf or ps file;
-@item Json: generates a JSON document with the details of your
- documents;
-@item PlainText: generates a Plain Text document with the details of your
- documents;
+@item Latex: generates a latex document with the details of your
+ documents base, you can compile this into a pdf or ps file.
 @item Ast : dump the documents pool into ascii
 @end itemize
-GNU Orgadoc also works well with other programs such as grep.
+GNU Orgadoc also includes a search tool to perform regex queries on the
+document pool.
 
 @node How to use it
 @chapter How to use it

@@ -1,12 +1,12 @@
 <!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
-  <!ENTITY dhfirstname "<firstname>Adam</firstname>">
-  <!ENTITY dhsurname   "<surname>Bilbrough</surname>">
-  <!ENTITY dhdate      "<date>February 7, 2018</date>">
+  <!ENTITY dhfirstname "<firstname>Julien Lemoine</firstname>">
+  <!ENTITY dhsurname   "<surname>SpeedBlue</surname>">
+  <!ENTITY dhdate      "<date>January 9, 2004</date>">
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
-  <!ENTITY dhemail     "<email>atsb@tutanota.de</email>">
-  <!ENTITY dhusername  "atsb">
-  <!ENTITY dhucpackage "<refentrytitle>orgadoc</refentrytitle>">
-  <!ENTITY dhpackage   "orgadoc">
+  <!ENTITY dhemail     "<email>speedblue@happycoders.org</email>">
+  <!ENTITY dhusername  "Julien Lemoine">
+  <!ENTITY dhucpackage "<refentrytitle>orgadoc-init-readme</refentrytitle>">
+  <!ENTITY dhpackage   "orgadoc-init-readme">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
 ]>
 
@@ -20,7 +20,7 @@
       &dhsurname;
     </author>
     <copyright>
-      <year>2018</year>
+      <year>2004</year>
       <holder>&dhusername;</holder>
     </copyright>
     &dhdate;
@@ -33,37 +33,20 @@
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>Organizes documents from XML descriptions</refpurpose>
+    <refpurpose>Try to generate readme.xml files for orgadoc
+  automaticaly from documentation files (.pdf, .ps, ...)</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
       <command>&dhpackage;</command>
-
       <arg><option>-h </option></arg>
       <arg><option>-v </option></arg>
-      <arg><option>-t </option></arg>
-      <arg><option>-b </option></arg>
-      <arg><option>-l </option></arg>
-      <arg><option>-j </option></arg>
-
+      <arg><option>-d </option></arg>
+      <command><parameter> directory</parameter></command>
     </cmdsynopsis>
   </refsynopsisdiv>
   <refsect1>
-    <title>DESCRIPTION</title>
-
-    <para>This manual page briefly describes the
-      <command>&dhpackage;</command> command.</para>
-
-    <para><command>&dhpackage;</command>  uses XML files to describe
-    your documents and convert them to a HTML file, a Bibtex
-    file a Latex file, a Plain Text file or a JSON file (in OrgaDoc syntax).
-      Users can also use programs such as grep to combine commands with GNU OrgaDoc.
-    </para>
-
-  </refsect1>
-  <refsect1>
     <title>OPTIONS</title>
-
     <para>This program follows the usual GNU command line syntax,
       with long options starting with two dashes (`-').  A summary of
       options is included below.  </para>
@@ -86,60 +69,61 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-t</option>
-          <option>--html</option>
-        </term>
-        <listitem>
-          <para>Activate production of a HTML file.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>-b</option>
-          <option>--bibtex</option>
-        </term>
-        <listitem>
-          <para>Activate production of a BibTex file.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>-l</option>
-          <option>--latex</option>
-        </term>
-        <listitem>
-          <para>Activate production of a LaTex file.</para>
-        </listitem>
-      </varlistentry>
-       <varlistentry>
-        <term><option>-p</option>
-          <option>--plain-text</option>
-        </term>
-        <listitem>
-          <para>Activate production of a Plain Text file.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term><option>-j</option>
-          <option>--json</option>
-        </term>
-        <listitem>
-          <para>Activate production of a JSON file.</para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
         <term><option>-d</option>
-          <option>--display-ast</option>
+          <option>--debug</option>
         </term>
         <listitem>
-          <para>display the Abstract Syntax Tree for each XML file.</para>
+          <para>Enable verbose mode.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>directory</option>
+        </term>
+        <listitem>
+          <para>Explore this directory to find documentation (.pdf, .ps, .ps.Z, ...)</para>
         </listitem>
       </varlistentry>
     </variablelist>
+  </refsect1> 
+  <refsect1>
+    <title>DESCRIPTION</title>
 
+    <para>This manual page briefly describes the
+      <command>&dhpackage;</command> command.</para>
+
+    <para><command>&dhpackage;</command> explore a directory
+    recursively to find documentation files (.pdf, .ps, .ps.Z, ...)
+    and generates a readme.xml file per directory with informations
+    extracted from file.</para>
+
+    <para>Currently, <command>&dhpackage;</command> can extract :</para>
+
+    <itemizedlist>
+      <listitem><para>
+      title, author, number of pages, date from a pdf file
+      </para></listitem>
+
+      <listitem><para>
+      number of pages from a ps (or compressed ps) file
+      </para></listitem>
+    </itemizedlist>
+
+    <para>Everything that could not be extracted from a document is
+  writed as "FIXME" in readme.xml files. After generation, you need to
+  hand edit generated readme.xml files.</para>
+
+  <para>Some xml sections can not be discovered in document, this is
+  the case of the "comment" and "summary" sections.</para>
+
+  <para><command>&dhpackage;</command> does not overwrite readme.xml
+  file, it appends content at the end of the file. This is an
+  important note, be carefull when you launch
+  <command>&dhpackage;</command> many times.</para>
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>orgadoc-init-readmes, orgadoc-add-docs</para>
+    <para>orgadoc, orgadoc_cgi, orgadoc_add_docs</para>
 
   </refsect1>
   <refsect1>

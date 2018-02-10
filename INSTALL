@@ -2,35 +2,19 @@ GNU OrgaDoc Installation Guide
 
 You will need the following mandatory programs (with specific versions):
     
-	* Gobo 3.3
-	* SmartEiffel 1.1
-	* Expat library
+	* libxml2
 
 The below are optional programs but which generate the documentation:
     
 	* docbook-utils
 	* texinfo
 
-On Trisquel GNU/Linux you need to run "sudo apt-get install libexpat1-dev docbook-utils texinfo". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
-
-Before moving onto generating the build scripts, add the following to your '.bashrc':
-	
-	* export SmartEiffel=/usr/lib/smarteiffel/sys/system.se (or another path where it is installed).
-
-Generating (in this order):
-	
-	* aclocal
-	* autoconf
-	* automake
-	   
-Now type './configure' and providing you have everything setup correctly, a makefile will be generated.
+On Trisquel GNU/Linux you need to run "sudo apt-get install libxml2-dev docbook-utils texinfo". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
 
 Compiling and Installation:
 
-	* type 'make' and you will get a GNU OrgaDoc binary in 'src/'.
+	* type 'make' and you will get a GNU OrgaDoc binary 'orgadoc' in the root directory (../src).
 
-To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program. The default path to the config file is '/usr/local/etc/orgadoc/orgadoc.conf'. The path can be changed in the config file to point to another location for the template files.
-
-For those without or who want to compile without setting up an Eiffel environment.  In src/c/ there are .c and .h files which have been generated, these can be compiled using gcc and linking with libexpat.
+To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program. The path to the config file is '~/.orgadoc.conf'.
 
 For an in-depth usage of GNU OrgaDoc, please read the documentation generated from 'docs/orgadoc.texi'.
