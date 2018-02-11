@@ -21,11 +21,17 @@
 void
 orgadoc_latex_start_tags()
 {
-  printf("\\documentclass{document}\n");
+  printf("\\documentclass[10pt]{article}\n");
+  printf("\\title{\\bfseries\\Document-Listing}\n");
+  printf("\\author{someone@email}\n");
+  printf("\\date{}\n");
+  printf("\\begin{document}\n");
+  printf("\\maketitle\n");
+  printf("\\bgroup\obeylines\n");
 }
 void
 orgadoc_latex_end_tags()
 {
-  printf("\\prog{%s %s}\n",FOOTER,VERSION);
+  printf("\n%s %s\n",FOOTER,VERSION);
   printf("\\end{document}\n");
 }

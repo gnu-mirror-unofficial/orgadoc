@@ -67,7 +67,7 @@ print_xml_latex(xmlNode * node, int indent_len)
     {	
       if(node->type == XML_ELEMENT_NODE)
 	{
-	  printf("\\%s{%s}\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
+	  printf("\\textbf{%s} %s\\\\\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
         }
       print_xml_latex(node->children, indent_len + 1);
       node = node->next;
