@@ -35,9 +35,8 @@ void
 parse_args(int argc, char** argv)
 {
   int c;
-
-  xmlDoc *doc = NULL;
-  xmlNode *root_element = NULL;
+  
+  char *readme = argv[2];
 
   while ((c = getopt_long (argc, argv, short_options,
                            long_options, NULL)) != -1)
@@ -55,72 +54,37 @@ parse_args(int argc, char** argv)
 	break;
 
 	case opt_generate_html:
+	  html = 1;
 	  orgadoc_html_start_tags();
-	  doc = xmlReadFile(argv[2], NULL, 0);
-	  if (doc == NULL)
-	    {
-	      printf("Could not parse the XML file\n");
-	    }
-	  root_element = xmlDocGetRootElement(doc);
-	  print_xml(root_element, 1);
-	  xmlFreeDoc(doc);
-	  xmlCleanupParser();
+	  orgadoc_xml_parser(readme);
 	  orgadoc_html_end_tags();
 	  exit(0);
 
 	case opt_generate_bibtex:
+	  bibtex = 1;
 	  orgadoc_bibtex_start_tags();
-	  doc = xmlReadFile(argv[2], NULL, 0);
-	  if (doc == NULL)
-	    {
-	      printf("Could not parse the XML file\n");
-	    }
-	  root_element = xmlDocGetRootElement(doc);
-	  print_xml_bibtex(root_element, 1);
-	  xmlFreeDoc(doc);
-	  xmlCleanupParser();
+	  orgadoc_xml_parser(readme);
 	  orgadoc_bibtex_end_tags();
 	  exit(0);
 
 	case opt_generate_latex:
+	  latex = 1;
 	  orgadoc_latex_start_tags();
-	  doc = xmlReadFile(argv[2], NULL, 0);
-	  if (doc == NULL)
-	    {
-	      printf("Could not parse the XML file\n");
-	    }
-	  root_element = xmlDocGetRootElement(doc);
-	  print_xml_latex(root_element, 1);
-	  xmlFreeDoc(doc);
-	  xmlCleanupParser();
+	  orgadoc_xml_parser(readme);
 	  orgadoc_latex_end_tags();
 	  exit(0);
 
 	case opt_generate_json:
+	  json = 1;
 	  orgadoc_json_start_tags();
-	  doc = xmlReadFile(argv[2], NULL, 0);
-	  if (doc == NULL)
-	    {
-	      printf("Could not parse the XML file\n");
-	    }
-	  root_element = xmlDocGetRootElement(doc);
-	  print_xml_json(root_element, 1);
-	  xmlFreeDoc(doc);
-	  xmlCleanupParser();
+	  orgadoc_xml_parser(readme);
 	  orgadoc_json_end_tags();
 	  exit(0);
 
-        case opt_generate_text:
+    case opt_generate_text:
+      text = 1;
 	  orgadoc_text_start_tags();
-	  doc = xmlReadFile(argv[2], NULL, 0);
-	  if(doc == NULL)
-	    {
-	      printf("Could not parse the XML file\n");
-	    }
-	  root_element = xmlDocGetRootElement(doc);
-	  print_xml_text(root_element, 1);
-          xmlFreeDoc(doc);
-	  xmlCleanupParser();
+	  orgadoc_xml_parser(readme);
 	  orgadoc_text_end_tags();
 	  exit(0);
 

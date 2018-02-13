@@ -18,3 +18,5 @@
 
 void orgadoc_html_start_tags(void);
 void orgadoc_html_end_tags(void);
+void orgadoc_html_table_start_tags(void);
+void orgadoc_html_table_end_tags(void);

@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<readme id="14188">
-<document id="9335">
+<?xml version="1.0" ?>
+
+<readme>
+<document>
 <title></title>
 <file>test.pdf</file>
 <date>Tue Feb  6 13:59:34 2018</date>
@@ -10,9 +11,10 @@
 <language>FIXME LANGUAGE</language>
 <summary>FIXME SUMMARY</summary>
 <part>FIXME PART</part>
+<part>FIXME PART2</part>
 <notes>FIXME NOTES</notes>
 </document>
-<document id="16802">
+<document>
 <title></title>
 <file>test(copy).pdf</file>
 <date>Tue Feb  6 13:59:34 2018</date>

@@ -19,23 +19,31 @@
 #include "main.h"
 
 void
+orgadoc_html_table_start_tags()
+{
+  printf("<table border=\"1\">\n");
+  printf("<thead>\n<tr>\n<th>Section</th>\n<th>Content</th>\n</tr>\n</thead>\n");
+  printf("<tbody>\n");
+}
+
+void
+orgadoc_html_table_end_tags()
+{
+  printf("</tbody>\n");
+  printf("</table>\n");
+}
+
+void
 orgadoc_html_start_tags()
 {
   printf("<!DOCTYPE HTML>\n");
   printf("<title>HTML Document Listing</title>\n");
   printf("<body>\n");
-  printf("<table border=\"1\">\n");
-  printf("<thead>\n<tr>\n<th>Section</th>\n<th>Content</th>\n</tr>\n</thead>\n");
-  printf("<tbody>\n");
-  
-  
 }
 
 void
 orgadoc_html_end_tags()
 {
-  printf("</tbody>\n");
-  printf("</tr>\n</table>\n");
   printf("</body>\n");
   printf("<footer>");
   printf("%s %s",FOOTER,VERSION);

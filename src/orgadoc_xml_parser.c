@@ -18,86 +18,354 @@
 
 #include "main.h"
 
-int
-is_leaf(xmlNode * node)
+void
+orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
 {
-  xmlNode * child = node->children;
-  while(child)
-    {
-      if(child->type == XML_ELEMENT_NODE) return 0;	
-      child = child->next;
+  xmlChar *key;
+  
+  cur = cur->xmlChildrenNode;
+  while (NULL != cur) {
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"title"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	orgadoc_html_table_start_tags();
+        printf("<tr>\n");
+      	printf("<td>Title</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Title=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Title} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Title\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Title: %s\n", key);
+      	xmlFree(key);
+      }
     }
-  return 1;
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"file"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Filename</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Filename=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Filename} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Filename\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Filename: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"date"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Date/Time</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Date-Time=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Date-Time} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Date-Time\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Date/Time: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"type"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Type</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Type=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Type} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Type\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Type: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"author"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Author</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Author=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Author} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Author\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Author: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"nbpages"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Number of Pages</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Number-of-Pages=%s\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Number-of-Pages} %s\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Number-of-Pages\" : %s\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Number of Pages: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"language"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Document Language</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Document-Language=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Document-Language} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Document-language\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Document Language: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"summary"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Summary</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Summary=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Summary} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Summary\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Summary: %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"part"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Chapter(s)</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Chapter(s)=\"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Chapter(s)} \"%s\"\\\\\n", key);
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Chapter\" : \"%s\"\n", key);
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Chapter(s): %s\n", key);
+      	xmlFree(key);
+      }
+    }
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"notes"))) {
+      key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
+      if(html == 1)
+      {
+      	printf("<tr>\n");
+      	printf("<td>Notes/Comments</td><td>%s</td>\n", key);
+      	printf("</tr>\n");
+      	orgadoc_html_table_end_tags();
+      	xmlFree(key);
+      }
+      if(bibtex == 1)
+      {
+      	printf("Notes-or-Comments=\"%s\"\n", key);
+      	printf("\n");
+      	xmlFree(key);
+      }
+      if(latex == 1)
+      {
+      	printf("\\textbf{Notes-or-Comments} \"%s\"\\\\\n", key);
+      	printf("\\\\\n");
+      	xmlFree(key);
+      }
+      if(json == 1)
+      {
+      	printf("    \"Notes\" : \"%s\"\n", key);
+      	printf("\n");
+      	xmlFree(key);
+      }
+      if(text == 1)
+      {
+      	printf("Notes/Comments: %s\n", key);
+      	printf("\n");
+      	xmlFree(key);
+      }
+    }
+    cur = cur->next;
+  }
+  return;
 }
 
 void
-print_xml(xmlNode * node, int indent_len)
+orgadoc_xml_parser(char *readme)
 {
-  while(node)
-    {	
-      if(node->type == XML_ELEMENT_NODE)
-	{
-	  	  printf("<tr>\n");
-          printf("<td>%s</td><td>%s</td>\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
-          printf("</tr>\n");
-        }
-      print_xml(node->children, indent_len + 1);
-      node = node->next;
-    }
-}
+  xmlDocPtr doc = NULL;
+  xmlNodePtr cur = NULL;
 
-void
-print_xml_bibtex(xmlNode * node, int indent_len)
-{
-  while(node)
-    {	
-      if(node->type == XML_ELEMENT_NODE)
-	{
-	  printf("%s=\"%s\"\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
-        }
-      print_xml_bibtex(node->children, indent_len + 1);
-      node = node->next;
+  // parse the xml document
+  doc = xmlParseFile(readme);
+  if (NULL == doc) {
+    fprintf(stderr, "Document cannot be parsed!\n");
+    return;
+  }
+  // get the root element
+  cur = xmlDocGetRootElement(doc);
+  if (NULL == cur) {
+    fprintf(stderr, "Empty document or is less than 1 byte!\n");
+    xmlFreeDoc(doc);
+    return;
+  }
+  if (xmlStrcmp(cur->name, (const xmlChar *)"readme")) {
+    fprintf(stderr, "Root node is of incorrect type!\n");
+    xmlFreeDoc(doc);
+  }
+  cur = cur->xmlChildrenNode;
+  while (NULL != cur) {
+    if ((!xmlStrcmp(cur->name, (const xmlChar *)"document"))) {
+      orgadoc_xml_printer(doc, cur);
     }
-}
-
-void
-print_xml_latex(xmlNode * node, int indent_len)
-{
-  while(node)
-    {	
-      if(node->type == XML_ELEMENT_NODE)
-	{
-	  printf("\\textbf{%s} %s\\\\\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
-        }
-      print_xml_latex(node->children, indent_len + 1);
-      node = node->next;
-    }
-}
-
-void
-print_xml_json(xmlNode * node, int indent_len)
-{
-  while(node)
-    {	
-      if(node->type == XML_ELEMENT_NODE)
-	{
-	  printf("    \"%s\": \"%s\",\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
-        }
-      print_xml_json(node->children, indent_len + 1);
-      node = node->next;
-    }
-}
-
-void
-print_xml_text(xmlNode * node, int indent_len)
-{
-  while(node)
-   {
-     if(node->type == XML_ELEMENT_NODE)
-       {
-         printf("%s: %s\n",node->name,is_leaf(node)?xmlNodeGetContent(node):xmlGetProp(node, "id"));
-       }
-     print_xml_text(node->children, indent_len + 1);
-     node = node->next;
-   }
+    cur = cur->next;
+  }
+  xmlFreeDoc(doc);
+  return;
 }
