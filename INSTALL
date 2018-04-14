@@ -1,8 +1,8 @@
 GNU OrgaDoc Installation Guide
 
-You will need the following mandatory programs (with specific versions):
+You will need the following mandatory programs:
     
-	* libxml2
+	* libxml2-dev
 
 The below are optional programs but which generate the documentation:
     

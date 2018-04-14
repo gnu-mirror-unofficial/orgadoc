@@ -29,4 +29,9 @@ help(void)
   printf("Options:\n");
   printf("  -h, --help\t\tdisplay this help and exit\n");
   printf("  -v, --version\t\toutput version information and exit\n\n");
+  printf("  -t, --html\t\tGenerate HTML output\n");
+  printf("  -b, --bibtex\t\tGenerate BIBTEX output\n\n");
+  printf("  -l, --latex\t\tGenerate LATEX output\n");
+  printf("  -j, --json\t\tGenerate JSON output\n\n");
+  printf("  -p, --text\t\tGenerate PLAIN TEXT output\n\n");
 }

@@ -131,7 +131,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>orgadoc, orgadoc_cgi, orgadoc_add_docs</para>
+    <para>orgadoc, orgadoc_add_docs</para>
 
   </refsect1>
   <refsect1>
