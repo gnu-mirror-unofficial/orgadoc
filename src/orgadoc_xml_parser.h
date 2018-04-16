@@ -18,3 +18,4 @@
 
 int is_leaf(xmlNode *);
 void print_xml(xmlNode *, int);
+void orgadoc_xml_parser(char *);

@@ -29,6 +29,7 @@
 #include "orgadoc_bibtex_tags.h"
 #include "orgadoc_json_tags.h"
 #include "orgadoc_latex_tags.h"
+#include "orgadoc_text_tags.h"
 #include "orgadoc_xml_parser.h"
 
 #ifndef MAIN_H_

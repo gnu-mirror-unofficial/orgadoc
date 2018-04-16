@@ -27,7 +27,7 @@ orgadoc_latex_start_tags()
   printf("\\date{}\n");
   printf("\\begin{document}\n");
   printf("\\maketitle\n");
-  printf("\\bgroup\obeylines\n");
+  printf("\\bgroup{obeylines}\n");
 }
 void
 orgadoc_latex_end_tags()

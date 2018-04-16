@@ -342,13 +342,11 @@ orgadoc_xml_parser(char *readme)
   xmlDocPtr doc = NULL;
   xmlNodePtr cur = NULL;
 
-  // parse the xml document
   doc = xmlParseFile(readme);
   if (NULL == doc) {
     fprintf(stderr, "Document cannot be parsed!\n");
     return;
   }
-  // get the root element
   cur = xmlDocGetRootElement(doc);
   if (NULL == cur) {
     fprintf(stderr, "Empty document or is less than 1 byte!\n");

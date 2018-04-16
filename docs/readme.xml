@@ -1,12 +1,11 @@
 <?xml version="1.0" ?>
-
 <readme>
 <document>
 <title></title>
 <file>test.pdf</file>
 <date>Tue Feb  6 13:59:34 2018</date>
 <type>public</type>
-<author>Adam Bilbrough</author>
+<author>Adam</author>
 <nbpages>1</nbpages>
 <language>FIXME LANGUAGE</language>
 <summary>FIXME SUMMARY</summary>
@@ -16,14 +15,14 @@
 </document>
 <document>
 <title></title>
-<file>test(copy).pdf</file>
-<date>Tue Feb  6 13:59:34 2018</date>
-<type>public</type>
-<author>Adam Bilbrough</author>
+<file>test2.pdf</file>
+<date>Tue Feb  7 13:59:34 2018</date>
+<type>private</type>
+<author>Adam</author>
 <nbpages>1</nbpages>
-<language>FIXME LANGUAGE</language>
-<summary>FIXME SUMMARY</summary>
-<part>FIXME PART</part>
-<notes>FIXME NOTES</notes>
+<language>FIXME LANGUAGE2</language>
+<summary>FIXME SUMMARY2</summary>
+<part>FIXME PART2</part>
+<notes>FIXME NOTES2</notes>
 </document>
 </readme>
