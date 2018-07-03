@@ -1,0 +1,37 @@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+##########################################################################
+#  	the location of data files
+datarootdir = @datarootdir@
+DATADIR	= 	@datadir@/orgadoc
+DOCDIR	=	@docdir@/
+distdir = @top_srcdir@/
+##########################################################################
+
+##########################################################################
+#	final location of binary (for 'make install')
+BINDIR = 	@bindir@
+##########################################################################
+
+##########################################################################
+#  	name of program
+SCRIPTS	= orgadoc-add-docs orgadoc-init-readme
+##########################################################################
+
+##########################################################################
+#   build related files
+BUILDFILES= Makefile.in
+##########################################################################
+
+all: $(PROGRAM)
+
+$(PROGRAM):
+	 $(SCRIPTS)
+	
+install: all
+	mkdir -p $(DESTDIR)$(BINDIR)
+	-cp $(SCRIPTS) $(DESTDIR)$(BINDIR)
+
+clean:
+

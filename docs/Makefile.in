@@ -1,0 +1,45 @@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+##########################################################################
+#  	the location of data files
+datarootdir = @datarootdir@
+DATADIR	= 	@datadir@/orgadoc
+DOCDIR	=	@docdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
+distdir = @top_srcdir@/
+DOCFILES = orgadoc.html
+##########################################################################
+
+##########################################################################
+#  	name of program
+DOCUMENT1 = orgadoc.texi
+##########################################################################
+
+##########################################################################
+#   build related files
+BUILDFILES= Makefile.in
+##########################################################################
+
+all: $(PROGRAM)
+
+$(PROGRAM):
+	 $(DOCUMENT1)
+	
+install:
+	texi2html $(DOCUMENT1)
+	mkdir -p $(DESTDIR)$(DOCDIR)
+	-cp $(DOCFILES) $(DESTDIR)$(DOCDIR)
+
+clean:
+	rm -f orgadoc.html
+
+distclean: clean
+	rm -f config.h Makefile
+	rm -f *~ .#*
+
+dist: clean
+	mkdir $(distdir)
+	cp $(BUILDFILES) $(distdir)
+	cp $(MISCFILES) $(distdir)
+	cp $(DOCFILES) $(distdir)
+

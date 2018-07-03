@@ -1,0 +1,69 @@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+#  	the location of data files
+datarootdir = @datarootdir@
+DATADIR	= 	@datadir@/orgadoc
+DOCDIR	=	@docdir@/
+distdir = @top_srcdir@/
+#	final location of binary (for 'make install')
+BINDIR = 	@bindir@
+#  	name of program
+PROGRAM	= orgadoc
+#	link flags
+LDFLAGS= @LIBS@ @TERMLIBS@
+#	compile flags
+CFLAGS= @CFLAGS@
+#	compile defs
+DEFS= -DLIBDIR='"@datadir@/orgadoc"'
+#   build related files
+BUILDFILES= Makefile.in configure configure.ac config.guess config.h.in \
+        config.sub
+#   misc files
+MISCFILES=  INSTALL AUTHORS TODO
+#   doc files
+DOCFILES=  ChangeLog COPYING NEWS README
+
+
+SUBDIRS = src utils docs
+
+all:
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+install: all
+	mkdir -p $(DESTDIR)$(DATADIR)
+	-cp $(DOCFILES) $(DESTDIR)$(DATADIR)
+	-chmod 644 $(DESTDIR)$(DATADIR)/*
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+
+lint:
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+clean:
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+distclean: clean
+	rm -f config.h Makefile
+	rm -f *~ .#*
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+dist: clean
+	mkdir $(distdir)
+	cp $(BUILDFILES) $(distdir)
+	cp $(MISCFILES) $(distdir)
+	cp $(DOCFILES) $(distdir)
+	for subdir in $(SUBDIRS); do \
+		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
+	done
+
+
