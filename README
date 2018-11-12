@@ -1,79 +1,30 @@
-===== DESCRIPTION =====
+* Please see the manpages in docs/
+* You may generate HTML documentation from the .texi files using texi2html.
 
-Orgadoc is a tool to organize you documents. Is goal is not to provide a 
-full web access with database but to give possibility to everyone to have a 
-copy of the database on this computers without having to install a web server 
-or database.
 
-Orgadoc includes a research tools (with regexp support), and multiple 
-output backend with templates support : static html, latex, bibtex. An output 
-of the html output is available at : http://docs.happycoders.org/html/
 
-===== USE =====
 
-Use is very easy : a xml file per directory describing all documents 
-of this directory.
 
-===== USE of CGI =====
-the cgi read a variable 'query'.
-Here is a example of HTML form to use with this cgi :
 
-<FORM ACTION="cgi-bin/orgadoc_cgi" xmethod="PRE">
-<P>Regexp search :
-<INPUT NAME="query" SIZE="10">
-<INPUT TYPE="SUBMIT" VALUE="Search">
-</FORM>
 
-===== EXAMPLE =====
 
-Here is a example of readme.xml file :
-<?xml version="1.0"?>
-<readme>
-  <document>
-    <comment>	
-      <author_name>Julien Lemoine</author_name>
-      <content>This is a comment</content>
-    </comment>
-    <comment>	
-      <author_name>Julien Lemoine</author_name>
-      <content>Second comment</content>
-    </comment>
-  </document>
-</readme>
 
-here is a example of command :
-  orgadoc -r -p /var/www/docs -w -e /tmp
 
-===== FRENCH NOTES =====
-You can add "accents" in your xml file, here is a summary :
 
-Â : &Acirc;
-â :&acirc;
-Æ : &AElig;
-æ : &aelig;
-À : &Agrave;
-à : &agrave;
-Ç : &Ccedil;
-ç : &ccedil;
-É : &Eacute;
-é : &eacute;
-Ê : &Ecirc;
-ê : &ecirc;
-È : &Egrave;
-è : &egrave;
-Ë : &Euml;
-ë : &euml;
-Î : &Icirc;
-î : &icirc;
-Ï : &Iuml;
-ï : &iuml;
-Ô : &Ocirc;
-ô : &ocirc;
-Ö : &Ouml;
-ö : &ouml;
-Ù : &Ugrave;
-ù : &ugrave;
-Û : &Ucirc;
-û : &ucirc;
-Ü : &Uuml;
-ü : &uuml;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

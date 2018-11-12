@@ -237,5 +237,5 @@ readme.xml files are now created, please edit the FIXME lines
 Once all of the xml files have been written, the OrgaDoc
 binary can be used to generate a html tree describing these documents
 (or any other kind of backend).
-@end verbatim
+
 @bye

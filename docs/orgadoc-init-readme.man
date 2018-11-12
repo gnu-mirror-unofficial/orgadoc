@@ -1,0 +1,33 @@
+.TH ORGADOC-INIT-README 1
+.SH NAME
+orgadoc-init-readme \- Generates readme.xml files for orgadoc automatically from documentation files.
+.SH SYNOPSIS
+.B orgadoc-init-readme
+[\fB\-h\fR \fR]
+[\fB\-\-help\fR]
+[\fB\-v\fR \fR]
+[\fB\-\-version\fR]
+[\fB\-d\fR \fR]
+[\fB\-\-debug\fR]
+[\fB\-m\fR \fR]
+[\fB\-\-merge\fR]
+.SH DESCRIPTION
+.B orgadoc-init-readme
+uses documentation files (PDF,PS,PS.Z,etc..) and retrieves as much information as possible
+ about the document and then generates the readme.xml file(s) with this data contained.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help\fR
+Displays the help text.
+.TP
+.BR \-v ", " \-\-version\fR
+Displays the program version.
+.TP
+.BR \-d ", " \-\-debug\fR
+When used as an argument, will provide additional information
+ in a verbose manner to the user.
+.TP
+.BR \-m ", " \-\-merge\fR
+When used as an argument, will look for all readme.xml files
+ in a directory and subdirectories and will place these readme.xml files in
+ the home directory of the user.

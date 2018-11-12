@@ -1,4 +1,4 @@
-@settitle GNU OrgaDoc - Version File
+@settitle GNU OrgaDoc @value{VERSION}
 @set UPDATED 13 JULY 2018
 @set UPDATED-MONTH JULY 2018
 @set EDITION 1.0

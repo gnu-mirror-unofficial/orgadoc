@@ -1,3 +1,13 @@
+2018-07-13   Adam Bilbrough <abilbrou@gmail.com>
+	* Removed orgadoc-add-docs script due to outdated use.
+	* Rewritten to C89 standard from Eiffel.
+	* Added -m/--merge option to orgadoc-init-readme.
+	* Cleaned usages and modernised what orgadoc is used for.
+	* Rewrote the configure approach.
+	* Rewrote documentation.
+	* Removed the TODO document.
+	* Bumped version to 1.0.
+
 2017-04-23   Adam Bilbrough <atsb@tutanota.de>
 	* Fixed deprecated functionality in the build scripts.
 	* Changed config and templates default path to '/usr/local/etc/orgadoc/'.
