@@ -6,7 +6,7 @@ exec_prefix = @exec_prefix@
 datarootdir = @datarootdir@
 DATADIR	= 	@datadir@/orgadoc
 DOCDIR	=	@docdir@/
-distdir = @top_srcdir@/
+distdir = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/utils
 ##########################################################################
 
 ##########################################################################
@@ -34,4 +34,13 @@ install: all
 	-cp $(SCRIPTS) $(DESTDIR)$(BINDIR)
 
 clean:
+
+distclean: clean
+	rm -f Makefile
+	rm -f *~ .#*
+
+dist: clean
+	mkdir $(distdir)
+	cp $(SCRIPTS) $(distdir)
+	cp $(BUILDFILES) $(distdir)
 

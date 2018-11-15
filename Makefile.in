@@ -4,7 +4,7 @@ exec_prefix = @exec_prefix@
 datarootdir = @datarootdir@
 DATADIR	= 	@datadir@/orgadoc
 DOCDIR	=	@docdir@/
-distdir = @top_srcdir@/
+distdir = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
 #	final location of binary (for 'make install')
 BINDIR = 	@bindir@
 #  	name of program
@@ -16,10 +16,10 @@ CFLAGS= @CFLAGS@
 #	compile defs
 DEFS= -DLIBDIR='"@datadir@/orgadoc"'
 #   build related files
-BUILDFILES= Makefile.in configure configure.ac config.guess config.h.in \
-        config.sub
+BUILDFILES= Makefile.in configure configure.ac config.guess \
+        config.sub autogen.sh
 #   misc files
-MISCFILES=  INSTALL AUTHORS TODO
+MISCFILES=  INSTALL AUTHORS
 #   doc files
 DOCFILES=  ChangeLog COPYING NEWS README
 

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(orgadoc, 1.0, atsb@tutanota.de)
+AC_INIT(orgadoc, 1.0)
 AC_CONFIG_SRCDIR([src/main.h])
 AC_CONFIG_HEADER([src/config.h])
 

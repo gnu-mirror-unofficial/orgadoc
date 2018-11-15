@@ -6,8 +6,8 @@ exec_prefix = @exec_prefix@
 datarootdir = @datarootdir@
 DATADIR	= 	@datadir@/orgadoc
 DOCDIR	=	@docdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
-distdir = @top_srcdir@/
-DOCFILES = orgadoc.html version.html orgadoc.man orgadoc-init-readme.man readme.xml
+distdir = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/docs
+DOCFILES = orgadoc.texi version.texi orgadoc.man orgadoc-init-readme.man readme.xml
 ##########################################################################
 
 ##########################################################################
@@ -34,14 +34,14 @@ install:
 
 clean:
 	rm -f orgadoc.html
+	rm -f version.html
 
 distclean: clean
-	rm -f config.h Makefile
+	rm -f Makefile
 	rm -f *~ .#*
 
 dist: clean
 	mkdir $(distdir)
 	cp $(BUILDFILES) $(distdir)
-	cp $(MISCFILES) $(distdir)
 	cp $(DOCFILES) $(distdir)
 
