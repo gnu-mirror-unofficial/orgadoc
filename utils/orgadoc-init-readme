@@ -37,7 +37,7 @@ version()
   echo "Version : 1.0"
   echo
   echo "Copyright 2002-2004 Julien Lemoine <speedblue@happycoders.org>"
-  echo "Copyright (C) 2017-2018 Adam Bilbrough <atsb@tutanota.de>"
+  echo "Copyright (C) 2017-2018 Adam Bilbrough"
   echo
   echo "Report bugs on the GNU OrgaDoc Savannah project page."
 }

@@ -16,7 +16,7 @@
 This manual is for @acronym{GNU} OrgaDoc (version @value{VERSION},
 @value{UPDATED})
 
-Copyright @copyright{} 2003, 2004 Free Software Foundation, Inc.
+Copyright @copyright{} 2003-2018 Free Software Foundation, Inc.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -44,21 +44,18 @@ Copies published by the Free Software Foundation raise funds for
 @end ifset
 @titlepage
 @title GNU OrgaDoc User Manual
-@subtitle Organizes documents from XML descriptions
-@subtitle @value{UPDATED}, GNU OrgaDoc Version @value{VERSION}
-
 @author original program by Julien Lemoine.  C Rewrite by Adam Bilbrough.
 
 @page
 @vskip 0pt plus 1filll
 @insertcopying
-@sp 2
+@sp 1
 Published by the Free Software Foundation @*
 59 Temple Place, Suite 330 @*
 Boston, MA  02111-1307  USA @*
 Printed copies are available from the Free Software Foundation.@*
 @acronym{ISBN} 1-882114-44-2
-@sp 2
+@sp 1
 Cover art by Etienne Suvasa.
 @end titlepage
 
@@ -83,8 +80,7 @@ GNU OrgaDoc has been designed to easily copy and maintain a pool of
 documents between computers. You can synchronize your document(s) pool
 with rsync or unison. You don't need to install a database server
 (like MySql or PostgreSql), a HTTP server, a script language (like
-php, perl, ...). You only need OrgaDoc to generate html pages and to
-perform queries.
+php, perl, ...). You only need OrgaDoc to generate pages.
 
 GNU OrgaDoc is easy to use, only the creation of some xml files
 describing your documents is needed. These files can be generated, read the
@@ -97,6 +93,7 @@ section (@pxref{How to use it}) for details.
 Required software to use GNU OrgaDoc:
 @itemize @bullet
 @item libxml2
+@item texi2html
 @end itemize
 
 Required software to run orgadoc_init_readmes:
@@ -109,8 +106,8 @@ GNU OrgaDoc uses the ./configure approach
 
 To use GNU OrgaDoc, run these commands in user mode:
 @verbatim
-tar xzvf orgadoc-1.0.0.tar.gz
-cd orgadoc-1.0.0
+tar xzvf orgadoc-1.0.tar.gz
+cd orgadoc-1.0
 ./configure <optionally add a --prefix= for a local installation>
 make && make install (as sudo/superuser)
 @end verbatim
@@ -158,21 +155,16 @@ A document node contains a number of subnodes:
 @itemize @bullet
 @item title: the title of the document;
 @item file: the filename or the directory of the document
+@item date: the timestamp of the document
+@item type: the kind of document (public/private)
+@item author: the author of the document
 @item nbpages: the number of pages;
-@item type: you can flag the document public or private, this option
-  is useful if you want to create a public documentation server and
-  you do not have the correct permission to diffuse all documents;
-@item date: creation date of the document;
 @item language: language the document was written in;
 @item summary : short resume of the document (useful for searching on
   your document pool);
-@item url : the url where you downloaded the document;
 @item part : you can give the principal chapter or section of your
-  document;
-@item author : authors of the document;
-@item notes : this node is designed to add some notes about your
-  document. Notes are split into two subnodes ``author_name'' and
-  ``content'' (see the example below).
+  document
+@item notes : this node is designed to add some notes about your document.
 @end itemize
 
 Here is an example of an xml file describing a directory:
@@ -237,5 +229,11 @@ readme.xml files are now created, please edit the FIXME lines
 Once all of the xml files have been written, the OrgaDoc
 binary can be used to generate a html tree describing these documents
 (or any other kind of backend).
+
+There is also a new option of '-m' or '--merge' which will
+locate the readme.xml directory from the script and merge
+all readme.xml files into a single directory for
+easy usage with orgadoc.
+Default path is the user's home directory in '.orgadoc'.
 @end verbatim
 @bye

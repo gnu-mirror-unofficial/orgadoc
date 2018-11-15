@@ -6,8 +6,7 @@ You will need the following mandatory programs:
 
 The below are optional programs but which generate the documentation:
     
-	* docbook-utils
-	* texinfo
+	* texi2html
 
 On Trisquel GNU/Linux you need to run "sudo apt-get install libxml2-dev docbook-utils texinfo". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
 
@@ -15,6 +14,6 @@ Compiling and Installation:
 
 	* type 'make' and you will get a GNU OrgaDoc binary 'orgadoc' in the root directory (../src).
 
-To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program. The path to the config file is '~/.orgadoc.conf'.
+To install GNU OrgaDoc onto your system, type 'sudo make install' which will compile and install the program.
 
 For an in-depth usage of GNU OrgaDoc, please read the documentation generated from 'docs/orgadoc.texi'.
