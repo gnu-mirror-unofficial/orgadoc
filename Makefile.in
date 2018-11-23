@@ -1,31 +1,30 @@
-prefix = @prefix@
+prefix      = @prefix@
 exec_prefix = @exec_prefix@
 #  	the location of data files
 datarootdir = @datarootdir@
-DATADIR	= 	@datadir@/orgadoc
-DOCDIR	=	@docdir@/
-distdir = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
+DATADIR	    = @datadir@/orgadoc
+DOCDIR	    = @docdir@/
+distdir     = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
 #	final location of binary (for 'make install')
-BINDIR = 	@bindir@
+BINDIR      = @bindir@
 #  	name of program
-PROGRAM	= orgadoc
+PROGRAM	    = orgadoc
 #	link flags
-LIBS= @LIBS@
-LDFLAGS= @LDFLAGS@
+LIBS        = @LIBS@
+LDFLAGS     = @LDFLAGS@
 #	compile flags
-CFLAGS= @CFLAGS@
+CFLAGS      = @CFLAGS@
 #	compile defs
-DEFS= -DLIBDIR='"@datadir@/orgadoc"'
+DEFS        = -DLIBDIR='"@datadir@/orgadoc"'
 #   build related files
-BUILDFILES= Makefile.in configure configure.ac config.guess \
+BUILDFILES  = Makefile.in configure configure.ac config.guess \
         config.sub autogen.sh
 #   misc files
-MISCFILES=  INSTALL AUTHORS
+MISCFILES   = INSTALL AUTHORS
 #   doc files
-DOCFILES=  ChangeLog COPYING NEWS README
+DOCFILES    = ChangeLog COPYING NEWS README
 
-
-SUBDIRS = src utils docs
+SUBDIRS     = src utils docs
 
 all:
 	for subdir in $(SUBDIRS); do \
@@ -66,5 +65,3 @@ dist: clean
 	for subdir in $(SUBDIRS); do \
 		(cd $$subdir && $(MAKE) $(MAKEDEFS) $@) || exit 1; \
 	done
-
-

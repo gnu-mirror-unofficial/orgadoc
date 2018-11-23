@@ -4,18 +4,15 @@ exec_prefix = @exec_prefix@
 #  	the location of data files
 datarootdir = @datarootdir@
 DATADIR	    = @datadir@/orgadoc
-DOCDIR	    = @docdir@/
-distdir     = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/utils
-##########################################################################
-
-##########################################################################
-#	final location of binary (for 'make install')
-BINDIR = @bindir@
+DOCDIR	    = @docdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@
+distdir     = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/docs
+DOCFILES    = orgadoc.texi version.texi orgadoc.man orgadoc-init-readme.man readme.xml
 ##########################################################################
 
 ##########################################################################
 #  	name of program
-SCRIPTS	= orgadoc-init-readme
+DOCUMENT1 = orgadoc.texi
+DOCUMENT2 = version.texi
 ##########################################################################
 
 ##########################################################################
@@ -26,13 +23,17 @@ BUILDFILES = Makefile.in
 all: $(PROGRAM)
 
 $(PROGRAM):
-	 $(SCRIPTS)
+	 $(DOCUMENT1) $(DOCUMENT2)
 
-install: all
-	mkdir -p $(DESTDIR)$(BINDIR)
-	-cp $(SCRIPTS) $(DESTDIR)$(BINDIR)
+install:
+	texi2html $(DOCUMENT1)
+	texi2html $(DOCUMENT2)
+	mkdir -p $(DESTDIR)$(DOCDIR)
+	-cp $(DOCFILES) $(DESTDIR)$(DOCDIR)
 
 clean:
+	rm -f orgadoc.html
+	rm -f version.html
 
 distclean: clean
 	rm -f Makefile
@@ -40,5 +41,5 @@ distclean: clean
 
 dist: clean
 	mkdir $(distdir)
-	cp $(SCRIPTS) $(distdir)
 	cp $(BUILDFILES) $(distdir)
+	cp $(DOCFILES) $(distdir)

@@ -1,16 +1,16 @@
-prefix      = @prefix@
+prefix = @prefix@
 exec_prefix = @exec_prefix@
-CC          = @CC@
+CC = @CC@
 ##########################################################################
 #  	the location of data files
 datarootdir = @datarootdir@
-DATADIR	    = @datadir@/orgadoc
-distdir     = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/src
+DATADIR	= 	@datadir@/orgadoc
+distdir = @top_srcdir@/@PACKAGE_NAME@-@PACKAGE_VERSION@/src
 ##########################################################################
 
 ##########################################################################
 #	final location of binary (for 'make install')
-BINDIR = @bindir@
+BINDIR = 	@bindir@
 ##########################################################################
 
 ##########################################################################
@@ -20,37 +20,37 @@ PROGRAM	= orgadoc
 
 ##########################################################################
 #	link flags
-LIBS    = @LIBS@
-LDFLAGS = @LDFLAGS@
+LIBS= @LIBS@
+LDFLAGS= @LDFLAGS@
 ##########################################################################
 
 ##########################################################################
 #	compile flags
-CFLAGS = `xml2-config --cflags --libs` -Wall -Wextra -std=c89 -pedantic
+CFLAGS= `xml2-config --cflags --libs` -Wall -Wextra -std=c89 -pedantic
 ##########################################################################
 
 ##########################################################################
 #	compile defs
-DEFS = -DLIBDIR='"@datadir@/orgadoc"'
+DEFS= -DLIBDIR='"@datadir@/orgadoc"'
 ##########################################################################
 
 ##########################################################################
 #	the source files
-SRCS1 = main.c orgadoc_argparse.c orgadoc_bibtex_tags.c orgadoc_help.c\
+SRCS1	= main.c orgadoc_argparse.c orgadoc_bibtex_tags.c orgadoc_help.c\
 	orgadoc_html_tags.c orgadoc_json_tags.c orgadoc_latex_tags.c\
 	orgadoc_text_tags.c orgadoc_version.c orgadoc_xml_parser.c
 ##########################################################################
 
 ##########################################################################
 #	the object files
-OBJS1 = main.o orgadoc_argparse.o orgadoc_bibtex_tags.o orgadoc_help.o\
+OBJS1	= main.o orgadoc_argparse.o orgadoc_bibtex_tags.o orgadoc_help.o\
 	orgadoc_html_tags.o orgadoc_json_tags.o orgadoc_latex_tags.o\
 	orgadoc_text_tags.o orgadoc_version.o orgadoc_xml_parser.o
 ##########################################################################
 
 ##########################################################################
 #	header files
-HDRS = main.h orgadoc_argparse.h orgadoc_bibtex_tags.h orgadoc_help.h\
+HDRS	= main.h orgadoc_argparse.h orgadoc_bibtex_tags.h orgadoc_help.h\
 	orgadoc_html_tags.h orgadoc_json_tags.h orgadoc_latex_tags.h\
 	orgadoc_text_tags.h orgadoc_version.h orgadoc_xml_parser.h
 ##########################################################################
@@ -73,6 +73,7 @@ install: $(PROGRAM)
 	if test ! -d $(DESTDIR)$(DATADIR) ; then mkdir -p $(DESTDIR)$(DATADIR) ; fi
 	if test ! -d $(DESTDIR)$(BINDIR) ; then mkdir -p $(DESTDIR)$(BINDIR) ; fi
 	-cp $(PROGRAM) $(DESTDIR)$(BINDIR)
+
 
 lint:
 	lint $(SRCS1) $(LINTLIBS)
@@ -109,3 +110,4 @@ orgadoc_latex_tags.o: main.h
 orgadoc_text_tags.o: main.h
 orgadoc_version.o: main.h
 orgadoc_xml_parser.o: main.h 
+

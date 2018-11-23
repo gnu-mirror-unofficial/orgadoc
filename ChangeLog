@@ -1,4 +1,15 @@
-2018-07-13   Adam Bilbrough <abilbrou@gmail.com>
+2018-11-23   Adam Bilbrough <abilbrou at gmail dot com>
+	* Fixed a bug where manpages were not installed in the correct directory.
+	* Added -s/--search options to help when using an existing converted
+    document pool.
+	* Using CC=@CC@ in autoconf to stop build failing on non-gcc compilers
+    (clang on FreeBSD).
+	* Documentation has once again been rewritten to be more useful and
+	helpful with commands and usage.
+	* Added a new -s/--search option to assist with querying
+	files with regex (grep etc..).
+
+2018-11-15   Adam Bilbrough
 	* Removed orgadoc-add-docs script due to outdated use.
 	* Rewritten to C89 standard from Eiffel.
 	* Added -m/--merge option to orgadoc-init-readme.
@@ -8,7 +19,7 @@
 	* Removed the TODO document.
 	* Bumped version to 1.0.
 
-2017-04-23   Adam Bilbrough <atsb@tutanota.de>
+2017-04-23   Adam Bilbrough
 	* Fixed deprecated functionality in the build scripts.
 	* Changed config and templates default path to '/usr/local/etc/orgadoc/'.
 	* Added 'GNU' to 'OrgaDoc' strings in templates, .texi and .e files.
@@ -19,14 +30,14 @@
 	* Removed 'debian' from manpages.
 	* Updated '--version' params.ge
 	* Bumped version to 0.9.
-	
+
 2004-01-09   Julien Lemoine <speedblue@happycoders.org>
 	* Improved man pages
-	
+
 2004-01-03   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of documentation for orgadoc_cgi, init_readmes
 	and add_docs
-	
+
 2003-12-29   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of add_docs : a small shell script to add documents
 	to a server using cvs to store readme.xml and scp to store documents.
@@ -34,7 +45,7 @@
 2003-12-04   Julien Lemoine <speedblue@happycoders.org>
 	* Creation of init_readmes : a small shell script to get
 	information from document and add it into readme.xml
-	
+
 2003-11-03   Julien Lemoine <speedblue@happycoders.org>
 	* Fixed a lot of warnings
 	* upgraded to autoconf/automake
@@ -74,7 +85,7 @@
 
 2003-03-10  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.7 was released
-	
+
 	* Fixed problem of encoding with iso-8859-1 documents.
 
 2003-03-06  Julien Lemoine <speedblue@happycoders.org>
@@ -85,13 +96,13 @@
 
 2003-02-25  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.6 was released
-	
+
 	* Added <nbpages> options
 	* Some code clean up
 
 2003-02-14  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.5 was released
-	
+
 	* Fixed compilation problem with SmartEiffel
  	* Does not need any more ucstring and exml, need only
 	  smarteiffel and gobo to compile
@@ -99,7 +110,7 @@
 
 2002-10-27  Julien Lemoine <speedblue@happycoders.org>
 	Orgadoc 0.6.4 was released
-	
+
 	* Fixed parameters problem 
 	(when given anothor configuration file)
 
@@ -129,9 +140,9 @@
 	* Fixed some bugs
 
 2002-06-30  Julien Lemoine <speedblue@happycoders.org>
-	
+
 	OrgaDoc 0.5 was released
-	
+
 	* added expat support (resolve problem with french characters)
 	* first release with BibTex support
 
@@ -157,7 +168,7 @@
 	  - added number of document in each directory
 
 2002-06-17  Julien Lemoine <speedblue@happycoders.org>
-	
+
 	OrgaDoc 0.4 was released
 
 	* Used configueration File Support
@@ -169,13 +180,13 @@
 	  (Not used for the moment)
 
 2002-06-15  Julien Lemoine <speedblue@happycoders.org>
-	
+
 	OrgaDoc 0.3 was released
 
 	* Added Template Support
 
 2002-06-12  Julien Lemoine <speedblue@happycoders.org>
-	
+
 	* Added Manpage
 
 2002-06-10  Julien Lemoine <speedblue@happycoders.org>
@@ -188,5 +199,5 @@
 2002-06-10  Julien Lemoine <speedblue@happycoders.org>
 
 	OrgaDoc 0.1 was released
-	
+
 	* first public release

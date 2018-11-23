@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <string.h>
-#include <regex.h>
 #include <libxml/parser.h>
 
 #include "orgadoc_version.h"
@@ -45,7 +44,7 @@ int bibtex;
 int latex;
 int json;
 int text;
-
+  
 typedef struct s_options
 {
   char s;

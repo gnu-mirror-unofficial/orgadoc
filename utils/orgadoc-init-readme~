@@ -86,9 +86,8 @@ if [ "$ORGADOC_DIR" = "" ]; then
   exit 1
 fi
 
-PATTERNS='-i -e .pdf$ -e .doc$ -e .docx$ -e.odt$
-          -e .ps$ -e .ps.gz$ -e .html$ -e .htm$
-          -e .ps.Z$'
+PATTERNS='-i -e .pdf$ -e .doc$ -e .ps$ -e .ps.gz$
+          -e .html$ -e .htm$ -e .ps.Z$'
 SUBDIRS=`find $ORGADOC_DIR -maxdepth 1 -type d`
 FILES=`find $ORGADOC_DIR -maxdepth 1 -type f`
 
