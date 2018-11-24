@@ -10,8 +10,7 @@ BINDIR      = @bindir@
 #  	name of program
 PROGRAM	    = orgadoc
 #	link flags
-LIBS        = @LIBS@
-LDFLAGS     = @LDFLAGS@
+LDFLAGS = @LDFLAGS@
 #	compile flags
 CFLAGS      = @CFLAGS@
 #	compile defs
