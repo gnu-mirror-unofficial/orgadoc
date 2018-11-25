@@ -35,11 +35,9 @@ static const char short_options[] = "hvtbljps";
 void
 parse_args(int argc, char** argv)
 {
-  FILE *f;
   int c;
   char *readme = argv[2];
   char *file = argv[2];
-  char fch;
 
   while ((c = getopt_long (argc, argv, short_options,
                            long_options, NULL)) != -1)
@@ -92,19 +90,7 @@ parse_args(int argc, char** argv)
 	  exit(EXIT_SUCCESS);
 
 	case opt_search_file:
-	  f = fopen(file, "r");
-	  if (f == NULL)
-	    {
-	      fprintf(stderr,"ERROR: %s does not exist or cannot be opened! \n",file);
-	      exit(1);
-	    }
-	  fch = fgetc(f);
-	  while(fch != EOF)
-	    {
-	      printf("%c", fch);
-	      fch = fgetc(f);
-	    }
-	  fclose(f);
+	  orgadoc_search(file);
 	  exit(EXIT_SUCCESS);
 	  
 	default:

@@ -1,2 +1,3 @@
-Julien Lemoine <speedblue@happycoders.org> (original eiffel orgadoc author)
-Adam Bilbrough (current C89 rewrite developer and maintainer)
+Julien Lemoine <speedblue@happycoders.org> (original eiffel orgadoc author).
+Adam Bilbrough (current C89 rewrite developer and maintainer).
+Nelson (contributed fixes for configure scripts for non-gcc compilers).

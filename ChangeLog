@@ -1,7 +1,12 @@
+2018-11-25   Adam Bilbrough <abilbrou at gmail dot com>
+	* Configure scripts have been rewritten with contributions (see AUHTORS).
+	* Fixed warnings given from FreeBSD (clang).
+	* Cleaning up spurious lines from documentation relating to
+	the pre-C89 OrgaDoc installation and usage.
+	* Bumped version to 1.1
+
 2018-11-23   Adam Bilbrough <abilbrou at gmail dot com>
 	* Fixed a bug where manpages were not installed in the correct directory.
-	* Added -s/--search options to help when using an existing converted
-    document pool.
 	* Using CC=@CC@ in autoconf to stop build failing on non-gcc compilers
     (clang on FreeBSD).
 	* Documentation has once again been rewritten to be more useful and

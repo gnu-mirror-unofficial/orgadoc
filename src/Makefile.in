@@ -33,21 +33,24 @@ DEFS = -DLIBDIR='"@datadir@/orgadoc"'
 #	the source files
 SRCS1 = main.c orgadoc_argparse.c orgadoc_bibtex_tags.c orgadoc_help.c\
 	orgadoc_html_tags.c orgadoc_json_tags.c orgadoc_latex_tags.c\
-	orgadoc_text_tags.c orgadoc_version.c orgadoc_xml_parser.c
+	orgadoc_text_tags.c orgadoc_version.c orgadoc_xml_parser.c\
+	orgadoc_search.c
 ##########################################################################
 
 ##########################################################################
 #	the object files
 OBJS1 = main.o orgadoc_argparse.o orgadoc_bibtex_tags.o orgadoc_help.o\
 	orgadoc_html_tags.o orgadoc_json_tags.o orgadoc_latex_tags.o\
-	orgadoc_text_tags.o orgadoc_version.o orgadoc_xml_parser.o
+	orgadoc_text_tags.o orgadoc_version.o orgadoc_xml_parser.o\
+	orgadoc_search.o
 ##########################################################################
 
 ##########################################################################
 #	header files
 HDRS = main.h orgadoc_argparse.h orgadoc_bibtex_tags.h orgadoc_help.h\
 	orgadoc_html_tags.h orgadoc_json_tags.h orgadoc_latex_tags.h\
-	orgadoc_text_tags.h orgadoc_version.h orgadoc_xml_parser.h
+	orgadoc_text_tags.h orgadoc_version.h orgadoc_xml_parser.h\
+	orgadoc_search.h
 ##########################################################################
 
 ##########################################################################

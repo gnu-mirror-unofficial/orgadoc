@@ -8,7 +8,7 @@ The below are optional programs but which generate the documentation:
     
 	* texi2html
 
-On Trisquel GNU/Linux you need to run "sudo apt-get install libxml2-dev docbook-utils texinfo". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
+On Trisquel GNU/Linux you need to run "sudo apt-get install libxml2-dev texinfo texi2html". For other distributions, you will need to use their package managers. However the names of the libraries should be the same.
 
 Compiling and Installation:
 
