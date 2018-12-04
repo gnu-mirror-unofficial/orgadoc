@@ -34,4 +34,5 @@ help(void)
   printf("  -l, --latex\t\tGenerate LATEX output\n");
   printf("  -j, --json\t\tGenerate JSON output\n\n");
   printf("  -p, --text\t\tGenerate PLAIN TEXT output\n\n");
+  printf("  -s, --search\t\tDisplays contents of readme.xml onto the terminal\n\n");
 }
