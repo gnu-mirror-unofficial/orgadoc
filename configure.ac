@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(orgadoc, 1.0)
+AC_INIT(orgadoc, 1.2)
 AC_CONFIG_SRCDIR([src/main.h])
 AC_CONFIG_HEADER([src/config.h])
 
@@ -12,11 +12,11 @@ AC_PROG_CPP
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 
-AC_SEARCH_LIBS([xmlCleanupParser],[xml xml2])
+# Checks for libxml2 library.
+PKG_CHECK_MODULES(LIBXML2,libxml-2.0)
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([stdio.h stdlib.h getopt.h string.h libxml/parser.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
