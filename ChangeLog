@@ -1,3 +1,7 @@
+2019-05-22   Adam Bilbrough <abilbrou at gmail dot com>
+	* Configure scripts have been fixed to fail if no libxml-2.0 found.
+	* Bumped version to 1.2
+	
 2018-11-25   Adam Bilbrough <abilbrou at gmail dot com>
 	* Configure scripts have been rewritten with contributions (see AUHTORS).
 	* Fixed warnings given from FreeBSD (clang).
