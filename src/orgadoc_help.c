@@ -21,7 +21,7 @@
 void
 help(void)
 {
-  printf("GNU OrgaDoc Copyright (C) 2017 - 2018  Adam Bilbrough\n");
+  printf("GNU OrgaDoc Copyright (C) 2017 - 2019  Adam Bilbrough\n");
   printf("This program comes with ABSOLUTELY NO WARRANTY;\n");
   printf("\nThis is free software, and you are welcome to redistribute it\n");
   printf("under certain conditions;  for details visit <https://www.gnu.org/licenses/>.\n");
