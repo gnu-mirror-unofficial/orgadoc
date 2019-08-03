@@ -30,6 +30,7 @@ $(PROGRAM):
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
+	chmod 775 $(SCRIPTS)
 	-cp $(SCRIPTS) $(DESTDIR)$(BINDIR)
 
 clean:
