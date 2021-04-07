@@ -1,6 +1,6 @@
 /*
     GNU OrgaDoc - organizes and converts your XML document pool.
-    Copyright (C) 2017 - 2018 Adam Bilbrough
+    Copyright (C) 2017 - 2019 Adam Bilbrough
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,8 @@ void
 orgadoc_search(char *file)
 {
   FILE *f;
+
+  printf("\nDisplaying contents of %s\n\n",file);
   f = fopen(file, "r");
   if (f == NULL)
     {

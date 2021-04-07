@@ -1,6 +1,6 @@
 /*
     GNU OrgaDoc - organizes and converts your XML document pool.
-    Copyright (C) 2017 - 2018 Adam Bilbrough
+    Copyright (C) 2017 - 2019 Adam Bilbrough
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,10 +27,11 @@ static struct option const long_options[] =
   {"latex",  0,0,   opt_generate_latex},
   {"json",   0,0,   opt_generate_json},
   {"text",   0,0,   opt_generate_text},
+  {"otxt",   0,0,   opt_generate_otext},
   {"search", 0,0,   opt_search_file},
   {NULL,     0,NULL,0}
 };
-static const char short_options[] = "hvtbljps";
+static const char short_options[] = "hvtbljpos";
 
 void
 parse_args(int argc, char** argv)
@@ -87,6 +88,13 @@ parse_args(int argc, char** argv)
 	  orgadoc_text_start_tags();
 	  orgadoc_xml_parser(readme);
 	  orgadoc_text_end_tags();
+	  exit(EXIT_SUCCESS);
+
+	case opt_generate_otext:
+	  otext = 1;
+	  orgadoc_otext_start_tags();
+	  orgadoc_xml_parser(readme);
+	  orgadoc_otext_end_tags();
 	  exit(EXIT_SUCCESS);
 
 	case opt_search_file:

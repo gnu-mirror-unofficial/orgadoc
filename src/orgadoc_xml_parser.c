@@ -1,6 +1,6 @@
 /*
     GNU OrgaDoc - organizes and converts your XML document pool.
-    Copyright (C) 2017 - 2018 Adam Bilbrough
+    Copyright (C) 2017 - 2019 Adam Bilbrough
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,6 +55,13 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       	printf("Title: %s\n", key);
       	xmlFree(key);
       }
+      if(otext == 1)
+      {
+	printf("\n#################\n");
+	printf("=================\n");
+      	printf("Title: %s\n", key);
+      	xmlFree(key);
+      }
     }
     if ((!xmlStrcmp(cur->name, (const xmlChar *)"file"))) {
       key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -82,6 +89,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       }
       if(text == 1)
       {
+      	printf("Filename: %s\n", key);
+      	xmlFree(key);
+      }
+      if(otext == 1)
+      {
+	printf("=================\n");
       	printf("Filename: %s\n", key);
       	xmlFree(key);
       }
@@ -115,6 +128,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       	printf("Date/Time: %s\n", key);
       	xmlFree(key);
       }
+      if(otext == 1)
+      {
+	printf("=================\n");
+      	printf("Date/Time: %s\n", key);
+      	xmlFree(key);
+      }
     }
     if ((!xmlStrcmp(cur->name, (const xmlChar *)"type"))) {
       key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -142,6 +161,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       }
       if(text == 1)
       {
+      	printf("Type: %s\n", key);
+      	xmlFree(key);
+      }
+      if(otext == 1)
+      {
+	printf("=================\n");
       	printf("Type: %s\n", key);
       	xmlFree(key);
       }
@@ -175,6 +200,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       	printf("Author: %s\n", key);
       	xmlFree(key);
       }
+      if(otext == 1)
+      {
+	printf("=================\n");
+      	printf("Author: %s\n", key);
+      	xmlFree(key);
+      }
     }
     if ((!xmlStrcmp(cur->name, (const xmlChar *)"nbpages"))) {
       key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -202,6 +233,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       }
       if(text == 1)
       {
+      	printf("Number of Pages: %s\n", key);
+      	xmlFree(key);
+      }
+      if(otext == 1)
+      {
+	printf("=================\n");
       	printf("Number of Pages: %s\n", key);
       	xmlFree(key);
       }
@@ -235,6 +272,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       	printf("Document Language: %s\n", key);
       	xmlFree(key);
       }
+      if(otext == 1)
+      {
+	printf("=================\n");
+      	printf("Document Language: %s\n", key);
+      	xmlFree(key);
+      }
     }
     if ((!xmlStrcmp(cur->name, (const xmlChar *)"summary"))) {
       key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -265,6 +308,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       	printf("Summary: %s\n", key);
       	xmlFree(key);
       }
+      if(otext == 1)
+      {
+	printf("=================\n");
+      	printf("Summary: %s\n", key);
+      	xmlFree(key);
+      }
     }
     if ((!xmlStrcmp(cur->name, (const xmlChar *)"part"))) {
       key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
@@ -292,6 +341,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       }
       if(text == 1)
       {
+      	printf("Chapter(s): %s\n", key);
+      	xmlFree(key);
+      }
+      if(otext == 1)
+      {
+	printf("=================\n");
       	printf("Chapter(s): %s\n", key);
       	xmlFree(key);
       }
@@ -328,6 +383,12 @@ orgadoc_xml_printer(xmlDocPtr doc, xmlNodePtr cur)
       {
       	printf("Notes/Comments: %s\n", key);
       	printf("\n");
+      	xmlFree(key);
+      }
+      if(otext == 1)
+      {
+	printf("=================\n");
+      	printf("Notes/Comments: %s\n", key);
       	xmlFree(key);
       }
     }

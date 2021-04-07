@@ -16,5 +16,5 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-void orgadoc_latex_start_tags(void);
-void orgadoc_latex_end_tags(void);
+void orgadoc_otext_start_tags(void);
+void orgadoc_otext_end_tags(void);
