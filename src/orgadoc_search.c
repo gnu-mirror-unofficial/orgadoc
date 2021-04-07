@@ -18,6 +18,10 @@
 
 #include "main.h"
 
+#define FILE_BUFSIZ 256
+char BUFFER[FILE_BUFSIZ];
+size_t nread;
+
 void
 orgadoc_search(char *file)
 {

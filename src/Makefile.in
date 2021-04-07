@@ -21,7 +21,7 @@ PROGRAM	= orgadoc
 LDFLAGS = `xml2-config --libs`
 ##########################################################################
 #	compile flags
-CFLAGS = `xml2-config --cflags` -Wall -Wextra -std=c89 -pedantic
+CFLAGS = `xml2-config --cflags` -Wall -Wextra
 ##########################################################################
 
 ##########################################################################
@@ -47,7 +47,7 @@ OBJS1 = main.o orgadoc_argparse.o orgadoc_bibtex_tags.o orgadoc_help.o\
 
 ##########################################################################
 #	header files
-HDRS = main.h orgadoc_argparse.h orgadoc_bibtex_tags.h orgadoc_help.h\
+HDRS =  main.h orgadoc_argparse.h orgadoc_bibtex_tags.h orgadoc_help.h\
 	orgadoc_html_tags.h orgadoc_json_tags.h orgadoc_latex_tags.h\
 	orgadoc_text_tags.h orgadoc_otext_tags.h orgadoc_version.h\
 	orgadoc_xml_parser.h orgadoc_search.h

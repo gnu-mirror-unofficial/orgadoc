@@ -18,6 +18,13 @@
 
 #include "main.h"
 
+int html;
+int bibtex;
+int latex;
+int json;
+int text;
+int otext;
+
 static struct option const long_options[] =
 {
   {"help",   0,0,   opt_help},
